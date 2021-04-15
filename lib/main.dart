@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // This is the theme of your application.
         //
-        // Try running your application with "flutter run". You'll see the
+        // Try running your application with "fl utter run". You'll see the
         // application has a blue toolbar. Then, without quitting the app, try
         // changing the primarySwatch below to Colors.green and then invoke
         // "hot reload" (press "r" in the console where you ran "flutter run",
@@ -46,18 +46,43 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  var _processorTypes = ['ASIC', 'GPU', 'CPU'];
+  String _selectedProcessorType = 'GPU';
+  var _processors = {
+    'ASIC': ['AntMiner', 'AC130', 'SPS320'],
+    'GPU': ['GTX 1080 Ti', 'RTX 2070S', 'RX 480'],
+    'CPU': ['i7 7700k', 'i5 3750k', '5700X']
+  };
+  // in Watts
+  var _powerUsages = {
+    'AntMiner': 1000,
+    'AC130': 800,
+    'SPS320': 900,
+    'GTX 1080 Ti': 500,
+    'RTX 2070S': 400,
+    'RX 480': 300,
+    'i7 7700k': 180,
+    'i5 3750k': 100,
+    '5700X': 200
+  };
+  // in MH/s
+  var _hashRates = {
+    'AntMiner': 700,
+    'AC130': 800,
+    'SPS320': 900,
+    'GTX 1080 Ti': 45.69,
+    'RTX 2070S': 43,
+    'RX 480': 30.29,
+    'i7 7700k': 5,
+    'i5 3750k': 4,
+    '5700X': 6
+  };
+  // in price / Wh
+  double _electricityPrice = 0.0002;
+  double _moneyPerMegahash = 5 / 3600;
+  int _hoursInMonth = 24 * 30;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  String _selectedProcessor = 'GTX 1080 Ti';
 
   @override
   Widget build(BuildContext context) {
@@ -76,38 +101,88 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
+        child: Column (
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+          children: [
+            Text('Calculate Economics'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Text('Processor type'),
+                    DropdownButton(
+                      value: _selectedProcessorType,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedProcessorType = newValue;
+                          _selectedProcessor = _processors[_selectedProcessorType].first;
+                        });
+                      },
+                      items: _processorTypes.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    )
+                  ],
+                ),
+                Container(
+                  width: 50,
+                ),
+                Column(
+                  children: [
+                    Text('Processor'),
+                    DropdownButton(
+                      value: _processors[_selectedProcessorType].contains(_selectedProcessor) ? _selectedProcessor : _processors[_selectedProcessorType].first,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          _selectedProcessor = newValue;
+                        });
+                      },
+                      items: _processors[_selectedProcessorType].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    )
+                  ],
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Text('Cost / Month'),
+                    Text('Income / Month')
+                  ],
+                ),
+                Container(
+                  width: 50,
+                ),
+                Column(
+                  children: [
+                    Text('\$' + calculateCosts().toStringAsFixed(2)),
+                    Text('\$' + calculateIncome().toStringAsFixed(2)),
+                  ],
+                )
+              ],
+            )
           ],
-        ),
+        )
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  double calculateCosts() {
+    return _electricityPrice * _hoursInMonth * _powerUsages[_selectedProcessor];
+  }
+
+  double calculateIncome() {
+    return _moneyPerMegahash * _hoursInMonth * _hashRates[_selectedProcessor];
   }
 }
