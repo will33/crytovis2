@@ -22,6 +22,12 @@ class ListItem extends StatefulWidget {
 }
 
 class _ListItemState extends State<ListItem> {
+  /*
+  Might need to have country pre-selected before going into the main screen.
+  Passing country value from one Widget to a list seems too hard :(
+   */
+  String selectedCountry = 'Australia';
+
   var _processorTypes = ['ASIC', 'GPU', 'CPU'];
   var _processors = {
     'ASIC': ['AntMiner', 'AC130', 'SPS320'],
@@ -53,7 +59,12 @@ class _ListItemState extends State<ListItem> {
     '5700X': 6
   };
   // in price / Wh
-  double _electricityPrice = 0.0002;
+  var _electricityPrices = {
+    'Australia' : 0.002,
+    'China' : 0.001,
+    'USA' : 0.003
+  };
+
   double _moneyPerMegahash = 5 / 3600;
   int _hoursInMonth = 24 * 30;
 
@@ -164,6 +175,8 @@ class _ListItemState extends State<ListItem> {
   }
 
   double calculateCosts() {
+    double _electricityPrice = _electricityPrices[this.selectedCountry];
+
     return _quantity * _electricityPrice * _hoursInMonth * _powerUsages[_selectedProcessor];
   }
 
