@@ -4,9 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 class ProfitChart extends StatefulWidget {
-  ProfitChart(this.chartData);
+  ProfitChart(this.chartData, this.xLabel, this.yLabel);
 
   final List<ProfitPerDay> chartData;
+  final String xLabel;
+  final String yLabel;
 
   @override
   _ProfitChartState createState() => _ProfitChartState();
@@ -57,12 +59,12 @@ class _ProfitChartState extends State<ProfitChart> {
     var chart = new charts.TimeSeriesChart(
       series,
       behaviors: [
-        new charts.ChartTitle('Forecast',
+        new charts.ChartTitle(widget.xLabel,
             behaviorPosition: charts.BehaviorPosition.bottom,
             titleStyleSpec: charts.TextStyleSpec(fontSize: 11),
             titleOutsideJustification:
             charts.OutsideJustification.middleDrawArea),
-        new charts.ChartTitle('Profit (\$)',
+        new charts.ChartTitle(widget.yLabel,
             behaviorPosition: charts.BehaviorPosition.start,
             titleStyleSpec: charts.TextStyleSpec(fontSize: 11),
             titleOutsideJustification:

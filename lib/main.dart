@@ -1,13 +1,13 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:cryptovis2/profit_chart.dart';
 import 'package:cryptovis2/profit_per_day.dart';
 import 'package:flutter/material.dart';
 
-import 'package:global_configuration/global_configuration.dart';
+import 'package:http/http.dart' as http;
 
-void main() async {
-  await GlobalConfiguration().loadFromAsset("app_settings");
+void main() {
   runApp(MyApp());
 }
 
@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
+      body: SingleChildScrollView(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
           child: Column(
@@ -164,7 +164,11 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-          ProfitChart(getChartForDateRange(DateTime.now(), 90))
+          ProfitChart(getChartForDateRange(DateTime.now(), 90), 'Time', 'Profit (AU\$)'),
+          Text('Bitcoin Price History'),
+          getPriceChart('bitcoin'),
+          Text('Ethereum Price History'),
+          getPriceChart('ethereum')
         ],
       )),
     );
@@ -191,5 +195,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   double calculateIncomeForDay() {
     return _moneyPerMegahash * 24 * _hashRates[_selectedProcessor];
+  }
+
+  Widget getPriceChart(String coin) {
+    final priceHistoryRequest = http.get(Uri.https('api.coingecko.com', 'api/v3/coins/$coin/market_chart',
+        <String, String>{'vs_currency': 'aud', 'days': '30', 'interval': 'daily'}));
+    return FutureBuilder<http.Response>(
+        future: priceHistoryRequest,
+        builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
+          if (snapshot.hasData) {
+            var priceSeries = getPriceSeries(snapshot.data.body);
+            return ProfitChart(priceSeries, 'Time', 'Price (AU\$)');
+          } else if (snapshot.hasError) {
+            return Container(child: Text(snapshot.error));
+          } else {
+            return Container();
+          }
+        });
+  }
+
+  List<ProfitPerDay> getPriceSeries(String data) {
+    var json = jsonDecode(data);
+    var prices = json['prices'];
+    var series = <ProfitPerDay>[];
+    prices.forEach((element) =>
+        series.add(ProfitPerDay(DateTime.fromMillisecondsSinceEpoch(element[0]), element[1], Colors.blue)));
+    return series;
   }
 }
