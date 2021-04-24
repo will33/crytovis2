@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:cryptovis2/profit_chart.dart';
+import 'package:cryptovis2/profit_per_day.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -53,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'GPU': ['GTX 1080 Ti', 'RTX 2070S', 'RX 480'],
     'CPU': ['i7 7700k', 'i5 3750k', '5700X']
   };
+
   // in Watts
   var _powerUsages = {
     'AntMiner': 1000,
@@ -65,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'i5 3750k': 100,
     '5700X': 200
   };
+
   // in MH/s
   var _hashRates = {
     'AntMiner': 700,
@@ -77,6 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'i5 3750k': 4,
     '5700X': 6
   };
+
   // in price / Wh
   double _electricityPrice = 0.0002;
   double _moneyPerMegahash = 5 / 3600;
@@ -99,90 +106,87 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column (
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Calculate Economics'),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    Text('Processor type'),
-                    DropdownButton(
-                      value: _selectedProcessorType,
-                      onChanged: (String newValue) {
-                        setState(() {
-                          _selectedProcessorType = newValue;
-                          _selectedProcessor = _processors[_selectedProcessorType].first;
-                        });
-                      },
-                      items: _processorTypes.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    )
-                  ],
-                ),
-                Container(
-                  width: 50,
-                ),
-                Column(
-                  children: [
-                    Text('Processor'),
-                    DropdownButton(
-                      value: _processors[_selectedProcessorType].contains(_selectedProcessor) ? _selectedProcessor : _processors[_selectedProcessorType].first,
-                      onChanged: (String newValue) {
-                        setState(() {
-                          _selectedProcessor = newValue;
-                        });
-                      },
-                      items: _processors[_selectedProcessorType].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    Text('Cost / Month'),
-                    Text('Income / Month')
-                  ],
-                ),
-                Container(
-                  width: 50,
-                ),
-                Column(
-                  children: [
-                    Text('\$' + calculateCosts().toStringAsFixed(2)),
-                    Text('\$' + calculateIncome().toStringAsFixed(2)),
-                  ],
-                )
-              ],
-            )
-          ],
-        )
-      ),
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Calculate Economics'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Text('Processor type'),
+                  DropdownButton(
+                    value: _selectedProcessorType,
+                    onChanged: (String newValue) {
+                      setState(() {
+                        _selectedProcessorType = newValue;
+                        _selectedProcessor = _processors[_selectedProcessorType].first;
+                      });
+                    },
+                    items: _processorTypes.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
+                ],
+              ),
+              Container(
+                width: 50,
+              ),
+              Column(
+                children: [
+                  Text('Processor'),
+                  DropdownButton(
+                    value: _processors[_selectedProcessorType].contains(_selectedProcessor)
+                        ? _selectedProcessor
+                        : _processors[_selectedProcessorType].first,
+                    onChanged: (String newValue) {
+                      setState(() {
+                        _selectedProcessor = newValue;
+                      });
+                    },
+                    items: _processors[_selectedProcessorType].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
+                ],
+              ),
+            ],
+          ),
+          ProfitChart(getChartForDateRange(DateTime.now(), 90))
+        ],
+      )),
     );
   }
 
-  double calculateCosts() {
-    return _electricityPrice * _hoursInMonth * _powerUsages[_selectedProcessor];
+  List<ProfitPerDay> getChartForDateRange(DateTime startDate, int numberOfDays) {
+    List<ProfitPerDay> series = [];
+    double sum = 0;
+    var rng = Random();
+    for (int i = 0; i < numberOfDays; i++) {
+      sum += calculateCostForDay();
+      series.add(ProfitPerDay(startDate.add(Duration(days: i)), sum + rng.nextInt(20), Colors.red));
+    }
+    return series;
   }
 
-  double calculateIncome() {
-    return _moneyPerMegahash * _hoursInMonth * _hashRates[_selectedProcessor];
+  double calculateProfitPerDay() {
+    return calculateIncomeForDay() - calculateCostForDay();
+  }
+
+  double calculateCostForDay() {
+    return _electricityPrice * 24 * _powerUsages[_selectedProcessor];
+  }
+
+  double calculateIncomeForDay() {
+    return _moneyPerMegahash * 24 * _hashRates[_selectedProcessor];
   }
 }
