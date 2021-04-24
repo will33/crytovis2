@@ -4,7 +4,10 @@ import 'package:cryptovis2/profit_chart.dart';
 import 'package:cryptovis2/profit_per_day.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+import 'package:global_configuration/global_configuration.dart';
+
+void main() async {
+  await GlobalConfiguration().loadFromAsset("app_settings");
   runApp(MyApp());
 }
 
