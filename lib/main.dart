@@ -170,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             ProfitChart(
-              getChartForDateRange(DateTime.now(), 90), 
+              getChartDataForDateRange(DateTime.now(), 90), 
               'Time', 
               'Profit (AU\$)'
             ),
@@ -188,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /// 
   /// The [startDate] is the [DateTime] to start populating the chart with, and 
   /// the [numberOfDays] is the amount of days to populate the chart with.
-  List<ProfitPerDay> getChartForDateRange(DateTime startDate, int numberOfDays) {
+  List<ProfitPerDay> getChartDataForDateRange(DateTime startDate, int numberOfDays) {
     List<ProfitPerDay> series = [];
     double sum = 0;
     var rng = Random();
