@@ -261,8 +261,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /// Builds a graph displaying the daily profit of a particular processor in a
   /// particular country.
   ///
-  /// The [startDate] is the [DateTime] to start populating the chart with, and
-  /// the [numberOfDays] is the amount of days to populate the chart with.
+  /// The [numberOfDays] is the amount of days to populate the chart with.
   Widget getProfitChart(int numberOfDays) {
     final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
         'api/v3/coins/bitcoin/market_chart', <String, String>{
