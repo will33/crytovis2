@@ -95,7 +95,40 @@ class _MyHomePageState extends State<MyHomePage> {
   };
 
   /// The electricity price of each country, in W/Hs.
-  double _electricityPrice = 0.0002; // TODO: Change by location.
+  double _electricityPrice = 0.32;
+  var _electricityPrices = {
+    'Australia': 0.32,
+    'Argentina': 0.077,
+    'Belgium': 0.39,
+    'Brazil': 0.15,
+    'China': 0.1,
+    'Cyprus': 0.27,
+    'Denmark': 0.42,
+    'France': 0.28,
+    'Germany': 0.46,
+    'India': 0.1,
+    'Indonesia': 0.13,
+    'Iran': 0.013,
+    'Ireland': 0.35,
+    'Italy': 0.33,
+    'Kenya': 0.27,
+    'Japan': 0.33,
+    'Mexico': 0.1,
+    'New Zealand': 0.31,
+    'Nigeria': 0.077,
+    'Poland': 0.24,
+    'Portugal': 0.35,
+    'Qatar': 0.039,
+    'Russia': 0.077,
+    'Rwanda': 0.33,
+    'Saudi Arabia': 0.064,
+    'Singapore': 0.21,
+    'South Africa': 0.19,
+    'Spain': 0.31,
+    'Turkey': 0.12,
+    'UK': 0.33,
+    'USA': 0.19,
+  };
   /// The expected return, in AUD, per megahash computed.
   double _coinPrice = 0.0;
 
