@@ -95,41 +95,45 @@ class _MyHomePageState extends State<MyHomePage> {
   };
 
   /// The electricity price of each country, in W/Hs.
-  double _electricityPrice = 0.32;
+  double _electricityPrice = 0.00032;
+
   /// The electricity price of each country, in W/Hs.
   var _electricityPrices = {
-    'Australia': 0.32,
-    'Argentina': 0.077,
-    'Belgium': 0.39,
-    'Brazil': 0.15,
-    'China': 0.1,
-    'Cyprus': 0.27,
-    'Denmark': 0.42,
-    'France': 0.28,
-    'Germany': 0.46,
-    'India': 0.1,
-    'Indonesia': 0.13,
-    'Iran': 0.013,
-    'Ireland': 0.35,
-    'Italy': 0.33,
-    'Kenya': 0.27,
-    'Japan': 0.33,
-    'Mexico': 0.1,
-    'New Zealand': 0.31,
-    'Nigeria': 0.077,
-    'Poland': 0.24,
-    'Portugal': 0.35,
-    'Qatar': 0.039,
-    'Russia': 0.077,
-    'Rwanda': 0.33,
-    'Saudi Arabia': 0.064,
-    'Singapore': 0.21,
-    'South Africa': 0.19,
-    'Spain': 0.31,
-    'Turkey': 0.12,
-    'UK': 0.33,
-    'USA': 0.19,
+    'Australia': 0.00032,
+    'Argentina': 0.000077,
+    'Belgium': 0.00039,
+    'Brazil': 0.00015,
+    'China': 0.0001,
+    'Cyprus': 0.00027,
+    'Denmark': 0.00042,
+    'France': 0.00028,
+    'Germany': 0.00046,
+    'India': 0.0001,
+    'Indonesia': 0.00013,
+    'Iran': 0.000013,
+    'Ireland': 0.00035,
+    'Italy': 0.00033,
+    'Kenya': 0.00027,
+    'Japan': 0.00033,
+    'Mexico': 0.0001,
+    'New Zealand': 0.00031,
+    'Nigeria': 0.000077,
+    'Poland': 0.00024,
+    'Portugal': 0.00035,
+    'Qatar': 0.000039,
+    'Russia': 0.000077,
+    'Rwanda': 0.00033,
+    'Saudi Arabia': 0.000064,
+    'Singapore': 0.00021,
+    'South Africa': 0.00019,
+    'Spain': 0.00031,
+    'Turkey': 0.00012,
+    'UK': 0.00033,
+    'USA': 0.00019,
   };
+
+  /// The price of the coin being calculated (atm, just BTC).
+  double _coinPrice = 0.0; // This cannot be set here, as it changes per day.
 
   /// The hours in the month being displayed.
   // ignore: unused_field
@@ -224,8 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /// Builds a graph displaying the daily profit of a particular processor in a
   /// particular country.
   ///
-  /// The [startDate] is the [DateTime] to start populating the chart with, and
-  /// the [numberOfDays] is the amount of days to populate the chart with.
+  /// The [numberOfDays] is the amount of days to populate the chart with.
   Widget getProfitChart(int numberOfDays) {
     final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
         'api/v3/coins/bitcoin/market_chart', <String, String>{
@@ -238,7 +241,7 @@ class _MyHomePageState extends State<MyHomePage> {
         future: priceHistoryRequest,
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
           if (snapshot.hasData) {
-            DateTime startDate = DateTime.now().add(Duration(days: -numberOfDays));
+            DateTime startDate = DateTime.now().subtract(Duration(days: numberOfDays));
             List<ProfitPerDay> series = [];
             double sum = 0.0;
             double profit = 0.0;
@@ -291,7 +294,7 @@ class _MyHomePageState extends State<MyHomePage> {
         (1440 / 10) * // Minutes in a day divide the BTC blocktime in minutes
         (_hashRates[_selectedProcessor] / // The processor hashrate.
             149045000) * // BTC network hashrate. TODO: See if Blockchain.com has an api.
-        coinPrice; // The price of BTC on that day.
+        _coinPrice; // The price of BTC on that day.
   }
 
   /// Builds a graph displaying the price history of a [coin] for the past 30
