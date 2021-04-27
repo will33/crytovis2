@@ -94,9 +94,10 @@ class _MyHomePageState extends State<MyHomePage> {
     '5700X': 6
   };
 
-  /// The electricity price of each country, in W/Hs.
+  /// The electricity price of each country, in kW/Hs.
   double _electricityPrice = 0.32;
-  /// The electricity price of each country, in W/Hs.
+  String _selectedCountry = 'Australia';
+  /// The electricity price of each country, in kW/Hs.
   var _electricityPrices = {
     'Australia': 0.32,
     'Argentina': 0.077,
@@ -131,6 +132,9 @@ class _MyHomePageState extends State<MyHomePage> {
     'USA': 0.19,
   };
 
+  static int HOURS_IN_DAY = 24;
+  static int WATTS_IN_KILOWATT = 1000;
+
   /// The hours in the month being displayed.
   // ignore: unused_field
   int _hoursInMonth = 24 * 30;
@@ -161,6 +165,39 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Column(
+                children: [
+                  Text('Country'),
+                  DropdownButton(
+                    value: _selectedCountry,
+                    onChanged: (String newCountry) {
+                      setState(() {
+                        _selectedCountry = newCountry;
+                        _electricityPrice = _electricityPrices[_selectedCountry];
+                      });
+                    },
+                    items: _electricityPrices.keys
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+              Container(
+                width: 50,
+              ),
+              Column(
+                children: [
+                  Text('Electricity Price'),
+                  Text('\$${this._electricityPrice.toStringAsFixed(2)}'),
+                ],
+              ),
+              Container(
+                width: 50,
+              ),
               Column(
                 children: [
                   Text('Processor type'),
@@ -282,7 +319,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// Returns the cost (in electricity) for 24 hours of use.
   double calculateCostForDay() {
-    return _electricityPrice * 24 * _powerUsages[_selectedProcessor];
+    return (_electricityPrice / WATTS_IN_KILOWATT) * HOURS_IN_DAY * _powerUsages[_selectedProcessor];
   }
 
   /// Returns the income generated from 24 hours of hashing.
