@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:cryptovis2/profit_chart.dart';
 import 'package:cryptovis2/profit_per_day.dart';
@@ -11,8 +10,8 @@ void main() {
   runApp(MyApp());
 }
 
+/// The root of the CryptoVis application.
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // This is the theme of your application.
         //
-        // Try running your application with "fl utter run". You'll see the
+        // Try running your application with "flutter run". You'll see the
         // application has a blue toolbar. Then, without quitting the app, try
         // changing the primarySwatch below to Colors.green and then invoke
         // "hot reload" (press "r" in the console where you ran "flutter run",
@@ -34,6 +33,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// The home page of the static site.
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -46,22 +46,29 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
+  /// The title of the webpage, often displayed in the tab in the browser.
   final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+/// Stores the state of the [MyHomePage].
 class _MyHomePageState extends State<MyHomePage> {
+  /// The processor types used to populate the second dropdown box.
   var _processorTypes = ['ASIC', 'GPU', 'CPU'];
+
+  /// The processor type selected from [_processorTypes].
   String _selectedProcessorType = 'GPU';
+
+  /// The list of processors the app can check against.
   var _processors = {
     'ASIC': ['AntMiner', 'AC130', 'SPS320'],
     'GPU': ['GTX 1080 Ti', 'RTX 2070S', 'RX 480'],
     'CPU': ['i7 7700k', 'i5 3750k', '5700X']
   };
 
-  // in Watts
+  /// The power usage of each processor, in Watts.
   var _powerUsages = {
     'AntMiner': 1000,
     'AC130': 800,
@@ -74,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
     '5700X': 200
   };
 
-  // in MH/s
+  /// The hash rate of each processor in MH/s
   var _hashRates = {
     'AntMiner': 700,
     'AC130': 800,
@@ -87,17 +94,21 @@ class _MyHomePageState extends State<MyHomePage> {
     '5700X': 6
   };
 
-  // in price / Wh
-  double _electricityPrice = 0.0002;
-  double _moneyPerMegahash = 5 / 3600;
+  /// The electricity price of each country, in W/Hs.
+  double _electricityPrice = 0.0002; // TODO: Change by location.
+  /// The expected return, in AUD, per megahash computed.
+  double _coinPrice = 0.0;
+
+  /// The hours in the month being displayed.
+  // ignore: unused_field
   int _hoursInMonth = 24 * 30;
 
+  /// The processor to return the profitability for.
   String _selectedProcessor = 'GTX 1080 Ti';
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
+    // This method is rerun every time setState is called.
     //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
@@ -126,10 +137,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     onChanged: (String newValue) {
                       setState(() {
                         _selectedProcessorType = newValue;
-                        _selectedProcessor = _processors[_selectedProcessorType].first;
+                        _selectedProcessor =
+                            _processors[_selectedProcessorType].first;
                       });
                     },
-                    items: _processorTypes.map<DropdownMenuItem<String>>((String value) {
+                    items: _processorTypes
+                        .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -145,7 +158,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text('Processor'),
                   DropdownButton(
-                    value: _processors[_selectedProcessorType].contains(_selectedProcessor)
+                    value: _processors[_selectedProcessorType]
+                            .contains(_selectedProcessor)
                         ? _selectedProcessor
                         : _processors[_selectedProcessorType].first,
                     onChanged: (String newValue) {
@@ -153,7 +167,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         _selectedProcessor = newValue;
                       });
                     },
-                    items: _processors[_selectedProcessorType].map<DropdownMenuItem<String>>((String value) {
+                    items: _processors[_selectedProcessorType]
+                        .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -164,42 +179,97 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-          ProfitChart(getChartForDateRange(DateTime.now(), 90), 'Time', 'Profit (AU\$)'),
-          Text('Bitcoin Price History'),
-          getPriceChart('bitcoin'),
-          Text('Ethereum Price History'),
-          getPriceChart('ethereum')
+          getProfitChart(DateTime.now(), 90),
+          //Text('Bitcoin Price History'),
+          //getPriceChart('bitcoin'),
+          //Text('Ethereum Price History'),
+          //getPriceChart('ethereum')
         ],
       )),
     );
   }
 
-  List<ProfitPerDay> getChartForDateRange(DateTime startDate, int numberOfDays) {
+  /// Returns a [List] of each days profit, to be turned into a chart.
+  ///
+  /// The [startDate] is the [DateTime] to start populating the chart with, and
+  /// the [numberOfDays] is the amount of days to populate the chart with.
+  Widget getProfitChart(DateTime startDate, int numberOfDays) {
     List<ProfitPerDay> series = [];
-    double sum = 0;
-    var rng = Random();
-    for (int i = 0; i < numberOfDays; i++) {
-      sum += calculateCostForDay();
-      series.add(ProfitPerDay(startDate.add(Duration(days: i)), sum + rng.nextInt(20), Colors.red));
-    }
-    return series;
+    double sum = 0.0;
+    double profit = 0.0;
+    Color colour = Colors.red;
+
+    final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
+        'api/v3/coins/bitcoin/market_chart', <String, String>{
+      'vs_currency': 'aud',
+      'days': numberOfDays.toString(),
+      'interval': 'daily'
+    }));
+
+    return FutureBuilder<http.Response>(
+        future: priceHistoryRequest,
+        builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
+          if (snapshot.hasData) {
+            // Go through each value on the priceHistoryRequest per day. The 
+            // first value in the response is the oldest, the last is the 
+            // current price.
+            for (int i = 0; i < numberOfDays; i++) {
+              Map<String, dynamic> response = jsonDecode(snapshot.data.body);
+              _coinPrice = response['prices'][i][1];
+              profit = calculateProfitForDay();
+
+              // Colour code the addition to the chart.
+              if (profit >= 0) {
+                colour = Colors.green;
+              } else {
+                colour = Colors.red;
+              }
+
+              // Add the result to the chart.
+              sum += profit;
+              series.add(ProfitPerDay(
+                startDate.add(Duration(days: i)),
+                sum,
+                colour,
+              ));
+            }
+            return ProfitChart(series, 'Time', 'Price (AU\$)');
+          } else if (snapshot.hasError) {
+            return Container(child: Text(snapshot.error));
+          } else {
+            return Container();
+          }
+        });
   }
 
-  double calculateProfitPerDay() {
+  /// Returns the amount of profit made for a specific day.
+  double calculateProfitForDay() {
     return calculateIncomeForDay() - calculateCostForDay();
   }
 
+  /// Returns the cost (in electricity) for 24 hours of use.
   double calculateCostForDay() {
     return _electricityPrice * 24 * _powerUsages[_selectedProcessor];
   }
 
+  /// Returns the income generated from 24 hours of hashing.
   double calculateIncomeForDay() {
-    return _moneyPerMegahash * 24 * _hashRates[_selectedProcessor];
+    return 6.25 * // Amount of bitcoins given as a reward.
+        (1440 / 10) * // Minutes in a day divide the BTC blocktime in minutes
+        (_hashRates[_selectedProcessor] / // The processor hashrate.
+            149045000) * // BTC network hashrate. TODO: See if Blockchain.com has an api.
+        _coinPrice; // The price of BTC on that day.
   }
 
+  /// Builds a graph displaying the price history of a [coin] for the past 30
+  /// days.
   Widget getPriceChart(String coin) {
-    final priceHistoryRequest = http.get(Uri.https('api.coingecko.com', 'api/v3/coins/$coin/market_chart',
-        <String, String>{'vs_currency': 'aud', 'days': '30', 'interval': 'daily'}));
+    final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
+        'api/v3/coins/$coin/market_chart', <String, String>{
+      'vs_currency': 'aud',
+      'days': '30',
+      'interval': 'daily'
+    }));
     return FutureBuilder<http.Response>(
         future: priceHistoryRequest,
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
@@ -214,12 +284,15 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  /// Returns a series of prices contained within a JSON string [data].
   List<ProfitPerDay> getPriceSeries(String data) {
     var json = jsonDecode(data);
     var prices = json['prices'];
     var series = <ProfitPerDay>[];
-    prices.forEach((element) =>
-        series.add(ProfitPerDay(DateTime.fromMillisecondsSinceEpoch(element[0]), element[1], Colors.blue)));
+    prices.forEach((element) => series.add(ProfitPerDay(
+        DateTime.fromMillisecondsSinceEpoch(element[0]),
+        element[1],
+        Colors.blue)));
     return series;
   }
 }
