@@ -191,7 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Column(
                 children: [
-                  Text('Electricity Price'),
+                  Text('Electricity Price / kWH'),
                   Text('\$${this._electricityPrice.toStringAsFixed(2)}'),
                 ],
               ),
