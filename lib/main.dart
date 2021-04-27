@@ -215,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-          getProfitChart(90),
+          getProfitChart(365),
           //Text('Bitcoin Price History'),
           //getPriceChart('bitcoin'),
           //Text('Ethereum Price History'),
@@ -230,13 +230,6 @@ class _MyHomePageState extends State<MyHomePage> {
   ///
   /// The [numberOfDays] is the amount of days to populate the chart with.
   Widget getProfitChart(int numberOfDays) {
-    DateTime startDate = DateTime.now();
-    startDate = startDate.subtract(Duration(days: numberOfDays));
-    List<ProfitPerDay> series = [];
-    double sum = 0.0;
-    double profit = 0.0;
-    Color colour = Colors.red;
-
     final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
         'api/v3/coins/bitcoin/market_chart', <String, String>{
       'vs_currency': 'aud',
@@ -248,13 +241,18 @@ class _MyHomePageState extends State<MyHomePage> {
         future: priceHistoryRequest,
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
           if (snapshot.hasData) {
+            DateTime startDate = DateTime.now().subtract(Duration(days: numberOfDays));
+            List<ProfitPerDay> series = [];
+            double sum = 0.0;
+            double profit = 0.0;
+            Color colour = Colors.red;
             // Go through each value on the priceHistoryRequest per day. The
-            // first value in the response is the oldest, the last is the
+            // first value in the response is the oldest, the last is the 
             // current price.
+            Map<String, dynamic> response = jsonDecode(snapshot.data.body);
             for (int i = 0; i < numberOfDays; i++) {
-              Map<String, dynamic> response = jsonDecode(snapshot.data.body);
-              _coinPrice = response['prices'][i][1];
-              profit = calculateProfitForDay();
+              double coinPrice = response['prices'][i][1];
+              profit = calculateProfitForDay(coinPrice);
 
               // Colour code the addition to the chart.
               if (profit >= 0) {
@@ -271,7 +269,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 colour,
               ));
             }
-            return ProfitChart(series, 'Time', 'Price (AU\$)');
+            return ProfitChart(series, 'Time', 'Profit (AU\$)');
           } else if (snapshot.hasError) {
             return Container(child: Text(snapshot.error));
           } else {
@@ -281,8 +279,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// Returns the amount of profit made for a specific day.
-  double calculateProfitForDay() {
-    return calculateIncomeForDay() - calculateCostForDay();
+  double calculateProfitForDay(double coinPrice) {
+    return calculateIncomeForDay(coinPrice) - calculateCostForDay();
   }
 
   /// Returns the cost (in electricity) for 24 hours of use.
@@ -291,7 +289,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// Returns the income generated from 24 hours of hashing.
-  double calculateIncomeForDay() {
+  double calculateIncomeForDay(double coinPrice) {
     return 6.25 * // Amount of bitcoins given as a reward.
         (1440 / 10) * // Minutes in a day divide the BTC blocktime in minutes
         (_hashRates[_selectedProcessor] / // The processor hashrate.
