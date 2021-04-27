@@ -294,7 +294,7 @@ class _MyHomePageState extends State<MyHomePage> {
         (1440 / 10) * // Minutes in a day divide the BTC blocktime in minutes
         (_hashRates[_selectedProcessor] / // The processor hashrate.
             149045000) * // BTC network hashrate. TODO: See if Blockchain.com has an api.
-        _coinPrice; // The price of BTC on that day.
+        coinPrice; // The price of BTC on that day.
   }
 
   /// Builds a graph displaying the price history of a [coin] for the past 30
