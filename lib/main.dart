@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:cryptovis2/profit_chart.dart';
 import 'package:cryptovis2/profit_per_day.dart';
@@ -58,14 +57,17 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   /// The processor types used to populate the second dropdown box.
   var _processorTypes = ['ASIC', 'GPU', 'CPU'];
+
   /// The processor type selected from [_processorTypes].
   String _selectedProcessorType = 'GPU';
+
   /// The list of processors the app can check against.
   var _processors = {
     'ASIC': ['AntMiner', 'AC130', 'SPS320'],
     'GPU': ['GTX 1080 Ti', 'RTX 2070S', 'RX 480'],
     'CPU': ['i7 7700k', 'i5 3750k', '5700X']
   };
+
   /// The power usage of each processor, in Watts.
   var _powerUsages = {
     'AntMiner': 1000,
@@ -78,6 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'i5 3750k': 100,
     '5700X': 200
   };
+
   /// The hash rate of each processor in MH/s
   var _hashRates = {
     'AntMiner': 700,
@@ -90,14 +93,17 @@ class _MyHomePageState extends State<MyHomePage> {
     'i5 3750k': 4,
     '5700X': 6
   };
+
   /// The electricity price of each country, in W/Hs.
   double _electricityPrice = 0.0002; // TODO: Change by location.
-  /// The expected return, in AUD, per megahash computed. 
-  double _moneyPerMegahash = 5 / 3600;
+  /// The expected return, in AUD, per megahash computed.
+  double _coinPrice = 0.0;
+
   /// The hours in the month being displayed.
   // ignore: unused_field
   int _hoursInMonth = 24 * 30;
-  /// The processor to return the profitability for. 
+
+  /// The processor to return the profitability for.
   String _selectedProcessor = 'GTX 1080 Ti';
 
   @override
@@ -114,97 +120,130 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: SingleChildScrollView(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Calculate Economics'),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(
-                  children: [
-                    Text('Processor type'),
-                    DropdownButton(
-                      value: _selectedProcessorType,
-                      onChanged: (String newValue) {
-                        setState(() {
-                          _selectedProcessorType = newValue;
-                          _selectedProcessor = _processors[_selectedProcessorType].first;
-                        });
-                      },
-                      items: _processorTypes.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    )
-                  ],
-                ),
-                Container(
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Calculate Economics'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Text('Processor type'),
+                  DropdownButton(
+                    value: _selectedProcessorType,
+                    onChanged: (String newValue) {
+                      setState(() {
+                        _selectedProcessorType = newValue;
+                        _selectedProcessor =
+                            _processors[_selectedProcessorType].first;
+                      });
+                    },
+                    items: _processorTypes
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
+                ],
+              ),
+              Container(
                 width: 50,
-                ),
-                Column(
-                  children: [
-                    Text('Processor'),
-                    DropdownButton(
-                      value: _processors[_selectedProcessorType].contains(_selectedProcessor)
+              ),
+              Column(
+                children: [
+                  Text('Processor'),
+                  DropdownButton(
+                    value: _processors[_selectedProcessorType]
+                            .contains(_selectedProcessor)
                         ? _selectedProcessor
                         : _processors[_selectedProcessorType].first,
-                      onChanged: (String newValue) {
-                        setState(() {
-                          _selectedProcessor = newValue;
-                        });
-                      },
-                      items: _processors[_selectedProcessorType].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    )
-                  ],
-                ),
-              ],
-            ),
-            ProfitChart(
-              getChartDataForDateRange(DateTime.now(), 90), 
-              'Time', 
-              'Profit (AU\$)'
-            ),
-            //Text('Bitcoin Price History'),
-            //getPriceChart('bitcoin'),
-            //Text('Ethereum Price History'),
-            //getPriceChart('ethereum')
-          ],
-        )
-      ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        _selectedProcessor = newValue;
+                      });
+                    },
+                    items: _processors[_selectedProcessorType]
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
+                ],
+              ),
+            ],
+          ),
+          getProfitChart(DateTime.now(), 90),
+          //Text('Bitcoin Price History'),
+          //getPriceChart('bitcoin'),
+          //Text('Ethereum Price History'),
+          //getPriceChart('ethereum')
+        ],
+      )),
     );
   }
 
   /// Returns a [List] of each days profit, to be turned into a chart.
-  /// 
-  /// The [startDate] is the [DateTime] to start populating the chart with, and 
+  ///
+  /// The [startDate] is the [DateTime] to start populating the chart with, and
   /// the [numberOfDays] is the amount of days to populate the chart with.
-  List<ProfitPerDay> getChartDataForDateRange(DateTime startDate, int numberOfDays) {
+  Widget getProfitChart(DateTime startDate, int numberOfDays) {
     List<ProfitPerDay> series = [];
-    double sum = 0;
-    var rng = Random();
-    for (int i = 0; i < numberOfDays; i++) {
-      sum += calculateCostForDay();
-      series.add(ProfitPerDay(
-        startDate.add(Duration(days: i)), 
-        sum + rng.nextInt(20), 
-        Colors.red,
-      ));
-    }
-    return series;
+    double sum = 0.0;
+    double profit = 0.0;
+    Color colour = Colors.red;
+
+    final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
+        'api/v3/coins/bitcoin/market_chart', <String, String>{
+      'vs_currency': 'aud',
+      'days': numberOfDays.toString(),
+      'interval': 'daily'
+    }));
+
+    return FutureBuilder<http.Response>(
+        future: priceHistoryRequest,
+        builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
+          if (snapshot.hasData) {
+            // Go through each value on the priceHistoryRequest per day. The 
+            // first value in the response is the oldest, the last is the 
+            // current price.
+            for (int i = 0; i < numberOfDays; i++) {
+              Map<String, dynamic> response = jsonDecode(snapshot.data.body);
+              _coinPrice = response['prices'][i][1];
+              profit = calculateProfitForDay();
+
+              // Colour code the addition to the chart.
+              if (profit >= 0) {
+                colour = Colors.green;
+              } else {
+                colour = Colors.red;
+              }
+
+              // Add the result to the chart.
+              sum += profit;
+              series.add(ProfitPerDay(
+                startDate.add(Duration(days: i)),
+                sum,
+                colour,
+              ));
+            }
+            return ProfitChart(series, 'Time', 'Price (AU\$)');
+          } else if (snapshot.hasError) {
+            return Container(child: Text(snapshot.error));
+          } else {
+            return Container();
+          }
+        });
   }
 
   /// Returns the amount of profit made for a specific day.
-  double calculateProfitPerDay() {
+  double calculateProfitForDay() {
     return calculateIncomeForDay() - calculateCostForDay();
   }
 
@@ -215,21 +254,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// Returns the income generated from 24 hours of hashing.
   double calculateIncomeForDay() {
-    return _moneyPerMegahash * 24 * _hashRates[_selectedProcessor];
+    return 6.25 * // Amount of bitcoins given as a reward.
+        (1440 / 10) * // Minutes in a day divide the BTC blocktime in minutes
+        (_hashRates[_selectedProcessor] / // The processor hashrate.
+            149045000) * // BTC network hashrate. TODO: See if Blockchain.com has an api.
+        _coinPrice; // The price of BTC on that day.
   }
 
   /// Builds a graph displaying the price history of a [coin] for the past 30
-  /// days. 
+  /// days.
   Widget getPriceChart(String coin) {
-    final priceHistoryRequest = http.get(Uri.https(
-      'api.coingecko.com', 
-      'api/v3/coins/$coin/market_chart', 
-      <String, String>{
-        'vs_currency': 'aud', 
-        'days': '30', 
-        'interval': 'daily'
-      }
-    ));
+    final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
+        'api/v3/coins/$coin/market_chart', <String, String>{
+      'vs_currency': 'aud',
+      'days': '30',
+      'interval': 'daily'
+    }));
     return FutureBuilder<http.Response>(
         future: priceHistoryRequest,
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
@@ -249,13 +289,10 @@ class _MyHomePageState extends State<MyHomePage> {
     var json = jsonDecode(data);
     var prices = json['prices'];
     var series = <ProfitPerDay>[];
-    prices.forEach((element) =>
-      series.add(ProfitPerDay(
-        DateTime.fromMillisecondsSinceEpoch(element[0]), 
-        element[1], 
-        Colors.blue
-      ))
-    );
+    prices.forEach((element) => series.add(ProfitPerDay(
+        DateTime.fromMillisecondsSinceEpoch(element[0]),
+        element[1],
+        Colors.blue)));
     return series;
   }
 }
