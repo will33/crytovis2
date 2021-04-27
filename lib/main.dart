@@ -96,6 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// The electricity price of each country, in W/Hs.
   double _electricityPrice = 0.32;
+  /// The electricity price of each country, in W/Hs.
   var _electricityPrices = {
     'Australia': 0.32,
     'Argentina': 0.077,
@@ -129,8 +130,8 @@ class _MyHomePageState extends State<MyHomePage> {
     'UK': 0.33,
     'USA': 0.19,
   };
-  /// The expected return, in AUD, per megahash computed.
-  double _coinPrice = 0.0;
+  /// The price of the coin being calculated (atm, just BTC).
+  double _coinPrice = 0.0; // This cannot be set here, as it changes per day.
 
   /// The hours in the month being displayed.
   // ignore: unused_field
@@ -222,7 +223,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  /// Returns a [List] of each days profit, to be turned into a chart.
+  /// Builds a graph displaying the daily profit of a particular processor in a
+  /// particular country.
   ///
   /// The [startDate] is the [DateTime] to start populating the chart with, and
   /// the [numberOfDays] is the amount of days to populate the chart with.
@@ -290,7 +292,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return 6.25 * // Amount of bitcoins given as a reward.
         (1440 / 10) * // Minutes in a day divide the BTC blocktime in minutes
         (_hashRates[_selectedProcessor] / // The processor hashrate.
-            149045000) * // BTC network hashrate. TODO: See if Blockchain.com has an api.
+          149045000) * // BTC network hashrate. TODO: See if Blockchain.com has an api.
         _coinPrice; // The price of BTC on that day.
   }
 
