@@ -94,13 +94,17 @@ class _MyHomePageState extends State<MyHomePage> {
     '5700X': 6
   };
 
-  /// The electricity price of each country, in kW/Hs.
+  /// The selected electricity price, in kW/Hs.
   double _electricityPrice = 0.32;
+  /// User inputed variable representing all of their other costs.
   double _otherFixedCosts = 0;
+  /// User inputed variable representing their one-off capital costs
   double _otherCapitalExpenses = 0;
+  /// User selected country to populate power prices.
   String _selectedCountry = 'Australia';
 
-  /// The electricity price of each country, in kW/Hs.
+  /// The electricity price of each country, in kW/Hs. Sourced from Statista, 
+  /// current as of September 2020. https://www.statista.com/aboutus/trust
   var _electricityPrices = {
     'Australia': 0.32,
     'Argentina': 0.077,
@@ -137,12 +141,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final priceController = new TextEditingController();
 
-  static int HOURS_IN_DAY = 24;
-  static int WATTS_IN_KILOWATT = 1000;
-
-  /// The hours in the month being displayed.
-  // ignore: unused_field
-  int _hoursInMonth = 24 * 30;
+  static const int HOURS_IN_DAY = 24;
+  static const int WATTS_IN_KILOWATT = 1000;
 
   /// The processor to return the profitability for.
   String _selectedProcessor = 'GTX 1080 Ti';
@@ -328,7 +328,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
           if (snapshot.hasData) {
             DateTime startDate =
-                DateTime.now().add(Duration(days: -numberOfDays));
+                DateTime.now().subtract(Duration(days: numberOfDays));
             List<ProfitPerDay> series = [];
             double sum = _otherCapitalExpenses * -1;
             double profit = 0.0;
