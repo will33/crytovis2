@@ -96,7 +96,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// The electricity price of each country, in kW/Hs.
   double _electricityPrice = 0.32;
+  double _otherFixedCosts = 0;
+  double _otherCapitalExpenses = 0;
   String _selectedCountry = 'Australia';
+
   /// The electricity price of each country, in kW/Hs.
   var _electricityPrices = {
     'Australia': 0.32,
@@ -165,52 +168,89 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Calculate Economics'),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Column(
+              children: [
+                Text('Country'),
+                DropdownButton(
+                  value: _selectedCountry,
+                  onChanged: (String newCountry) {
+                    setState(() {
+                      _selectedCountry = newCountry;
+                      _electricityPrice = _electricityPrices[_selectedCountry];
+                      priceController.text = _electricityPrice.toString();
+                    });
+                  },
+                  items: _electricityPrices.keys
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+            Container(width: 50),
+            Container(
+              width: 150,
+              child: Column(children: [
+                Text("Electricity Price \$/kwH"),
+                TextFormField(
+                  controller: priceController,
+                  keyboardType: TextInputType.number,
+                  onFieldSubmitted: (String newValue) {
+                    setState(() {
+                      _electricityPrice = double.parse(newValue);
+                    });
+                  },
+                )
+              ]),
+            ),
+            Container(
+              width: 50,
+            )
+          ]),
+          Container(height: 50),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+              width: 150,
+              child: Column(children: [
+                Text("Other Fixed Costs"),
+                TextFormField(
+                  initialValue: _otherFixedCosts.toString(),
+                  keyboardType: TextInputType.number,
+                  onChanged: (String newValue) {
+                    setState(() {
+                      _otherFixedCosts = double.parse(newValue);
+                    });
+                  },
+                )
+              ]),
+            ),
+            Container(
+              width: 50,
+            ),
+            Container(
+              width: 150,
+              child: Column(children: [
+                Text("Other Initial Capital Expenses"),
+                TextFormField(
+                  initialValue: _otherCapitalExpenses.toString(),
+                  keyboardType: TextInputType.number,
+                  onChanged: (String newValue) {
+                    setState(() {
+                      _otherCapitalExpenses = double.parse(newValue);
+                    });
+                  },
+                )
+              ]),
+            )
+          ]),
+          Container(height: 50),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  Text('Country'),
-                  DropdownButton(
-                    value: _selectedCountry,
-                    onChanged: (String newCountry) {
-                      setState(() {
-                        _selectedCountry = newCountry;
-                        _electricityPrice = _electricityPrices[_selectedCountry];
-                        priceController.text = _electricityPrice.toString();
-                      });
-                    },
-                    items: _electricityPrices.keys
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
-              Container(width: 50
-              ),
-              Container(
-                width: 150,
-                child: Column(
-                    children: [
-                      Text("Electricity Price \$/kwH"),
-                      TextFormField(
-                        controller: priceController,
-                        keyboardType: TextInputType.number,
-                        onFieldSubmitted: (String newValue) {
-                          setState(() {
-                            _electricityPrice = double.parse(newValue);
-                          });
-                        },
-                      )
-                ]),
-              ),
-              Container(
-                width: 50,
-              ),
               Column(
                 children: [
                   Text('Processor type'),
@@ -287,13 +327,14 @@ class _MyHomePageState extends State<MyHomePage> {
         future: priceHistoryRequest,
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
           if (snapshot.hasData) {
-            DateTime startDate = DateTime.now().add(Duration(days: -numberOfDays));
+            DateTime startDate =
+                DateTime.now().add(Duration(days: -numberOfDays));
             List<ProfitPerDay> series = [];
-            double sum = 0.0;
+            double sum = _otherCapitalExpenses * -1;
             double profit = 0.0;
             Color colour = Colors.red;
             // Go through each value on the priceHistoryRequest per day. The
-            // first value in the response is the oldest, the last is the 
+            // first value in the response is the oldest, the last is the
             // current price.
             Map<String, dynamic> response = jsonDecode(snapshot.data.body);
             for (int i = 0; i < numberOfDays; i++) {
@@ -331,7 +372,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// Returns the cost (in electricity) for 24 hours of use.
   double calculateCostForDay() {
-    return (_electricityPrice / WATTS_IN_KILOWATT) * HOURS_IN_DAY * _powerUsages[_selectedProcessor];
+    return (_electricityPrice / WATTS_IN_KILOWATT) *
+            HOURS_IN_DAY *
+            _powerUsages[_selectedProcessor] +
+        _otherFixedCosts;
   }
 
   /// Returns the income generated from 24 hours of hashing.
