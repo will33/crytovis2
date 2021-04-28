@@ -132,6 +132,8 @@ class _MyHomePageState extends State<MyHomePage> {
     'USA': 0.19,
   };
 
+  final priceController = new TextEditingController();
+
   static int HOURS_IN_DAY = 24;
   static int WATTS_IN_KILOWATT = 1000;
 
@@ -149,6 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    priceController.text = _electricityPrice.toStringAsFixed(2);
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -174,6 +177,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       setState(() {
                         _selectedCountry = newCountry;
                         _electricityPrice = _electricityPrices[_selectedCountry];
+                        priceController.text = _electricityPrice.toString();
                       });
                     },
                     items: _electricityPrices.keys
@@ -186,14 +190,23 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
-              Container(
-                width: 50,
+              Container(width: 50
               ),
-              Column(
-                children: [
-                  Text('Electricity Price / kWH'),
-                  Text('\$${this._electricityPrice.toStringAsFixed(2)}'),
-                ],
+              Container(
+                width: 150,
+                child: Column(
+                    children: [
+                      Text("Electricity Price \$/kwH"),
+                      TextFormField(
+                        controller: priceController,
+                        keyboardType: TextInputType.number,
+                        onFieldSubmitted: (String newValue) {
+                          setState(() {
+                            _electricityPrice = double.parse(newValue);
+                          });
+                        },
+                      )
+                ]),
               ),
               Container(
                 width: 50,
