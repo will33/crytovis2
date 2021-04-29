@@ -425,7 +425,18 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
 
-          getProfitChart(365),
+          getProfitChart(365, true),
+
+          Column(
+            children: [
+              Container(
+                height: 25,
+              ),
+              Text('This graph shows the daily profit/loss that would have been generated over the past year using this Bitcoin Mining Configuration',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+            ],
+          ),
+          getProfitChart(365, false),
           // This button toggles if we should show the price history of the
           // coins.
           Text('Display Price History of the coins in AUD', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -477,7 +488,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /// particular country.
   ///
   /// The [numberOfDays] is the amount of days to populate the chart with.
-  Widget getProfitChart(int numberOfDays) {
+  Widget getProfitChart(int numberOfDays, bool isCumulative) {
     final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
         'api/v3/coins/bitcoin/market_chart', <String, String>{
       'vs_currency': 'aud',
@@ -502,15 +513,21 @@ class _MyHomePageState extends State<MyHomePage> {
             for (int i = 0; i < numberOfDays; i++) {
               double coinPrice = response['prices'][i][1];
               double profitForDay = 0.0;
-              double profitProcessor2 = 0.0;
 
               profitForDay = calculateProfitForDay(coinPrice, processors);
 
               cumulativeProfit += profitForDay;
 
+              double dataPoint = 0.0;
+              if (isCumulative) {
+                dataPoint = cumulativeProfit;
+              } else {
+                dataPoint = profitForDay;
+              }
+
               processorSeries.add(ProfitPerDay(
                 startDate.add(Duration(days: i)),
-                cumulativeProfit,
+                dataPoint,
                 profitForDay >= 0 ? Colors.green : Colors.redAccent,
               ));
 
