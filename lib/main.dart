@@ -128,7 +128,10 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Calculate Economics'),
+          Container(height: 50),
+          Text('Give us some details on your proposed Bitcoin Mining Operation', style: TextStyle(fontWeight: FontWeight.bold),),
+          Container(height: 25),
+
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Column(
               children: [
@@ -210,6 +213,8 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ]),
           Container(height: 50),
+          Text('Give us some details about the processors you are looking to use', style: TextStyle(fontWeight: FontWeight.bold),),
+          Container(height: 25),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -410,10 +415,23 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
+          Column(
+            children: [
+              Container(
+                height: 100,
+              ),
+              Text('This graph shows the cumulative profit/loss that would have been generated over the past year using this Bitcoin Mining Configuration',
+                style: TextStyle(fontWeight: FontWeight.bold)),
+            ],
+          ),
+
           getProfitChart(365),
           // This button toggles if we should show the price history of the
           // coins.
-          Text('Display Price History of the coins in AUD'),
+          Text('Display Price History of the coins in AUD', style: TextStyle(fontWeight: FontWeight.bold)),
+          Container(
+            height: 20,
+          ),
           ToggleButtons(
             children: <Widget>[
               Icon(ToggleIcons.bitcoin),
@@ -431,12 +449,15 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             isSelected: _coinHistorySelected,
           ),
+          Container(
+            height: 50,
+          ),
           Visibility(
               visible: _bitcoinVisible,
               child: Column(
                 children: [
                   Text('Bitcoin Price History'),
-                  get30DayPriceChart('bitcoin'),
+                  getPriceChart('bitcoin', 365),
                 ],
               )),
           Visibility(
@@ -444,7 +465,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: [
                   Text('Ethereum Price History'),
-                  get30DayPriceChart('ethereum'),
+                  getPriceChart('ethereum', 365),
                 ],
               )),
         ],
@@ -562,11 +583,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// Builds a graph displaying the price history of a [coin] for the past 30
   /// days.
-  Widget get30DayPriceChart(String coin) {
+  Widget getPriceChart(String coin, int numDays) {
     final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
         'api/v3/coins/$coin/market_chart', <String, String>{
       'vs_currency': 'aud',
-      'days': '30',
+      'days': numDays.toString(),
       'interval': 'daily'
     }));
     return FutureBuilder<http.Response>(
