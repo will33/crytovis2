@@ -57,6 +57,16 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+class ProcessorSet {
+  String processorType = 'GPU';
+  String processor = 'GTX 1080 Ti';
+  bool enabled = true;
+  int quantity = 1;
+  bool alreadyPurchased = false;
+
+}
+
+
 /// Stores the state of the [MyHomePage].
 class _MyHomePageState extends State<MyHomePage> {
   /// Determines if Bitcoin price chart is shown. Defaults to false.
@@ -64,15 +74,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// Determines if Ethereum price chart is shown. Defaults to false.
   bool _ethereumVisible = false;
-  
-  String _selectedProcessorType1 = 'GPU';
-  String _selectedProcessorType2 = 'GPU';
-  String _selectedProcessor1 = 'GTX 1080 Ti';
-  String _selectedProcessor2 = 'GTX 1080 Ti';
-  bool _enabledProcessor1 = true;
-  bool _enabledProcessor2 = false;
-  int _quantityProcessor1 = 1;
-  int _quantityProcessor2 = 1;
+
+  ProcessorSet _processorSet1 = ProcessorSet();
+  ProcessorSet _processorSet2 = ProcessorSet();
+
+  // String _selectedProcessorType1 = 'GPU';
+  // String _selectedProcessorType2 = 'GPU';
+  // String _selectedProcessor1 = 'GTX 1080 Ti';
+  // String _selectedProcessor2 = 'GTX 1080 Ti';
+  // bool _enabledProcessor1 = true;
+  // bool _enabledProcessor2 = false;
+  // int _quantityProcessor1 = 1;
+  // int _quantityProcessor2 = 1;
 
   /// The selected electricity price, in kW/Hs.
   double _electricityPrice = 0.32;
@@ -204,12 +217,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text('Processor type'),
                   DropdownButton(
-                    value: _selectedProcessorType1,
+                    value: _processorSet1.processorType,
                     onChanged: (String newValue) {
                       setState(() {
-                        _selectedProcessorType1 = newValue;
-                        _selectedProcessor1 =
-                            Constants.PROCESSORS[_selectedProcessorType1].first;
+                        _processorSet1.processorType = newValue;
+                        _processorSet1. processor =
+                            Constants.PROCESSORS[_processorSet1.processorType].first;
                       });
                     },
                     items: Constants.PROCESSOR_TYPES
@@ -229,16 +242,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text('Processor', style: TextStyle(color: Colors.green),),
                   DropdownButton(
-                    value: Constants.PROCESSORS[_selectedProcessorType1]
-                            .contains(_selectedProcessor1)
-                        ? _selectedProcessor1
-                        : Constants.PROCESSORS[_selectedProcessorType1].first,
+                    value: Constants.PROCESSORS[_processorSet1.processorType]
+                            .contains(_processorSet1.processor)
+                        ? _processorSet1.processor
+                        : Constants.PROCESSORS[_processorSet1.processorType].first,
                     onChanged: (String newValue) {
                       setState(() {
-                        _selectedProcessor1 = newValue;
+                        _processorSet1.processor = newValue;
                       });
                     },
-                    items: Constants.PROCESSORS[_selectedProcessorType1]
+                    items: Constants.PROCESSORS[_processorSet1.processorType]
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -257,12 +270,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     width: 50,
                     child: TextFormField(
-                      initialValue: _quantityProcessor1.toString(),
+                      initialValue: _processorSet1.quantity.toString(),
                       keyboardType: TextInputType.number,
                       onChanged: (String newValue) {
                         setState(() {
                           if (newValue != "")
-                            _quantityProcessor1 = int.parse(newValue);
+                            _processorSet1.quantity = int.parse(newValue);
                         });
                       },
                     ),
@@ -275,9 +288,22 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text('Enabled'),
-                  Checkbox(value: _enabledProcessor1, onChanged: (bool newValue) {
+                  Checkbox(value: _processorSet1.enabled, onChanged: (bool newValue) {
                     setState(() {
-                      _enabledProcessor1 = newValue;
+                      _processorSet1.enabled = newValue;
+                    });
+                  })
+                ],
+              ),
+              Container(
+                width: 50,
+              ),
+              Column(
+                children: [
+                  Text('Already Purchased'),
+                  Checkbox(value: _processorSet1.alreadyPurchased, onChanged: (bool newValue) {
+                    setState(() {
+                      _processorSet1.alreadyPurchased = newValue;
                     });
                   })
                 ],
@@ -291,12 +317,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text('Processor type'),
                   DropdownButton(
-                    value: _selectedProcessorType2,
+                    value: _processorSet2.processorType,
                     onChanged: (String newValue) {
                       setState(() {
-                        _selectedProcessorType2 = newValue;
-                        _selectedProcessor2 =
-                            Constants.PROCESSORS[_selectedProcessorType2].first;
+                        _processorSet2.processorType = newValue;
+                        _processorSet2.processor =
+                            Constants.PROCESSORS[_processorSet2.processorType].first;
                       });
                     },
                     items: Constants.PROCESSOR_TYPES
@@ -316,16 +342,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text('Processor', style: TextStyle(color: Colors.blue),),
                   DropdownButton(
-                    value: Constants.PROCESSORS[_selectedProcessorType2]
-                        .contains(_selectedProcessor2)
-                        ? _selectedProcessor2
-                        : Constants.PROCESSORS[_selectedProcessorType2].first,
+                    value: Constants.PROCESSORS[_processorSet2.processorType]
+                        .contains(_processorSet2.processor)
+                        ? _processorSet2.processor
+                        : Constants.PROCESSORS[_processorSet2.processorType].first,
                     onChanged: (String newValue) {
                       setState(() {
-                        _selectedProcessor2 = newValue;
+                        _processorSet2.processor = newValue;
                       });
                     },
-                    items: Constants.PROCESSORS[_selectedProcessorType2]
+                    items: Constants.PROCESSORS[_processorSet2.processorType]
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -344,12 +370,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     width: 50,
                     child: TextFormField(
-                      initialValue: _quantityProcessor2.toString(),
+                      initialValue: _processorSet2.quantity.toString(),
                       keyboardType: TextInputType.number,
                       onChanged: (String newValue) {
                         setState(() {
                           if (newValue != "")
-                            _quantityProcessor2 = int.parse(newValue);
+                            _processorSet2.quantity = int.parse(newValue);
                         });
                       },
                     ),
@@ -362,9 +388,22 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text('Enabled'),
-                  Checkbox(value: _enabledProcessor2, onChanged: (bool newValue) {
+                  Checkbox(value: _processorSet2.enabled, onChanged: (bool newValue) {
                     setState(() {
-                      _enabledProcessor2 = newValue;
+                      _processorSet2.enabled = newValue;
+                    });
+                  })
+                ],
+              ),
+              Container(
+                width: 50,
+              ),
+              Column(
+                children: [
+                  Text('Already Purchased'),
+                  Checkbox(value: _processorSet2.alreadyPurchased, onChanged: (bool newValue) {
+                    setState(() {
+                      _processorSet2.alreadyPurchased = newValue;
                     });
                   })
                 ],
@@ -431,10 +470,9 @@ class _MyHomePageState extends State<MyHomePage> {
           if (snapshot.hasData) {
             DateTime startDate =
                 DateTime.now().subtract(Duration(days: numberOfDays));
-            List<ProfitPerDay> seriesProcessor1 = [];
-            List<ProfitPerDay> seriesProcessor2 = [];
-            double sumProcessor1 = _otherCapitalExpenses * -1;
-            double sumProcessor2 = _otherCapitalExpenses * -1;
+            List<ProcessorSet> processors = [_processorSet1, _processorSet2];
+            List<ProfitPerDay> processorSeries = [];
+            double cumulativeProfit = calculateInitialCapitalExpense(processors) * -1;
 
             // Go through each value on the priceHistoryRequest per day. The
             // first value in the response is the oldest, the last is the
@@ -442,30 +480,21 @@ class _MyHomePageState extends State<MyHomePage> {
             Map<String, dynamic> response = jsonDecode(snapshot.data.body);
             for (int i = 0; i < numberOfDays; i++) {
               double coinPrice = response['prices'][i][1];
-              double profitProcessor1 = 0.0;
+              double profitForDay = 0.0;
               double profitProcessor2 = 0.0;
-              
-              profitProcessor1 = calculateProfitForDay(coinPrice, _selectedProcessor1);
-              profitProcessor2 = calculateProfitForDay(coinPrice, _selectedProcessor2);
 
-              sumProcessor1 += profitProcessor1 * _quantityProcessor1;
-              sumProcessor2 += profitProcessor2 * _quantityProcessor2;
+              profitForDay = calculateProfitForDay(coinPrice, processors);
 
-              if (_enabledProcessor1)
-                seriesProcessor1.add(ProfitPerDay(
-                  startDate.add(Duration(days: i)),
-                  sumProcessor1,
-                  profitProcessor1 >= 0 ? Colors.green : Colors.redAccent,
-                ));
+              cumulativeProfit += profitForDay;
 
-              if (_enabledProcessor2)
-                seriesProcessor2.add(ProfitPerDay(
-                  startDate.add(Duration(days: i)),
-                  sumProcessor2,
-                  profitProcessor2 >= 0 ? Colors.blue : Colors.red,
-                ));
+              processorSeries.add(ProfitPerDay(
+                startDate.add(Duration(days: i)),
+                cumulativeProfit,
+                profitForDay >= 0 ? Colors.green : Colors.redAccent,
+              ));
+
             }
-            List<List<ProfitPerDay>> series = [seriesProcessor1, seriesProcessor2];
+            List<List<ProfitPerDay>> series = [processorSeries];
             return ProfitChart(series, 'Time', 'Profit (AU\$)');
           } else if (snapshot.hasError) {
             return Container(child: Text(snapshot.error));
@@ -475,23 +504,60 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  double calculateInitialCapitalExpense(List<ProcessorSet> processors) {
+
+      double totalInitialCapitalExpense = _otherCapitalExpenses;
+
+      for( var i = 0 ; i < processors.length; i++ ) {
+          if (processors[i].enabled && !processors[i].alreadyPurchased) {
+            totalInitialCapitalExpense += Constants.INITIAL_CAPITALS[processors[i].processor];
+          }
+      }
+
+      return totalInitialCapitalExpense;
+
+  }
+
   /// Returns the amount of profit made for a specific day.
-  double calculateProfitForDay(double coinPrice, String processor) {
-    return calculateIncomeForDay(coinPrice, processor) - calculateCostForDay(processor);
+  double calculateProfitForDay(double coinPrice, List<ProcessorSet> processors) {
+    return calculateIncomeForDay(coinPrice, processors) - calculateCostForDay(processors);
   }
 
   /// Returns the cost (in electricity) for 24 hours of use.
-  double calculateCostForDay(String processor) {
-    return (_electricityPrice / Constants.WATTS_IN_KILOWATT) *
-            Constants.HOURS_IN_DAY *
-            Constants.POWER_USAGES[processor] +
-        _otherFixedCosts;
+  double calculateCostForDay(List<ProcessorSet> processors) {
+
+    double totalFixedCosts = _otherFixedCosts;
+
+    // Calculate the fixed daily costs of running all of the enabled processors
+    for( var i = 0 ; i < processors.length; i++ ) {
+      if (processors[i].enabled) {
+        totalFixedCosts += (_electricityPrice / Constants.WATTS_IN_KILOWATT) *
+            Constants.HOURS_IN_DAY * Constants.POWER_USAGES[processors[i].processor] *
+            processors[i].quantity;
+      }
+    }
+
+    return totalFixedCosts;
   }
 
   /// Returns the income generated from 24 hours of hashing.
-  double calculateIncomeForDay(double coinPrice, String processor) {
-    return Constants.BITCOIN_BLOCK_REWARD * (Constants.MINUTES_IN_DAY / Constants.BITCOIN_AVG_BLOCKTIME) *
-        (Constants.HASH_RATES[processor] / Constants.NETWORK_HASHRATE) * coinPrice;
+  double calculateIncomeForDay(double coinPrice, List<ProcessorSet> processors) {
+
+    double totalIncome = 0;
+
+    // Calculate the fixed daily income generated from running all of the enabled processors
+    processors.forEach((processor) {
+      if (processor.enabled) {
+        totalIncome += Constants.BITCOIN_BLOCK_REWARD *
+            (Constants.MINUTES_IN_DAY / Constants.BITCOIN_AVG_BLOCKTIME) *
+            (Constants.HASH_RATES[processor.processor] /
+                Constants.NETWORK_HASHRATE) * coinPrice *
+            processor.quantity;
+      }
+
+    });
+
+    return totalIncome;
   }
 
   /// Builds a graph displaying the price history of a [coin] for the past 30

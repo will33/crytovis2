@@ -40,6 +40,18 @@ class Constants {
     'GPU': ['GTX 1080 Ti', 'RTX 2070S', 'RX 480'],
     'CPU': ['i7 7700k', 'i5 3750k', '5700X']
   };
+  /// The initial capital expense associated with each processor.
+  static const INITIAL_CAPITALS = {
+    'AntMiner': 1000,
+    'AC130': 1000,
+    'SPS320': 1000,
+    'GTX 1080 Ti': 1000,
+    'RTX 2070S': 1000,
+    'RX 480': 1000,
+    'i7 7700k': 1000,
+    'i5 3750k': 1000,
+    '5700X': 1000
+  };
   /// The power usage of each processor, in Watts.
   static const POWER_USAGES = {
     'AntMiner': 1000,
