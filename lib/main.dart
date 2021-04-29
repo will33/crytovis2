@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cryptovis2/profit_chart.dart';
 import 'package:cryptovis2/profit_per_day.dart';
+import 'package:cryptovis2/toggle_icons_icons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
@@ -55,6 +56,12 @@ class MyHomePage extends StatefulWidget {
 
 /// Stores the state of the [MyHomePage].
 class _MyHomePageState extends State<MyHomePage> {
+  /// Determines if Bitcoin price chart is shown. Defaults to false.
+  bool _bitcoinVisible = false;
+
+  /// Determines if Ethereum price chart is shown. Defaults to false.
+  bool _ethereumVisible = false;
+
   /// The processor types used to populate the second dropdown box.
   var _processorTypes = ['ASIC', 'GPU', 'CPU'];
 
@@ -94,13 +101,20 @@ class _MyHomePageState extends State<MyHomePage> {
     '5700X': 6
   };
 
-  /// The electricity price of each country, in kW/Hs.
+  /// The selected electricity price, in kW/Hs.
   double _electricityPrice = 0.32;
+
+  /// User inputed variable representing all of their other costs.
   double _otherFixedCosts = 0;
+
+  /// User inputed variable representing their one-off capital costs
   double _otherCapitalExpenses = 0;
+
+  /// User selected country to populate power prices.
   String _selectedCountry = 'Australia';
 
-  /// The electricity price of each country, in kW/Hs.
+  /// The electricity price of each country, in kW/Hs. Sourced from Statista,
+  /// current as of September 2020. https://www.statista.com/aboutus/trust
   var _electricityPrices = {
     'Australia': 0.32,
     'Argentina': 0.077,
@@ -137,15 +151,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final priceController = new TextEditingController();
 
-  static int HOURS_IN_DAY = 24;
-  static int WATTS_IN_KILOWATT = 1000;
-
-  /// The hours in the month being displayed.
-  // ignore: unused_field
-  int _hoursInMonth = 24 * 30;
+  static const int HOURS_IN_DAY = 24;
+  static const int WATTS_IN_KILOWATT = 1000;
 
   /// The processor to return the profitability for.
   String _selectedProcessor = 'GTX 1080 Ti';
+
+  /// The selection state for the coin price history toggle widget. 
+  /// 
+  /// True indicates the coins history is visible, False indicates the coins 
+  /// history is hidden. Index 0 is bitcoin. Index 1 is ethereum. 
+  final List<bool> _coinHistorySelected = [false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     priceController.text = _electricityPrice.toStringAsFixed(2);
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -302,10 +319,42 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           getProfitChart(365),
-          //Text('Bitcoin Price History'),
-          //getPriceChart('bitcoin'),
-          //Text('Ethereum Price History'),
-          //getPriceChart('ethereum')
+          // This button toggles if we should show the price history of the
+          // coins.
+          Text('Display Price History of the coins in AUD'),
+          ToggleButtons(
+            children: <Widget>[
+              Icon(ToggleIcons.bitcoin),
+              Icon(ToggleIcons.ethereum),
+            ],
+            onPressed: (int index) {
+              setState(() {
+                _coinHistorySelected[index] = !_coinHistorySelected[index];
+                if (index == 0) {
+                  _bitcoinVisible = !_bitcoinVisible;
+                } else {
+                  _ethereumVisible = !_ethereumVisible;
+                }
+              });
+            },
+            isSelected: _coinHistorySelected,
+          ),
+          Visibility(
+              visible: _bitcoinVisible,
+              child: Column(
+                children: [
+                  Text('Bitcoin Price History'),
+                  getPriceChart('bitcoin'),
+                ],
+              )),
+          Visibility(
+              visible: _ethereumVisible,
+              child: Column(
+                children: [
+                  Text('Ethereum Price History'),
+                  getPriceChart('ethereum'),
+                ],
+              )),
         ],
       )),
     );
@@ -328,7 +377,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
           if (snapshot.hasData) {
             DateTime startDate =
-                DateTime.now().add(Duration(days: -numberOfDays));
+                DateTime.now().subtract(Duration(days: numberOfDays));
             List<ProfitPerDay> series = [];
             double sum = _otherCapitalExpenses * -1;
             double profit = 0.0;
