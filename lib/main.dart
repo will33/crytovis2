@@ -109,6 +109,18 @@ class _MyHomePageState extends State<MyHomePage> {
   // the Scenario start time
   DateTime _startDate = DateTime.now();
 
+  bool isSwitched = false;
+  void toggleSwitch(bool value) {
+    setState(() {
+      isSwitched = !isSwitched;
+      if (_coinSelected[0] == true) {
+        _bitcoinVisible = !_bitcoinVisible;
+      } else {
+        _ethereumVisible = !_ethereumVisible;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called.
@@ -464,7 +476,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Icon(ToggleIcons.ethereum),
             ],
             onPressed: null,
-              /*  (int index) {
+            /*  (int index) {
               setState(() {
                 for (int i = 0; i < _coinSelected.length; i++) {
                   if (i == index) {
@@ -505,10 +517,14 @@ class _MyHomePageState extends State<MyHomePage> {
           getProfitChart(365, false, 'bitcoin'),
           // This button toggles if we should show the price history of the
           // coins.
-          Text('Display Price History of the coins in AUD',
+          Text('Do you want to display the price history of the coin?',
               style: TextStyle(fontWeight: FontWeight.bold)),
           Container(height: 20),
-          Container(height: 50),
+          Switch(
+            value: isSwitched,
+            onChanged: toggleSwitch,
+          ),
+          Container(height: 20),
           Visibility(
               visible: _bitcoinVisible,
               child: Column(
