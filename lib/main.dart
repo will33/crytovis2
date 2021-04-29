@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
+import 'constants.dart';
+
+
 void main() {
   runApp(MyApp());
 }
@@ -61,45 +64,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// Determines if Ethereum price chart is shown. Defaults to false.
   bool _ethereumVisible = false;
-
-  /// The processor types used to populate the second dropdown box.
-  var _processorTypes = ['ASIC', 'GPU', 'CPU'];
-
-  /// The processor type selected from [_processorTypes].
-  String _selectedProcessorType = 'GPU';
-
-  /// The list of processors the app can check against.
-  var _processors = {
-    'ASIC': ['AntMiner', 'AC130', 'SPS320'],
-    'GPU': ['GTX 1080 Ti', 'RTX 2070S', 'RX 480'],
-    'CPU': ['i7 7700k', 'i5 3750k', '5700X']
-  };
-
-  /// The power usage of each processor, in Watts.
-  var _powerUsages = {
-    'AntMiner': 1000,
-    'AC130': 800,
-    'SPS320': 900,
-    'GTX 1080 Ti': 500,
-    'RTX 2070S': 400,
-    'RX 480': 300,
-    'i7 7700k': 180,
-    'i5 3750k': 100,
-    '5700X': 200
-  };
-
-  /// The hash rate of each processor in MH/s
-  var _hashRates = {
-    'AntMiner': 700,
-    'AC130': 800,
-    'SPS320': 900,
-    'GTX 1080 Ti': 45.69,
-    'RTX 2070S': 43,
-    'RX 480': 30.29,
-    'i7 7700k': 5,
-    'i5 3750k': 4,
-    '5700X': 6
-  };
+  
+  String _selectedProcessorType1 = 'GPU';
+  String _selectedProcessorType2 = 'GPU';
+  String _selectedProcessor1 = 'GTX 1080 Ti';
+  String _selectedProcessor2 = 'GTX 1080 Ti';
+  bool _enabledProcessor1 = true;
+  bool _enabledProcessor2 = false;
+  int _quantityProcessor1 = 1;
+  int _quantityProcessor2 = 1;
 
   /// The selected electricity price, in kW/Hs.
   double _electricityPrice = 0.32;
@@ -112,50 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// User selected country to populate power prices.
   String _selectedCountry = 'Australia';
-
-  /// The electricity price of each country, in kW/Hs. Sourced from Statista,
-  /// current as of September 2020. https://www.statista.com/aboutus/trust
-  var _electricityPrices = {
-    'Australia': 0.32,
-    'Argentina': 0.077,
-    'Belgium': 0.39,
-    'Brazil': 0.15,
-    'China': 0.1,
-    'Cyprus': 0.27,
-    'Denmark': 0.42,
-    'France': 0.28,
-    'Germany': 0.46,
-    'India': 0.1,
-    'Indonesia': 0.13,
-    'Iran': 0.013,
-    'Ireland': 0.35,
-    'Italy': 0.33,
-    'Kenya': 0.27,
-    'Japan': 0.33,
-    'Mexico': 0.1,
-    'New Zealand': 0.31,
-    'Nigeria': 0.077,
-    'Poland': 0.24,
-    'Portugal': 0.35,
-    'Qatar': 0.039,
-    'Russia': 0.077,
-    'Rwanda': 0.33,
-    'Saudi Arabia': 0.064,
-    'Singapore': 0.21,
-    'South Africa': 0.19,
-    'Spain': 0.31,
-    'Turkey': 0.12,
-    'UK': 0.33,
-    'USA': 0.19,
-  };
-
+  
   final priceController = new TextEditingController();
-
-  static const int HOURS_IN_DAY = 24;
-  static const int WATTS_IN_KILOWATT = 1000;
-
-  /// The processor to return the profitability for.
-  String _selectedProcessor = 'GTX 1080 Ti';
 
   /// The selection state for the coin price history toggle widget. 
   /// 
@@ -194,11 +125,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   onChanged: (String newCountry) {
                     setState(() {
                       _selectedCountry = newCountry;
-                      _electricityPrice = _electricityPrices[_selectedCountry];
+                      _electricityPrice = Constants.ELECTRICITY_PRICES[_selectedCountry];
                       priceController.text = _electricityPrice.toString();
                     });
                   },
-                  items: _electricityPrices.keys
+                  items: Constants.ELECTRICITY_PRICES.keys
                       .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -216,9 +147,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 TextFormField(
                   controller: priceController,
                   keyboardType: TextInputType.number,
-                  onFieldSubmitted: (String newValue) {
+                  onChanged: (String newValue) {
                     setState(() {
-                      _electricityPrice = double.parse(newValue);
+                      if (newValue != "")
+                        _electricityPrice = double.parse(newValue);
                     });
                   },
                 )
@@ -272,15 +204,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text('Processor type'),
                   DropdownButton(
-                    value: _selectedProcessorType,
+                    value: _selectedProcessorType1,
                     onChanged: (String newValue) {
                       setState(() {
-                        _selectedProcessorType = newValue;
-                        _selectedProcessor =
-                            _processors[_selectedProcessorType].first;
+                        _selectedProcessorType1 = newValue;
+                        _selectedProcessor1 =
+                            Constants.PROCESSORS[_selectedProcessorType1].first;
                       });
                     },
-                    items: _processorTypes
+                    items: Constants.PROCESSOR_TYPES
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -295,18 +227,18 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Column(
                 children: [
-                  Text('Processor'),
+                  Text('Processor', style: TextStyle(color: Colors.green),),
                   DropdownButton(
-                    value: _processors[_selectedProcessorType]
-                            .contains(_selectedProcessor)
-                        ? _selectedProcessor
-                        : _processors[_selectedProcessorType].first,
+                    value: Constants.PROCESSORS[_selectedProcessorType1]
+                            .contains(_selectedProcessor1)
+                        ? _selectedProcessor1
+                        : Constants.PROCESSORS[_selectedProcessorType1].first,
                     onChanged: (String newValue) {
                       setState(() {
-                        _selectedProcessor = newValue;
+                        _selectedProcessor1 = newValue;
                       });
                     },
-                    items: _processors[_selectedProcessorType]
+                    items: Constants.PROCESSORS[_selectedProcessorType1]
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -314,6 +246,127 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                     }).toList(),
                   )
+                ],
+              ),
+              Container(
+                width: 50,
+              ),
+              Column(
+                children: [
+                  Text('Quantity'),
+                  Container(
+                    width: 50,
+                    child: TextFormField(
+                      initialValue: _quantityProcessor1.toString(),
+                      keyboardType: TextInputType.number,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          if (newValue != "")
+                            _quantityProcessor1 = int.parse(newValue);
+                        });
+                      },
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                width: 50,
+              ),
+              Column(
+                children: [
+                  Text('Enabled'),
+                  Checkbox(value: _enabledProcessor1, onChanged: (bool newValue) {
+                    setState(() {
+                      _enabledProcessor1 = newValue;
+                    });
+                  })
+                ],
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Text('Processor type'),
+                  DropdownButton(
+                    value: _selectedProcessorType2,
+                    onChanged: (String newValue) {
+                      setState(() {
+                        _selectedProcessorType2 = newValue;
+                        _selectedProcessor2 =
+                            Constants.PROCESSORS[_selectedProcessorType2].first;
+                      });
+                    },
+                    items: Constants.PROCESSOR_TYPES
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
+                ],
+              ),
+              Container(
+                width: 50,
+              ),
+              Column(
+                children: [
+                  Text('Processor', style: TextStyle(color: Colors.blue),),
+                  DropdownButton(
+                    value: Constants.PROCESSORS[_selectedProcessorType2]
+                        .contains(_selectedProcessor2)
+                        ? _selectedProcessor2
+                        : Constants.PROCESSORS[_selectedProcessorType2].first,
+                    onChanged: (String newValue) {
+                      setState(() {
+                        _selectedProcessor2 = newValue;
+                      });
+                    },
+                    items: Constants.PROCESSORS[_selectedProcessorType2]
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
+                ],
+              ),
+              Container(
+                width: 50,
+              ),
+              Column(
+                children: [
+                  Text('Quantity'),
+                  Container(
+                    width: 50,
+                    child: TextFormField(
+                      initialValue: _quantityProcessor2.toString(),
+                      keyboardType: TextInputType.number,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          if (newValue != "")
+                            _quantityProcessor2 = int.parse(newValue);
+                        });
+                      },
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                width: 50,
+              ),
+              Column(
+                children: [
+                  Text('Enabled'),
+                  Checkbox(value: _enabledProcessor2, onChanged: (bool newValue) {
+                    setState(() {
+                      _enabledProcessor2 = newValue;
+                    });
+                  })
                 ],
               ),
             ],
@@ -344,7 +397,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: [
                   Text('Bitcoin Price History'),
-                  getPriceChart('bitcoin'),
+                  get30DayPriceChart('bitcoin'),
                 ],
               )),
           Visibility(
@@ -352,7 +405,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: [
                   Text('Ethereum Price History'),
-                  getPriceChart('ethereum'),
+                  get30DayPriceChart('ethereum'),
                 ],
               )),
         ],
@@ -378,33 +431,41 @@ class _MyHomePageState extends State<MyHomePage> {
           if (snapshot.hasData) {
             DateTime startDate =
                 DateTime.now().subtract(Duration(days: numberOfDays));
-            List<ProfitPerDay> series = [];
-            double sum = _otherCapitalExpenses * -1;
-            double profit = 0.0;
-            Color colour = Colors.red;
+            List<ProfitPerDay> seriesProcessor1 = [];
+            List<ProfitPerDay> seriesProcessor2 = [];
+            double sumProcessor1 = _otherCapitalExpenses * -1;
+            double sumProcessor2 = _otherCapitalExpenses * -1;
+
             // Go through each value on the priceHistoryRequest per day. The
             // first value in the response is the oldest, the last is the
             // current price.
             Map<String, dynamic> response = jsonDecode(snapshot.data.body);
             for (int i = 0; i < numberOfDays; i++) {
               double coinPrice = response['prices'][i][1];
-              profit = calculateProfitForDay(coinPrice);
+              double profitProcessor1 = 0.0;
+              double profitProcessor2 = 0.0;
+              
+              profitProcessor1 = calculateProfitForDay(coinPrice, _selectedProcessor1);
+              profitProcessor2 = calculateProfitForDay(coinPrice, _selectedProcessor2);
 
-              // Colour code the addition to the chart.
-              if (profit >= 0) {
-                colour = Colors.green;
-              } else {
-                colour = Colors.red;
-              }
+              sumProcessor1 += profitProcessor1 * _quantityProcessor1;
+              sumProcessor2 += profitProcessor2 * _quantityProcessor2;
 
-              // Add the result to the chart.
-              sum += profit;
-              series.add(ProfitPerDay(
-                startDate.add(Duration(days: i)),
-                sum,
-                colour,
-              ));
+              if (_enabledProcessor1)
+                seriesProcessor1.add(ProfitPerDay(
+                  startDate.add(Duration(days: i)),
+                  sumProcessor1,
+                  profitProcessor1 >= 0 ? Colors.green : Colors.redAccent,
+                ));
+
+              if (_enabledProcessor2)
+                seriesProcessor2.add(ProfitPerDay(
+                  startDate.add(Duration(days: i)),
+                  sumProcessor2,
+                  profitProcessor2 >= 0 ? Colors.blue : Colors.red,
+                ));
             }
+            List<List<ProfitPerDay>> series = [seriesProcessor1, seriesProcessor2];
             return ProfitChart(series, 'Time', 'Profit (AU\$)');
           } else if (snapshot.hasError) {
             return Container(child: Text(snapshot.error));
@@ -415,30 +476,27 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// Returns the amount of profit made for a specific day.
-  double calculateProfitForDay(double coinPrice) {
-    return calculateIncomeForDay(coinPrice) - calculateCostForDay();
+  double calculateProfitForDay(double coinPrice, String processor) {
+    return calculateIncomeForDay(coinPrice, processor) - calculateCostForDay(processor);
   }
 
   /// Returns the cost (in electricity) for 24 hours of use.
-  double calculateCostForDay() {
-    return (_electricityPrice / WATTS_IN_KILOWATT) *
-            HOURS_IN_DAY *
-            _powerUsages[_selectedProcessor] +
+  double calculateCostForDay(String processor) {
+    return (_electricityPrice / Constants.WATTS_IN_KILOWATT) *
+            Constants.HOURS_IN_DAY *
+            Constants.POWER_USAGES[processor] +
         _otherFixedCosts;
   }
 
   /// Returns the income generated from 24 hours of hashing.
-  double calculateIncomeForDay(double coinPrice) {
-    return 6.25 * // Amount of bitcoins given as a reward.
-        (1440 / 10) * // Minutes in a day divide the BTC blocktime in minutes
-        (_hashRates[_selectedProcessor] / // The processor hashrate.
-            149045000) * // BTC network hashrate. TODO: See if Blockchain.com has an api.
-        coinPrice; // The price of BTC on that day.
+  double calculateIncomeForDay(double coinPrice, String processor) {
+    return Constants.BITCOIN_BLOCK_REWARD * (Constants.MINUTES_IN_DAY / Constants.BITCOIN_AVG_BLOCKTIME) *
+        (Constants.HASH_RATES[processor] / Constants.NETWORK_HASHRATE) * coinPrice;
   }
 
   /// Builds a graph displaying the price history of a [coin] for the past 30
   /// days.
-  Widget getPriceChart(String coin) {
+  Widget get30DayPriceChart(String coin) {
     final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
         'api/v3/coins/$coin/market_chart', <String, String>{
       'vs_currency': 'aud',
@@ -450,7 +508,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
           if (snapshot.hasData) {
             var priceSeries = getPriceSeries(snapshot.data.body);
-            return ProfitChart(priceSeries, 'Time', 'Price (AU\$)');
+            return ProfitChart([priceSeries], 'Time', 'Price (AU\$)');
           } else if (snapshot.hasError) {
             return Container(child: Text(snapshot.error));
           } else {
