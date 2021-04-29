@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cryptovis2/profit_chart.dart';
 import 'package:cryptovis2/profit_per_day.dart';
+import 'package:cryptovis2/toggle_icons_icons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
@@ -55,6 +56,12 @@ class MyHomePage extends StatefulWidget {
 
 /// Stores the state of the [MyHomePage].
 class _MyHomePageState extends State<MyHomePage> {
+  /// Determines if Bitcoin price chart is shown. Defaults to false.
+  bool _bitcoinVisible = false;
+
+  /// Determines if Ethereum price chart is shown. Defaults to false.
+  bool _ethereumVisible = false;
+
   /// The processor types used to populate the second dropdown box.
   var _processorTypes = ['ASIC', 'GPU', 'CPU'];
 
@@ -96,14 +103,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// The selected electricity price, in kW/Hs.
   double _electricityPrice = 0.32;
+
   /// User inputed variable representing all of their other costs.
   double _otherFixedCosts = 0;
+
   /// User inputed variable representing their one-off capital costs
   double _otherCapitalExpenses = 0;
+
   /// User selected country to populate power prices.
   String _selectedCountry = 'Australia';
 
-  /// The electricity price of each country, in kW/Hs. Sourced from Statista, 
+  /// The electricity price of each country, in kW/Hs. Sourced from Statista,
   /// current as of September 2020. https://www.statista.com/aboutus/trust
   var _electricityPrices = {
     'Australia': 0.32,
@@ -155,6 +165,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     priceController.text = _electricityPrice.toStringAsFixed(2);
+
+    /// The selection state for the coin price history toggle widget.
+    final List<bool> priceHistorySelected = [false, false];
+    
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -302,10 +316,39 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           getProfitChart(365),
-          //Text('Bitcoin Price History'),
-          //getPriceChart('bitcoin'),
-          //Text('Ethereum Price History'),
-          //getPriceChart('ethereum')
+          ToggleButtons(
+            children: <Widget>[
+              Icon(ToggleIcons.bitcoin),
+              Icon(ToggleIcons.ethereum),
+            ],
+            onPressed: (int index) {
+              setState(() {
+                priceHistorySelected[index] = !priceHistorySelected[index];
+                if (index == 0) {
+                  _bitcoinVisible = !_bitcoinVisible;
+                } else {
+                  _ethereumVisible = !_ethereumVisible;
+                }
+              });
+            },
+            isSelected: priceHistorySelected,
+          ),
+          Visibility(
+              visible: _bitcoinVisible,
+              child: Column(
+                children: [
+                  Text('Bitcoin Price History'),
+                  getPriceChart('bitcoin'),
+                ],
+              )),
+          Visibility(
+              visible: _ethereumVisible,
+              child: Column(
+                children: [
+                  Text('Ethereum Price History'),
+                  getPriceChart('ethereum'),
+                ],
+              )),
         ],
       )),
     );
