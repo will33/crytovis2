@@ -157,6 +157,12 @@ class _MyHomePageState extends State<MyHomePage> {
   /// The processor to return the profitability for.
   String _selectedProcessor = 'GTX 1080 Ti';
 
+  /// The selection state for the coin price history toggle widget. 
+  /// 
+  /// True indicates the coins history is visible, False indicates the coins 
+  /// history is hidden. Index 0 is bitcoin. Index 1 is ethereum. 
+  final List<bool> _coinHistorySelected = [false, false];
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called.
@@ -166,9 +172,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     priceController.text = _electricityPrice.toStringAsFixed(2);
 
-    /// The selection state for the coin price history toggle widget.
-    final List<bool> priceHistorySelected = [false, false];
-    
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -316,6 +319,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           getProfitChart(365),
+          // This button toggles if we should show the price history of the
+          // coins.
+          Text('Display Price History of the coins in AUD'),
           ToggleButtons(
             children: <Widget>[
               Icon(ToggleIcons.bitcoin),
@@ -323,7 +329,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
             onPressed: (int index) {
               setState(() {
-                priceHistorySelected[index] = !priceHistorySelected[index];
+                _coinHistorySelected[index] = !_coinHistorySelected[index];
                 if (index == 0) {
                   _bitcoinVisible = !_bitcoinVisible;
                 } else {
@@ -331,7 +337,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
               });
             },
-            isSelected: priceHistorySelected,
+            isSelected: _coinHistorySelected,
           ),
           Visibility(
               visible: _bitcoinVisible,
