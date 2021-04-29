@@ -163,6 +163,9 @@ class _MyHomePageState extends State<MyHomePage> {
   /// history is hidden. Index 0 is bitcoin. Index 1 is ethereum. 
   final List<bool> _coinHistorySelected = [false, false];
 
+  // the Scenario start time
+  DateTime _startDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called.
@@ -226,6 +229,22 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               width: 50,
+            ),
+            Container(
+              width: 150,
+              child: Column(children: [
+                Text('Select starting date'),
+                InputDatePickerFormField(
+                    firstDate: DateTime.now().subtract(Duration(days: 3650)),
+                    lastDate: DateTime.now().add(Duration(days:365)),
+                    onDateSubmitted: (DateTime newDate){
+                      setState(() {
+                        _startDate = newDate;
+                      });
+                  },
+
+                )
+              ])
             )
           ]),
           Container(height: 50),
@@ -318,7 +337,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
-          getProfitChart(365),
+          getProfitChart(365, 'bitcoin'), // TODO: don't hardcode either
           // This button toggles if we should show the price history of the
           // coins.
           Text('Display Price History of the coins in AUD'),
@@ -364,20 +383,33 @@ class _MyHomePageState extends State<MyHomePage> {
   /// particular country.
   ///
   /// The [numberOfDays] is the amount of days to populate the chart with.
-  Widget getProfitChart(int numberOfDays) {
+  Widget getProfitChart(int numberOfDays, String coin) {
+    // we now get a range of dates explicitly
+    var startingDate = _startDate;
+    var nDaysAgo = DateTime.now().subtract(Duration(days: numberOfDays));
+    if (startingDate.isAfter(nDaysAgo)){
+      startingDate = nDaysAgo;
+    }
+    var endingDate = startingDate.add(Duration(days: numberOfDays));
+    if (endingDate.isAfter(DateTime.now())){
+      endingDate = DateTime.now();
+    }
+
     final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
-        'api/v3/coins/bitcoin/market_chart', <String, String>{
+        'api/v3/coins/$coin/market_chart/range', <String, String>{
       'vs_currency': 'aud',
-      'days': numberOfDays.toString(),
-      'interval': 'daily'
+      // 'days': numberOfDays.toString(),
+      // 'interval': 'daily'
+          'from': (startingDate.millisecondsSinceEpoch/1000).toString(),
+          'to': (endingDate.millisecondsSinceEpoch/1000).toString()
     }));
 
     return FutureBuilder<http.Response>(
         future: priceHistoryRequest,
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
           if (snapshot.hasData) {
-            DateTime startDate =
-                DateTime.now().subtract(Duration(days: numberOfDays));
+            DateTime startDate = startingDate;
+
             List<ProfitPerDay> series = [];
             double sum = _otherCapitalExpenses * -1;
             double profit = 0.0;
