@@ -12,7 +12,7 @@ class ProfitChart extends StatefulWidget {
   ProfitChart(this.chartData, this.xLabel, this.yLabel);
 
   /// The list of [ProfitPerDay] objects to be displayed in this [ProfitChart].
-  final List<ProfitPerDay> chartData;
+  final List<List<ProfitPerDay>> chartData;
   /// The label for the x-axis.
   final String xLabel;
   /// The label for the y-axis.
@@ -59,16 +59,16 @@ class _ProfitChartState extends State<ProfitChart> {
 
   @override
   Widget build(BuildContext context) {
-
-    var series = [
-      new charts.Series(
+    List<charts.Series<ProfitPerDay, DateTime>> series = [];
+    widget.chartData.forEach((element) {
+      series.add(new charts.Series(
         id: 'Profit',
         domainFn: (ProfitPerDay clickData, _) => clickData.day,
         measureFn: (ProfitPerDay clickData, _) => clickData.profit,
         colorFn: (ProfitPerDay clickData, _) => clickData.color,
-        data: widget.chartData,
-      ),
-    ];
+        data: element,
+      ));
+    });
 
     var chart = new charts.TimeSeriesChart(
       series,
@@ -84,7 +84,7 @@ class _ProfitChartState extends State<ProfitChart> {
             titleOutsideJustification:
             charts.OutsideJustification.middleDrawArea)
       ],
-      defaultRenderer: new charts.LineRendererConfig(includePoints: true),
+      // defaultRenderer: new charts.LineRendererConfig(includePoints: true),
       selectionModels: [
         new charts.SelectionModelConfig(
           type: charts.SelectionModelType.info,
