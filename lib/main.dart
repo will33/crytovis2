@@ -64,9 +64,7 @@ class ProcessorSet {
   bool enabled = true;
   int quantity = 1;
   bool alreadyPurchased = false;
-
 }
-
 
 /// Stores the state of the [MyHomePage].
 class _MyHomePageState extends State<MyHomePage> {
@@ -102,15 +100,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final priceController = new TextEditingController();
 
-  /// The selection state for the coin price history toggle widget. 
-  /// 
-  /// True indicates the coins history is visible, False indicates the coins 
-  /// history is hidden. Index 0 is bitcoin. Index 1 is ethereum. 
-  final List<bool> _coinHistorySelected = [false, false];
+  /// The crypto coin to use in the tool.
+  ///
+  /// True indicates the coin is active, False indicates the coins is inactive.
+  /// Only one coin can be active at a time. Index 0 is bitcoin.
+  /// Index 1 is ethereum. Must be a List<bool> and not a string so it can be
+  /// use as the `isSelected` option in the [ToggleButton] widget.
+  final List<bool> _coinSelected = [true, false];
 
   // the Scenario start time
   DateTime _startDate = DateTime.now();
   int _chartNumberOfDays = 365;
+
+  bool isSwitched = false;
+  void toggleSwitch(bool value) {
+    setState(() {
+      isSwitched = !isSwitched;
+      if (_coinSelected[0] == true) {
+        _bitcoinVisible = !_bitcoinVisible;
+      } else {
+        _ethereumVisible = !_ethereumVisible;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +146,10 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(height: 50),
-          Text('Give us some details on your proposed Bitcoin Mining Operation', style: TextStyle(fontWeight: FontWeight.bold),),
+          Text(
+            'Give us some details on your proposed Bitcoin Mining Operation',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           Container(height: 25),
 
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -146,7 +161,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   onChanged: (String newCountry) {
                     setState(() {
                       _selectedCountry = newCountry;
-                      _electricityPrice = Constants.ELECTRICITY_PRICES[_selectedCountry];
+                      _electricityPrice =
+                          Constants.ELECTRICITY_PRICES[_selectedCountry];
                       priceController.text = _electricityPrice.toString();
                     });
                   },
@@ -249,7 +265,10 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ]),
           Container(height: 50),
-          Text('Give us some details about the processors you are looking to use', style: TextStyle(fontWeight: FontWeight.bold),),
+          Text(
+            'Give us some details about the processors you are looking to use',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           Container(height: 25),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -262,8 +281,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     onChanged: (String newValue) {
                       setState(() {
                         _processorSet1.processorType = newValue;
-                        _processorSet1. processor =
-                            Constants.PROCESSORS[_processorSet1.processorType].first;
+                        _processorSet1.processor = Constants
+                            .PROCESSORS[_processorSet1.processorType].first;
                       });
                     },
                     items: Constants.PROCESSOR_TYPES
@@ -281,12 +300,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Column(
                 children: [
-                  Text('Processor', style: TextStyle(color: Colors.green),),
+                  Text(
+                    'Processor',
+                    style: TextStyle(color: Colors.green),
+                  ),
                   DropdownButton(
                     value: Constants.PROCESSORS[_processorSet1.processorType]
                             .contains(_processorSet1.processor)
                         ? _processorSet1.processor
-                        : Constants.PROCESSORS[_processorSet1.processorType].first,
+                        : Constants
+                            .PROCESSORS[_processorSet1.processorType].first,
                     onChanged: (String newValue) {
                       setState(() {
                         _processorSet1.processor = newValue;
@@ -329,11 +352,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text('Enabled'),
-                  Checkbox(value: _processorSet1.enabled, onChanged: (bool newValue) {
-                    setState(() {
-                      _processorSet1.enabled = newValue;
-                    });
-                  })
+                  Checkbox(
+                      value: _processorSet1.enabled,
+                      onChanged: (bool newValue) {
+                        setState(() {
+                          _processorSet1.enabled = newValue;
+                        });
+                      })
                 ],
               ),
               Container(
@@ -342,11 +367,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text('Already Purchased'),
-                  Checkbox(value: _processorSet1.alreadyPurchased, onChanged: (bool newValue) {
-                    setState(() {
-                      _processorSet1.alreadyPurchased = newValue;
-                    });
-                  })
+                  Checkbox(
+                      value: _processorSet1.alreadyPurchased,
+                      onChanged: (bool newValue) {
+                        setState(() {
+                          _processorSet1.alreadyPurchased = newValue;
+                        });
+                      })
                 ],
               ),
             ],
@@ -362,8 +389,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     onChanged: (String newValue) {
                       setState(() {
                         _processorSet2.processorType = newValue;
-                        _processorSet2.processor =
-                            Constants.PROCESSORS[_processorSet2.processorType].first;
+                        _processorSet2.processor = Constants
+                            .PROCESSORS[_processorSet2.processorType].first;
                       });
                     },
                     items: Constants.PROCESSOR_TYPES
@@ -381,12 +408,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Column(
                 children: [
-                  Text('Processor', style: TextStyle(color: Colors.blue),),
+                  Text(
+                    'Processor',
+                    style: TextStyle(color: Colors.blue),
+                  ),
                   DropdownButton(
                     value: Constants.PROCESSORS[_processorSet2.processorType]
-                        .contains(_processorSet2.processor)
+                            .contains(_processorSet2.processor)
                         ? _processorSet2.processor
-                        : Constants.PROCESSORS[_processorSet2.processorType].first,
+                        : Constants
+                            .PROCESSORS[_processorSet2.processorType].first,
                     onChanged: (String newValue) {
                       setState(() {
                         _processorSet2.processor = newValue;
@@ -429,11 +460,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text('Enabled'),
-                  Checkbox(value: _processorSet2.enabled, onChanged: (bool newValue) {
-                    setState(() {
-                      _processorSet2.enabled = newValue;
-                    });
-                  })
+                  Checkbox(
+                      value: _processorSet2.enabled,
+                      onChanged: (bool newValue) {
+                        setState(() {
+                          _processorSet2.enabled = newValue;
+                        });
+                      })
                 ],
               ),
               Container(
@@ -442,14 +475,43 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: [
                   Text('Already Purchased'),
-                  Checkbox(value: _processorSet2.alreadyPurchased, onChanged: (bool newValue) {
-                    setState(() {
-                      _processorSet2.alreadyPurchased = newValue;
-                    });
-                  })
+                  Checkbox(
+                      value: _processorSet2.alreadyPurchased,
+                      onChanged: (bool newValue) {
+                        setState(() {
+                          _processorSet2.alreadyPurchased = newValue;
+                        });
+                      })
                 ],
               ),
             ],
+          ),
+          Container(height: 50),
+          Text("What coin would you like to mine?",
+              style: TextStyle(fontWeight: FontWeight.bold)),
+          Container(height: 25),
+          ToggleButtons(
+            children: <Widget>[
+              Icon(ToggleIcons.bitcoin),
+              Icon(ToggleIcons.ethereum),
+            ],
+            onPressed: null,
+            /*  (int index) {
+              setState(() {
+                for (int i = 0; i < _coinSelected.length; i++) {
+                  if (i == index) {
+                    if (_coinSelected[index] != true) {
+                      _coinSelected[index] = true;
+                    }
+                  } else {
+                    if (_coinSelected[i] == true) {
+                      _coinSelected[i] = false;
+                    }
+                  }
+                }
+              });
+            },*/
+            isSelected: _coinSelected,
           ),
           Column(
             children: [
@@ -475,30 +537,14 @@ class _MyHomePageState extends State<MyHomePage> {
           getProfitChart(_chartNumberOfDays, false, 'bitcoin'),
           // This button toggles if we should show the price history of the
           // coins.
-          Text('Display Price History of the coins in AUD', style: TextStyle(fontWeight: FontWeight.bold)),
-          Container(
-            height: 20,
+          Text('Do you want to display the price history of the coin?',
+              style: TextStyle(fontWeight: FontWeight.bold)),
+          Container(height: 20),
+          Switch(
+            value: isSwitched,
+            onChanged: toggleSwitch,
           ),
-          ToggleButtons(
-            children: <Widget>[
-              Icon(ToggleIcons.bitcoin),
-              Icon(ToggleIcons.ethereum),
-            ],
-            onPressed: (int index) {
-              setState(() {
-                _coinHistorySelected[index] = !_coinHistorySelected[index];
-                if (index == 0) {
-                  _bitcoinVisible = !_bitcoinVisible;
-                } else {
-                  _ethereumVisible = !_ethereumVisible;
-                }
-              });
-            },
-            isSelected: _coinHistorySelected,
-          ),
-          Container(
-            height: 50,
-          ),
+          Container(height: 20),
           Visibility(
               visible: _bitcoinVisible,
               child: Column(
@@ -546,7 +592,8 @@ class _MyHomePageState extends State<MyHomePage> {
             // the start date is set to now - numberOfDays and the end to now
             List<ProcessorSet> processors = [_processorSet1, _processorSet2];
             List<ProfitPerDay> processorSeries = [];
-            double cumulativeProfit = calculateInitialCapitalExpense(processors) * -1;
+            double cumulativeProfit =
+                calculateInitialCapitalExpense(processors) * -1;
 
             // Go through each value on the priceHistoryRequest per day. The
             // first value in the response is the oldest, the last is the
@@ -572,7 +619,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 dataPoint,
                 profitForDay >= 0 ? Colors.green : Colors.redAccent,
               ));
-
             }
             List<List<ProfitPerDay>> series = [processorSeries];
             return ProfitChart(series, 'Time', 'Profit (AU\$)');
@@ -585,34 +631,35 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   double calculateInitialCapitalExpense(List<ProcessorSet> processors) {
+    double totalInitialCapitalExpense = _otherCapitalExpenses;
 
-      double totalInitialCapitalExpense = _otherCapitalExpenses;
-
-      for( var i = 0 ; i < processors.length; i++ ) {
-          if (processors[i].enabled && !processors[i].alreadyPurchased) {
-            totalInitialCapitalExpense += Constants.INITIAL_CAPITALS[processors[i].processor];
-          }
+    for (var i = 0; i < processors.length; i++) {
+      if (processors[i].enabled && !processors[i].alreadyPurchased) {
+        totalInitialCapitalExpense +=
+            Constants.INITIAL_CAPITALS[processors[i].processor];
       }
+    }
 
-      return totalInitialCapitalExpense;
-
+    return totalInitialCapitalExpense;
   }
 
   /// Returns the amount of profit made for a specific day.
-  double calculateProfitForDay(double coinPrice, List<ProcessorSet> processors) {
-    return calculateIncomeForDay(coinPrice, processors) - calculateCostForDay(processors);
+  double calculateProfitForDay(
+      double coinPrice, List<ProcessorSet> processors) {
+    return calculateIncomeForDay(coinPrice, processors) -
+        calculateCostForDay(processors);
   }
 
   /// Returns the cost (in electricity) for 24 hours of use.
   double calculateCostForDay(List<ProcessorSet> processors) {
-
     double totalFixedCosts = _otherFixedCosts;
 
     // Calculate the fixed daily costs of running all of the enabled processors
-    for( var i = 0 ; i < processors.length; i++ ) {
+    for (var i = 0; i < processors.length; i++) {
       if (processors[i].enabled) {
         totalFixedCosts += (_electricityPrice / Constants.WATTS_IN_KILOWATT) *
-            Constants.HOURS_IN_DAY * Constants.POWER_USAGES[processors[i].processor] *
+            Constants.HOURS_IN_DAY *
+            Constants.POWER_USAGES[processors[i].processor] *
             processors[i].quantity;
       }
     }
@@ -621,8 +668,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// Returns the income generated from 24 hours of hashing.
-  double calculateIncomeForDay(double coinPrice, List<ProcessorSet> processors) {
-
+  double calculateIncomeForDay(
+      double coinPrice, List<ProcessorSet> processors) {
     double totalIncome = 0;
 
     // Calculate the fixed daily income generated from running all of the enabled processors
@@ -631,10 +678,10 @@ class _MyHomePageState extends State<MyHomePage> {
         totalIncome += Constants.BITCOIN_BLOCK_REWARD *
             (Constants.MINUTES_IN_DAY / Constants.BITCOIN_AVG_BLOCKTIME) *
             (Constants.HASH_RATES[processor.processor] /
-                Constants.NETWORK_HASHRATE) * coinPrice *
+                Constants.NETWORK_HASHRATE) *
+            coinPrice *
             processor.quantity;
       }
-
     });
 
     return totalIncome;

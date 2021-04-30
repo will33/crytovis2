@@ -78,7 +78,7 @@ class Constants {
   'i5 3750k': 4,
   '5700X': 6
   };
-  static const NETWORK_HASHRATE = 149045000;
+  static const NETWORK_HASHRATE = 149045000; //TODO: Make this variable per day
   static const BITCOIN_BLOCK_REWARD = 6.25;
   static const BITCOIN_AVG_BLOCKTIME = 10;
   static const MINUTES_IN_DAY = 1440;
