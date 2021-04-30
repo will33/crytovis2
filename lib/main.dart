@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 
 import 'constants.dart';
 
+import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 
 void main() {
   runApp(MyApp());
@@ -109,6 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // the Scenario start time
   DateTime _startDate = DateTime.now();
+  int _chartNumberOfDays = 365;
 
   @override
   Widget build(BuildContext context) {
@@ -178,23 +180,38 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               width: 50,
             ),
-            Container(
-              width: 150,
-              child: Column(children: [
-                Text('Select starting date'),
-                InputDatePickerFormField(
-                    firstDate: DateTime.now().subtract(Duration(days: 3650)),
-                    lastDate: DateTime.now().add(Duration(days:365)),
-                    onDateSubmitted: (DateTime newDate){
-                      setState(() {
-                        _startDate = newDate;
-                      });
-                  },
-
-                )
-              ])
-            )
           ]),
+          Container(height: 50),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+              width: 200,
+              child: dp.DayPicker.single(
+                firstDate: DateTime(2015, 2, 1),
+                lastDate: DateTime.now(), // TODO: predict the future
+                selectedDate: _startDate,
+                onChanged: (DateTime newDate){
+                  setState(() {
+                    _startDate = newDate;
+                  });
+                }
+              )
+            ),
+            Container(width: 50),
+            Container(width: 200, child: Column(children: [
+                Text("Number of days to show on charts"),
+                Slider(
+              value: _chartNumberOfDays.toDouble(),
+              min: 7, // min one week to ensure the API returns useful info
+              max: 1827, // five years and a day
+              divisions: 7, // go week by week
+              label: _chartNumberOfDays.round().toString(),
+              onChanged: (double value) {
+                setState(() {
+                  _chartNumberOfDays = value.round();
+                });
+              },
+            )])
+          )]),
           Container(height: 50),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Container(
@@ -439,23 +456,23 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 height: 100,
               ),
-              Text('This graph shows the cumulative profit/loss that would have been generated over the past year using this Bitcoin Mining Configuration',
+              Text('This graph shows the cumulative profit/loss that would have been generated over the time period using this Bitcoin Mining Configuration',
                 style: TextStyle(fontWeight: FontWeight.bold)),
             ],
           ),
 
-          getProfitChart(365, true, 'bitcoin'),
+          getProfitChart(_chartNumberOfDays, true, 'bitcoin'),
 
           Column(
             children: [
               Container(
                 height: 25,
               ),
-              Text('This graph shows the daily profit/loss that would have been generated over the past year using this Bitcoin Mining Configuration',
+              Text('This graph shows the daily profit/loss that would have been generated over the time period using this Bitcoin Mining Configuration',
                   style: TextStyle(fontWeight: FontWeight.bold)),
             ],
           ),
-          getProfitChart(365, false, 'bitcoin'),
+          getProfitChart(_chartNumberOfDays, false, 'bitcoin'),
           // This button toggles if we should show the price history of the
           // coins.
           Text('Display Price History of the coins in AUD', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -487,7 +504,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: [
                   Text('Bitcoin Price History'),
-                  getPriceChart('bitcoin', 365),
+                  getPriceChart('bitcoin', _chartNumberOfDays),
                 ],
               )),
           Visibility(
@@ -495,7 +512,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: [
                   Text('Ethereum Price History'),
-                  getPriceChart('ethereum', 365),
+                  getPriceChart('ethereum', _chartNumberOfDays),
                 ],
               )),
         ],
@@ -509,21 +526,12 @@ class _MyHomePageState extends State<MyHomePage> {
   /// The [numberOfDays] is the amount of days to populate the chart with.
   Widget getProfitChart(int numberOfDays, bool isCumulative, String coin) {
     // we now get a range of dates explicitly
-    var startingDate = _startDate;
-    var nDaysAgo = DateTime.now().subtract(Duration(days: numberOfDays));
-    if (startingDate.isAfter(nDaysAgo)){
-      startingDate = nDaysAgo;
-    }
-    var endingDate = startingDate.add(Duration(days: numberOfDays));
-    if (endingDate.isAfter(DateTime.now())){
-      endingDate = DateTime.now();
-    }
+    var startingDate = chartStartDate(_startDate, numberOfDays);
+    var endingDate = chartEndDate(_startDate, numberOfDays);
 
     final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
         'api/v3/coins/$coin/market_chart/range', <String, String>{
-      'vs_currency': 'aud',
-      // 'days': numberOfDays.toString(),
-      // 'interval': 'daily'
+          'vs_currency': 'aud',
           'from': (startingDate.millisecondsSinceEpoch/1000).toString(),
           'to': (endingDate.millisecondsSinceEpoch/1000).toString()
     }));
@@ -533,6 +541,9 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
           if (snapshot.hasData) {
             DateTime startDate = startingDate;
+            // TODO: once we start predicting the future we need to do this differently
+            // right now if you set a start date of less than numberOfDays days ago.
+            // the start date is set to now - numberOfDays and the end to now
             List<ProcessorSet> processors = [_processorSet1, _processorSet2];
             List<ProfitPerDay> processorSeries = [];
             double cumulativeProfit = calculateInitialCapitalExpense(processors) * -1;
@@ -632,11 +643,13 @@ class _MyHomePageState extends State<MyHomePage> {
   /// Builds a graph displaying the price history of a [coin] for the past 30
   /// days.
   Widget getPriceChart(String coin, int numDays) {
+    var startingDate = chartStartDate(_startDate, numDays);
+    var endingDate = chartEndDate(_startDate, numDays);
     final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
-        'api/v3/coins/$coin/market_chart', <String, String>{
-      'vs_currency': 'aud',
-      'days': numDays.toString(),
-      'interval': 'daily'
+        'api/v3/coins/$coin/market_chart/range', <String, String>{
+          'vs_currency': 'aud',
+          'from': (startingDate.millisecondsSinceEpoch/1000).toString(),
+          'to': (endingDate.millisecondsSinceEpoch/1000).toString()
     }));
     return FutureBuilder<http.Response>(
         future: priceHistoryRequest,
@@ -663,4 +676,27 @@ class _MyHomePageState extends State<MyHomePage> {
         Colors.blue)));
     return series;
   }
+
+  /// Calculate a sensible date for the chart to start
+  /// TODO: predict the future and deprecate this function
+  DateTime chartStartDate(DateTime startingDate, int numberOfDays){
+    var nDaysAgo = DateTime.now().subtract(Duration(days: numberOfDays));
+    if (startingDate.isAfter(nDaysAgo)){
+      return nDaysAgo;
+    } else {
+      return startingDate;
+    }
+  }
+
+  /// Calculate a sensible date for the chart to end
+  /// TODO: predict the future
+  DateTime chartEndDate(DateTime startingDate, int numberOfDays){
+    var nDaysAgo = DateTime.now().subtract(Duration(days: numberOfDays));
+    if (startingDate.isAfter(nDaysAgo)){
+      return DateTime.now();
+    } else {
+      return startingDate.add(Duration(days:numberOfDays));
+    }
+  }
+
 }

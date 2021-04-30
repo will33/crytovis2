@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   charts_flutter: ^0.10.0
   http: ^0.13.1
+  flutter_date_pickers: ^0.2.4
 
 dev_dependencies:
   flutter_test:
