@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
   DateTime _startDate = DateTime.now();
   int _chartNumberOfDays = 365;
 
-  double _chartWidth = 639;
+  double _chartWidth = 610;
 
   bool isSwitched = false;
 
