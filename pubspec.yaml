@@ -30,6 +30,7 @@ dependencies:
   charts_flutter: ^0.10.0
   http: ^0.13.1
   flutter_date_pickers: ^0.2.4
+  group_button: ^2.1.0
 
 dev_dependencies:
   flutter_test:

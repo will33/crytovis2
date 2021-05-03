@@ -4,6 +4,7 @@ import 'package:cryptovis2/profit_chart.dart';
 import 'package:cryptovis2/profit_per_day.dart';
 import 'package:cryptovis2/toggle_icons_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:group_button/group_button.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -523,33 +524,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: VerticalDivider(color: Colors.black)),
             Column(
               children: [
+                Container(height: 50),
                 Row(
                   children: [
-                    Text("7 Days"),
-                    Container(
-                      width: 500,
-                      child: Column(children: [
-                        Text("Time Slider"),
-                        Slider(
-                          value: _chartNumberOfDays.toDouble(),
-                          min: 7,
-                          // min one week to ensure the API returns useful info
-                          max: 1827,
-                          // five years and a day
-                          divisions: 7,
-                          // go week by week
-                          label: _chartNumberOfDays.round().toString(),
-                          onChanged: (double value) {
-                            setState(() {
-                              _chartNumberOfDays = value.round();
-                            });
-                          },
-                        )
-                      ])),
-                    Text("5 Years"),
+                    Container(child: GroupButton(
+                      isRadio: true,
+                      spacing: 10,
+                      direction: Axis.horizontal,
+                      selectedButtons: ["1Y"],
+                      onSelected: (index, isSelected) {
+                        const _dayMap = {0:7, 1:14, 2:30, 3:90, 4:183, 5:365, 6:730, 7:1826};
+                        setState(() {
+                          _chartNumberOfDays = _dayMap[index];
+                        });
+                      },
+                      buttons: ["7D", "14D", "1M", "3M", "6M", "1Y", "2Y", "5Y"],
+                    ))
                   ]
                 ),
-                    Text('Cummulative Profit/Loss',
+                Container(height: 50),
+                Text('Cumulative Profit/Loss',
                         style: TextStyle(fontWeight: FontWeight.bold)),
                 Container(
                   width: _chartWidth,
