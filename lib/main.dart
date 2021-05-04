@@ -162,448 +162,888 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(children: [
-            Container(width: 20),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(height: 5),
+          Expanded(flex: 1, child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+                children: [
+                  Container(height: 5),
 
-                Text(
-                  'Give us some details on your proposed Bitcoin Mining Operation',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.left,
-                ),
+                  Text(
+                    'Give us some details on your proposed Bitcoin Mining Operation',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.left,
+                  ),
 
-                Container(height: 25),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Column(
+                  Container(height: 25),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Column(
+                      children: [
+                        Text('Country'),
+                        DropdownButton(
+                          value: _selectedCountry,
+                          onChanged: (String newCountry) {
+                            setState(() {
+                              _selectedCountry = newCountry;
+                              _electricityPrice =
+                              Constants.ELECTRICITY_PRICES[_selectedCountry];
+                              priceController.text = _electricityPrice.toString();
+                            });
+                          },
+                          items: Constants.ELECTRICITY_PRICES.keys
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                    Container(width: 50),
+                    Container(
+                      width: 150,
+                      child: Column(children: [
+                        Text("Electricity Price \$/kwH"),
+                        TextFormField(
+                          controller: priceController,
+                          keyboardType: TextInputType.number,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              if (newValue != "")
+                                _electricityPrice = double.parse(newValue);
+                            });
+                          },
+                        )
+                      ]),
+                    ),
+                    Container(
+                      width: 50,
+                    ),
+                    Container(
+                        width: 150,
+                        child: Column(children: [
+                          Text("Cryptocurrency Select"),
+                          Container(height: 5),
+                          ToggleButtons(
+                            children: <Widget>[
+                              Icon(ToggleIcons.bitcoin),
+                              Icon(ToggleIcons.ethereum),
+                            ],
+                            onPressed: null,
+                            /*  (int index) {
+                    setState(() {
+                      for (int i = 0; i < _coinSelected.length; i++) {
+                        if (i == index) {
+                          if (_coinSelected[index] != true) {
+                            _coinSelected[index] = true;
+                          }
+                        } else {
+                          if (_coinSelected[i] == true) {
+                            _coinSelected[i] = false;
+                          }
+                        }
+                      }
+                    });
+                  },*/
+                            isSelected: _coinSelected,
+                          ),
+                        ]))
+                  ]),
+
+                  Container(height: 50),
+                  Text(
+                    'Give us some details about the processors you are looking to use',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Container(height: 25),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Country'),
-                      DropdownButton(
-                        value: _selectedCountry,
-                        onChanged: (String newCountry) {
-                          setState(() {
-                            _selectedCountry = newCountry;
-                            _electricityPrice =
-                                Constants.ELECTRICITY_PRICES[_selectedCountry];
-                            priceController.text = _electricityPrice.toString();
-                          });
-                        },
-                        items: Constants.ELECTRICITY_PRICES.keys
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
+                      Column(
+                        children: [
+                          Text('Processor type'),
+                          DropdownButton(
+                            value: _processorSet1.processorType,
+                            onChanged: (String newValue) {
+                              setState(() {
+                                _processorSet1.processorType = newValue;
+                                _processorSet1.processor = Constants
+                                    .PROCESSORS[_processorSet1.processorType]
+                                    .first;
+                              });
+                            },
+                            items: Constants.PROCESSOR_TYPES
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          )
+                        ],
+                      ),
+                      Container(
+                        width: 50,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            'Processor',
+                            style: TextStyle(color: Colors.green),
+                          ),
+                          DropdownButton(
+                            value: Constants
+                                .PROCESSORS[_processorSet1.processorType]
+                                .contains(_processorSet1.processor)
+                                ? _processorSet1.processor
+                                : Constants
+                                .PROCESSORS[_processorSet1.processorType]
+                                .first,
+                            onChanged: (String newValue) {
+                              setState(() {
+                                _processorSet1.processor = newValue;
+                              });
+                            },
+                            items: Constants
+                                .PROCESSORS[_processorSet1.processorType]
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          )
+                        ],
+                      ),
+                      Container(
+                        width: 50,
+                      ),
+                      Column(
+                        children: [
+                          Text('Quantity'),
+                          Container(
+                            width: 50,
+                            child: TextFormField(
+                              initialValue: _processorSet1.quantity.toString(),
+                              keyboardType: TextInputType.number,
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  if (newValue != "")
+                                    _processorSet1.quantity = int.parse(newValue);
+                                });
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                      Container(
+                        width: 20,
+                      ),
+                      Column(
+                        children: [
+                          Text('Enabled'),
+                          Checkbox(
+                              value: _processorSet1.enabled,
+                              onChanged: (bool newValue) {
+                                setState(() {
+                                  _processorSet1.enabled = newValue;
+                                });
+                              })
+                        ],
+                      ),
+                      Container(
+                        width: 20,
+                      ),
+                      Column(
+                        children: [
+                          Text('Already Purchased'),
+                          Checkbox(
+                              value: _processorSet1.alreadyPurchased,
+                              onChanged: (bool newValue) {
+                                setState(() {
+                                  _processorSet1.alreadyPurchased = newValue;
+                                });
+                              })
+                        ],
+                      ),
+                      Container(
+                        width: 10,
                       ),
                     ],
                   ),
-                  Container(width: 50),
-                  Container(
-                    width: 150,
-                    child: Column(children: [
-                      Text("Electricity Price \$/kwH"),
-                      TextFormField(
-                        controller: priceController,
-                        keyboardType: TextInputType.number,
-                        onChanged: (String newValue) {
-                          setState(() {
-                            if (newValue != "")
-                              _electricityPrice = double.parse(newValue);
-                          });
-                        },
-                      )
-                    ]),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          Text('Processor type'),
+                          DropdownButton(
+                            value: _processorSet2.processorType,
+                            onChanged: (String newValue) {
+                              setState(() {
+                                _processorSet2.processorType = newValue;
+                                _processorSet2.processor = Constants
+                                    .PROCESSORS[_processorSet2.processorType]
+                                    .first;
+                              });
+                            },
+                            items: Constants.PROCESSOR_TYPES
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          )
+                        ],
+                      ),
+                      Container(
+                        width: 50,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            'Processor',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                          DropdownButton(
+                            value: Constants
+                                .PROCESSORS[_processorSet2.processorType]
+                                .contains(_processorSet2.processor)
+                                ? _processorSet2.processor
+                                : Constants
+                                .PROCESSORS[_processorSet2.processorType]
+                                .first,
+                            onChanged: (String newValue) {
+                              setState(() {
+                                _processorSet2.processor = newValue;
+                              });
+                            },
+                            items: Constants
+                                .PROCESSORS[_processorSet2.processorType]
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          )
+                        ],
+                      ),
+                      Container(
+                        width: 50,
+                      ),
+                      Column(
+                        children: [
+                          Text('Quantity'),
+                          Container(
+                            width: 50,
+                            child: TextFormField(
+                              initialValue: _processorSet2.quantity.toString(),
+                              keyboardType: TextInputType.number,
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  if (newValue != "")
+                                    _processorSet2.quantity = int.parse(newValue);
+                                });
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                      Container(
+                        width: 20,
+                      ),
+                      Column(
+                        children: [
+                          Text('Enabled'),
+                          Checkbox(
+                              value: _processorSet2.enabled,
+                              onChanged: (bool newValue) {
+                                setState(() {
+                                  _processorSet2.enabled = newValue;
+                                });
+                              })
+                        ],
+                      ),
+                      Container(
+                        width: 20,
+                      ),
+                      Column(
+                        children: [
+                          Text('Already Purchased'),
+                          Checkbox(
+                              value: _processorSet2.alreadyPurchased,
+                              onChanged: (bool newValue) {
+                                setState(() {
+                                  _processorSet2.alreadyPurchased = newValue;
+                                });
+                              })
+                        ],
+                      ),
+                      Container(
+                        width: 10,
+                      ),
+                    ],
                   ),
-                  Container(
-                    width: 50,
+
+                  Container(height: 50),
+                  Text(
+                    'Enter any additional costs associated with running your operation',
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Container(
+                  Container(height: 25),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Container(
                       width: 150,
                       child: Column(children: [
-                        Text("Cryptocurrency Select"),
-                        Container(height: 5),
-                        ToggleButtons(
-                          children: <Widget>[
-                            Icon(ToggleIcons.bitcoin),
-                            Icon(ToggleIcons.ethereum),
+                        Text("Other Fixed Costs (Daily)"),
+                        TextFormField(
+                          initialValue: _otherFixedCosts.toString(),
+                          keyboardType: TextInputType.number,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              _otherFixedCosts = double.parse(newValue);
+                            });
+                          },
+                        )
+                      ]),
+                    ),
+                    Container(
+                      width: 50,
+                    ),
+                    Container(
+                      width: 150,
+                      child: Column(children: [
+                        Text("Other Initial Capital Expenses (Daily)"),
+                        TextFormField(
+                          initialValue: _otherCapitalExpenses.toString(),
+                          keyboardType: TextInputType.number,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              _otherCapitalExpenses = double.parse(newValue);
+                            });
+                          },
+                        )
+                      ]),
+                    )
+                  ]),
+                ],
+              ),
+          ),
+          ),
+          Expanded(flex: 1, child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+                children: [
+                  Container(height: 50),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(child: GroupButton(
+                          isRadio: true,
+                          spacing: 10,
+                          direction: Axis.horizontal,
+                          selectedButtons: ["1Y"],
+                          onSelected: (index, isSelected) {
+                            const _dayMap = {0:7, 1:14, 2:30, 3:90, 4:183, 5:365, 6:730};
+                            setState(() {
+                              _chartNumberOfDays = _dayMap[index];
+                            });
+                          },
+                          buttons: ["7D", "14D", "1M", "3M", "6M", "1Y", "2Y"],
+                        ))
+                      ]
+                  ),
+                  Container(height: 50),
+                  Text('Cumulative Profit/Loss',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Container(
+                    width: _chartWidth,
+                    child: getProfitChart(_chartNumberOfDays, true),
+                  ),
+
+                  Text('Daily Profit/Loss',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Container(
+                    width: _chartWidth,
+                    child: getProfitChart(_chartNumberOfDays, false),
+                  ),
+
+                  // This button toggles if we should show the price history of the
+                  // coins.
+                  Container(
+                    width: _chartWidth,
+                    child: Visibility(
+                        visible: _bitcoinVisible,
+                        child: Column(
+                          children: [
+                            Text('Bitcoin Price History',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            getPriceChart(),
                           ],
-                          onPressed: null,
-                          /*  (int index) {
-                  setState(() {
-                    for (int i = 0; i < _coinSelected.length; i++) {
-                      if (i == index) {
-                        if (_coinSelected[index] != true) {
-                          _coinSelected[index] = true;
-                        }
-                      } else {
-                        if (_coinSelected[i] == true) {
-                          _coinSelected[i] = false;
-                        }
-                      }
-                    }
-                  });
-                },*/
-                          isSelected: _coinSelected,
-                        ),
-                      ]))
-                ]),
-
-                Container(height: 50),
-                Text(
-                  'Give us some details about the processors you are looking to use',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Container(height: 25),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        Text('Processor type'),
-                        DropdownButton(
-                          value: _processorSet1.processorType,
-                          onChanged: (String newValue) {
-                            setState(() {
-                              _processorSet1.processorType = newValue;
-                              _processorSet1.processor = Constants
-                                  .PROCESSORS[_processorSet1.processorType]
-                                  .first;
-                            });
-                          },
-                          items: Constants.PROCESSOR_TYPES
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        )
-                      ],
-                    ),
-                    Container(
-                      width: 50,
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          'Processor',
-                          style: TextStyle(color: Colors.green),
-                        ),
-                        DropdownButton(
-                          value: Constants
-                                  .PROCESSORS[_processorSet1.processorType]
-                                  .contains(_processorSet1.processor)
-                              ? _processorSet1.processor
-                              : Constants
-                                  .PROCESSORS[_processorSet1.processorType]
-                                  .first,
-                          onChanged: (String newValue) {
-                            setState(() {
-                              _processorSet1.processor = newValue;
-                            });
-                          },
-                          items: Constants
-                              .PROCESSORS[_processorSet1.processorType]
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        )
-                      ],
-                    ),
-                    Container(
-                      width: 50,
-                    ),
-                    Column(
-                      children: [
-                        Text('Quantity'),
-                        Container(
-                          width: 50,
-                          child: TextFormField(
-                            initialValue: _processorSet1.quantity.toString(),
-                            keyboardType: TextInputType.number,
-                            onChanged: (String newValue) {
-                              setState(() {
-                                if (newValue != "")
-                                  _processorSet1.quantity = int.parse(newValue);
-                              });
-                            },
-                          ),
-                        )
-                      ],
-                    ),
-                    Container(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        Text('Enabled'),
-                        Checkbox(
-                            value: _processorSet1.enabled,
-                            onChanged: (bool newValue) {
-                              setState(() {
-                                _processorSet1.enabled = newValue;
-                              });
-                            })
-                      ],
-                    ),
-                    Container(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        Text('Already Purchased'),
-                        Checkbox(
-                            value: _processorSet1.alreadyPurchased,
-                            onChanged: (bool newValue) {
-                              setState(() {
-                                _processorSet1.alreadyPurchased = newValue;
-                              });
-                            })
-                      ],
-                    ),
-                    Container(
-                      width: 10,
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        Text('Processor type'),
-                        DropdownButton(
-                          value: _processorSet2.processorType,
-                          onChanged: (String newValue) {
-                            setState(() {
-                              _processorSet2.processorType = newValue;
-                              _processorSet2.processor = Constants
-                                  .PROCESSORS[_processorSet2.processorType]
-                                  .first;
-                            });
-                          },
-                          items: Constants.PROCESSOR_TYPES
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        )
-                      ],
-                    ),
-                    Container(
-                      width: 50,
-                    ),
-                    Column(
-                      children: [
-                        Text(
-                          'Processor',
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                        DropdownButton(
-                          value: Constants
-                                  .PROCESSORS[_processorSet2.processorType]
-                                  .contains(_processorSet2.processor)
-                              ? _processorSet2.processor
-                              : Constants
-                                  .PROCESSORS[_processorSet2.processorType]
-                                  .first,
-                          onChanged: (String newValue) {
-                            setState(() {
-                              _processorSet2.processor = newValue;
-                            });
-                          },
-                          items: Constants
-                              .PROCESSORS[_processorSet2.processorType]
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        )
-                      ],
-                    ),
-                    Container(
-                      width: 50,
-                    ),
-                    Column(
-                      children: [
-                        Text('Quantity'),
-                        Container(
-                          width: 50,
-                          child: TextFormField(
-                            initialValue: _processorSet2.quantity.toString(),
-                            keyboardType: TextInputType.number,
-                            onChanged: (String newValue) {
-                              setState(() {
-                                if (newValue != "")
-                                  _processorSet2.quantity = int.parse(newValue);
-                              });
-                            },
-                          ),
-                        )
-                      ],
-                    ),
-                    Container(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        Text('Enabled'),
-                        Checkbox(
-                            value: _processorSet2.enabled,
-                            onChanged: (bool newValue) {
-                              setState(() {
-                                _processorSet2.enabled = newValue;
-                              });
-                            })
-                      ],
-                    ),
-                    Container(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        Text('Already Purchased'),
-                        Checkbox(
-                            value: _processorSet2.alreadyPurchased,
-                            onChanged: (bool newValue) {
-                              setState(() {
-                                _processorSet2.alreadyPurchased = newValue;
-                              });
-                            })
-                      ],
-                    ),
-                    Container(
-                      width: 10,
-                    ),
-                  ],
-                ),
-
-                Container(height: 50),
-                Text(
-                  'Enter any additional costs associated with running your operation',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Container(height: 25),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Container(
-                    width: 150,
-                    child: Column(children: [
-                      Text("Other Fixed Costs (Daily)"),
-                      TextFormField(
-                        initialValue: _otherFixedCosts.toString(),
-                        keyboardType: TextInputType.number,
-                        onChanged: (String newValue) {
-                          setState(() {
-                            _otherFixedCosts = double.parse(newValue);
-                          });
-                        },
-                      )
-                    ]),
+                        )),
                   ),
-                  Container(
-                    width: 50,
-                  ),
-                  Container(
-                    width: 150,
-                    child: Column(children: [
-                      Text("Other Initial Capital Expenses (Daily)"),
-                      TextFormField(
-                        initialValue: _otherCapitalExpenses.toString(),
-                        keyboardType: TextInputType.number,
-                        onChanged: (String newValue) {
-                          setState(() {
-                            _otherCapitalExpenses = double.parse(newValue);
-                          });
-                        },
-                      )
-                    ]),
-                  )
-                ]),
-              ],
-            ),
-            Container(
-                height: MediaQuery.of(context).size.height,
-                child: VerticalDivider(color: Colors.black)),
-            Column(
-              children: [
-                Container(height: 50),
-                Row(
-                  children: [
-                    Container(child: GroupButton(
-                      isRadio: true,
-                      spacing: 10,
-                      direction: Axis.horizontal,
-                      selectedButtons: ["1Y"],
-                      onSelected: (index, isSelected) {
-                        const _dayMap = {0:7, 1:14, 2:30, 3:90, 4:183, 5:365, 6:730};
-                        setState(() {
-                          _chartNumberOfDays = _dayMap[index];
-                        });
-                      },
-                      buttons: ["7D", "14D", "1M", "3M", "6M", "1Y", "2Y"],
-                    ))
-                  ]
-                ),
-                Container(height: 50),
-                Text('Cumulative Profit/Loss',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                Container(
-                  width: _chartWidth,
-                  child: getProfitChart(_chartNumberOfDays, true),
-                ),
-
-                    Text('Daily Profit/Loss',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                Container(
-                  width: _chartWidth,
-                  child: getProfitChart(_chartNumberOfDays, false),
-                ),
-
-                // This button toggles if we should show the price history of the
-                // coins.
-                Container(
-                  width: _chartWidth,
-                  child: Visibility(
-                      visible: _bitcoinVisible,
-                      child: Column(
-                        children: [
-                          Text('Bitcoin Price History',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          getPriceChart(),
-                        ],
-                      )),
-                ),
-                // Container(
-                //   width: _chartWidth,
-                //   child: Visibility(
-                //     visible: _bitcoinVisible,
-                //     child: Visibility(
-                //         visible: _ethereumVisible,
-                //         child: Column(
-                //           children: [
-                //             Text('Ethereum Price History'),
-                //             getPriceChart('ethereum', _chartNumberOfDays),
-                //           ],
-                //         )),
-                //   ),
-                // ),
-              ],
-            )
-          ])
+                  // Container(
+                  //   width: _chartWidth,
+                  //   child: Visibility(
+                  //     visible: _bitcoinVisible,
+                  //     child: Visibility(
+                  //         visible: _ethereumVisible,
+                  //         child: Column(
+                  //           children: [
+                  //             Text('Ethereum Price History'),
+                  //             getPriceChart('ethereum', _chartNumberOfDays),
+                  //           ],
+                  //         )),
+                  //   ),
+                  // ),
+                ],
+              ),
+          ),
+          ),
+          // Row(children: [
+          //   Container(width: 20),
+          //   Column(
+          //     mainAxisAlignment: MainAxisAlignment.start,
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       Container(height: 5),
+          //
+          //       Text(
+          //         'Give us some details on your proposed Bitcoin Mining Operation',
+          //         style: TextStyle(fontWeight: FontWeight.bold),
+          //         textAlign: TextAlign.left,
+          //       ),
+          //
+          //       Container(height: 25),
+          //       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          //         Column(
+          //           children: [
+          //             Text('Country'),
+          //             DropdownButton(
+          //               value: _selectedCountry,
+          //               onChanged: (String newCountry) {
+          //                 setState(() {
+          //                   _selectedCountry = newCountry;
+          //                   _electricityPrice =
+          //                       Constants.ELECTRICITY_PRICES[_selectedCountry];
+          //                   priceController.text = _electricityPrice.toString();
+          //                 });
+          //               },
+          //               items: Constants.ELECTRICITY_PRICES.keys
+          //                   .map<DropdownMenuItem<String>>((String value) {
+          //                 return DropdownMenuItem<String>(
+          //                   value: value,
+          //                   child: Text(value),
+          //                 );
+          //               }).toList(),
+          //             ),
+          //           ],
+          //         ),
+          //         Container(width: 50),
+          //         Container(
+          //           width: 150,
+          //           child: Column(children: [
+          //             Text("Electricity Price \$/kwH"),
+          //             TextFormField(
+          //               controller: priceController,
+          //               keyboardType: TextInputType.number,
+          //               onChanged: (String newValue) {
+          //                 setState(() {
+          //                   if (newValue != "")
+          //                     _electricityPrice = double.parse(newValue);
+          //                 });
+          //               },
+          //             )
+          //           ]),
+          //         ),
+          //         Container(
+          //           width: 50,
+          //         ),
+          //         Container(
+          //             width: 150,
+          //             child: Column(children: [
+          //               Text("Cryptocurrency Select"),
+          //               Container(height: 5),
+          //               ToggleButtons(
+          //                 children: <Widget>[
+          //                   Icon(ToggleIcons.bitcoin),
+          //                   Icon(ToggleIcons.ethereum),
+          //                 ],
+          //                 onPressed: null,
+          //                 /*  (int index) {
+          //         setState(() {
+          //           for (int i = 0; i < _coinSelected.length; i++) {
+          //             if (i == index) {
+          //               if (_coinSelected[index] != true) {
+          //                 _coinSelected[index] = true;
+          //               }
+          //             } else {
+          //               if (_coinSelected[i] == true) {
+          //                 _coinSelected[i] = false;
+          //               }
+          //             }
+          //           }
+          //         });
+          //       },*/
+          //                 isSelected: _coinSelected,
+          //               ),
+          //             ]))
+          //       ]),
+          //
+          //       Container(height: 50),
+          //       Text(
+          //         'Give us some details about the processors you are looking to use',
+          //         style: TextStyle(fontWeight: FontWeight.bold),
+          //       ),
+          //       Container(height: 25),
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: [
+          //           Column(
+          //             children: [
+          //               Text('Processor type'),
+          //               DropdownButton(
+          //                 value: _processorSet1.processorType,
+          //                 onChanged: (String newValue) {
+          //                   setState(() {
+          //                     _processorSet1.processorType = newValue;
+          //                     _processorSet1.processor = Constants
+          //                         .PROCESSORS[_processorSet1.processorType]
+          //                         .first;
+          //                   });
+          //                 },
+          //                 items: Constants.PROCESSOR_TYPES
+          //                     .map<DropdownMenuItem<String>>((String value) {
+          //                   return DropdownMenuItem<String>(
+          //                     value: value,
+          //                     child: Text(value),
+          //                   );
+          //                 }).toList(),
+          //               )
+          //             ],
+          //           ),
+          //           Container(
+          //             width: 50,
+          //           ),
+          //           Column(
+          //             children: [
+          //               Text(
+          //                 'Processor',
+          //                 style: TextStyle(color: Colors.green),
+          //               ),
+          //               DropdownButton(
+          //                 value: Constants
+          //                         .PROCESSORS[_processorSet1.processorType]
+          //                         .contains(_processorSet1.processor)
+          //                     ? _processorSet1.processor
+          //                     : Constants
+          //                         .PROCESSORS[_processorSet1.processorType]
+          //                         .first,
+          //                 onChanged: (String newValue) {
+          //                   setState(() {
+          //                     _processorSet1.processor = newValue;
+          //                   });
+          //                 },
+          //                 items: Constants
+          //                     .PROCESSORS[_processorSet1.processorType]
+          //                     .map<DropdownMenuItem<String>>((String value) {
+          //                   return DropdownMenuItem<String>(
+          //                     value: value,
+          //                     child: Text(value),
+          //                   );
+          //                 }).toList(),
+          //               )
+          //             ],
+          //           ),
+          //           Container(
+          //             width: 50,
+          //           ),
+          //           Column(
+          //             children: [
+          //               Text('Quantity'),
+          //               Container(
+          //                 width: 50,
+          //                 child: TextFormField(
+          //                   initialValue: _processorSet1.quantity.toString(),
+          //                   keyboardType: TextInputType.number,
+          //                   onChanged: (String newValue) {
+          //                     setState(() {
+          //                       if (newValue != "")
+          //                         _processorSet1.quantity = int.parse(newValue);
+          //                     });
+          //                   },
+          //                 ),
+          //               )
+          //             ],
+          //           ),
+          //           Container(
+          //             width: 20,
+          //           ),
+          //           Column(
+          //             children: [
+          //               Text('Enabled'),
+          //               Checkbox(
+          //                   value: _processorSet1.enabled,
+          //                   onChanged: (bool newValue) {
+          //                     setState(() {
+          //                       _processorSet1.enabled = newValue;
+          //                     });
+          //                   })
+          //             ],
+          //           ),
+          //           Container(
+          //             width: 20,
+          //           ),
+          //           Column(
+          //             children: [
+          //               Text('Already Purchased'),
+          //               Checkbox(
+          //                   value: _processorSet1.alreadyPurchased,
+          //                   onChanged: (bool newValue) {
+          //                     setState(() {
+          //                       _processorSet1.alreadyPurchased = newValue;
+          //                     });
+          //                   })
+          //             ],
+          //           ),
+          //           Container(
+          //             width: 10,
+          //           ),
+          //         ],
+          //       ),
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: [
+          //           Column(
+          //             children: [
+          //               Text('Processor type'),
+          //               DropdownButton(
+          //                 value: _processorSet2.processorType,
+          //                 onChanged: (String newValue) {
+          //                   setState(() {
+          //                     _processorSet2.processorType = newValue;
+          //                     _processorSet2.processor = Constants
+          //                         .PROCESSORS[_processorSet2.processorType]
+          //                         .first;
+          //                   });
+          //                 },
+          //                 items: Constants.PROCESSOR_TYPES
+          //                     .map<DropdownMenuItem<String>>((String value) {
+          //                   return DropdownMenuItem<String>(
+          //                     value: value,
+          //                     child: Text(value),
+          //                   );
+          //                 }).toList(),
+          //               )
+          //             ],
+          //           ),
+          //           Container(
+          //             width: 50,
+          //           ),
+          //           Column(
+          //             children: [
+          //               Text(
+          //                 'Processor',
+          //                 style: TextStyle(color: Colors.blue),
+          //               ),
+          //               DropdownButton(
+          //                 value: Constants
+          //                         .PROCESSORS[_processorSet2.processorType]
+          //                         .contains(_processorSet2.processor)
+          //                     ? _processorSet2.processor
+          //                     : Constants
+          //                         .PROCESSORS[_processorSet2.processorType]
+          //                         .first,
+          //                 onChanged: (String newValue) {
+          //                   setState(() {
+          //                     _processorSet2.processor = newValue;
+          //                   });
+          //                 },
+          //                 items: Constants
+          //                     .PROCESSORS[_processorSet2.processorType]
+          //                     .map<DropdownMenuItem<String>>((String value) {
+          //                   return DropdownMenuItem<String>(
+          //                     value: value,
+          //                     child: Text(value),
+          //                   );
+          //                 }).toList(),
+          //               )
+          //             ],
+          //           ),
+          //           Container(
+          //             width: 50,
+          //           ),
+          //           Column(
+          //             children: [
+          //               Text('Quantity'),
+          //               Container(
+          //                 width: 50,
+          //                 child: TextFormField(
+          //                   initialValue: _processorSet2.quantity.toString(),
+          //                   keyboardType: TextInputType.number,
+          //                   onChanged: (String newValue) {
+          //                     setState(() {
+          //                       if (newValue != "")
+          //                         _processorSet2.quantity = int.parse(newValue);
+          //                     });
+          //                   },
+          //                 ),
+          //               )
+          //             ],
+          //           ),
+          //           Container(
+          //             width: 20,
+          //           ),
+          //           Column(
+          //             children: [
+          //               Text('Enabled'),
+          //               Checkbox(
+          //                   value: _processorSet2.enabled,
+          //                   onChanged: (bool newValue) {
+          //                     setState(() {
+          //                       _processorSet2.enabled = newValue;
+          //                     });
+          //                   })
+          //             ],
+          //           ),
+          //           Container(
+          //             width: 20,
+          //           ),
+          //           Column(
+          //             children: [
+          //               Text('Already Purchased'),
+          //               Checkbox(
+          //                   value: _processorSet2.alreadyPurchased,
+          //                   onChanged: (bool newValue) {
+          //                     setState(() {
+          //                       _processorSet2.alreadyPurchased = newValue;
+          //                     });
+          //                   })
+          //             ],
+          //           ),
+          //           Container(
+          //             width: 10,
+          //           ),
+          //         ],
+          //       ),
+          //
+          //       Container(height: 50),
+          //       Text(
+          //         'Enter any additional costs associated with running your operation',
+          //         style: TextStyle(fontWeight: FontWeight.bold),
+          //       ),
+          //       Container(height: 25),
+          //       Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          //         Container(
+          //           width: 150,
+          //           child: Column(children: [
+          //             Text("Other Fixed Costs (Daily)"),
+          //             TextFormField(
+          //               initialValue: _otherFixedCosts.toString(),
+          //               keyboardType: TextInputType.number,
+          //               onChanged: (String newValue) {
+          //                 setState(() {
+          //                   _otherFixedCosts = double.parse(newValue);
+          //                 });
+          //               },
+          //             )
+          //           ]),
+          //         ),
+          //         Container(
+          //           width: 50,
+          //         ),
+          //         Container(
+          //           width: 150,
+          //           child: Column(children: [
+          //             Text("Other Initial Capital Expenses (Daily)"),
+          //             TextFormField(
+          //               initialValue: _otherCapitalExpenses.toString(),
+          //               keyboardType: TextInputType.number,
+          //               onChanged: (String newValue) {
+          //                 setState(() {
+          //                   _otherCapitalExpenses = double.parse(newValue);
+          //                 });
+          //               },
+          //             )
+          //           ]),
+          //         )
+          //       ]),
+          //     ],
+          //   ),
+          //   Container(
+          //       height: MediaQuery.of(context).size.height,
+          //       child: VerticalDivider(color: Colors.black)),
+          //   Column(
+          //     children: [
+          //       Container(height: 50),
+          //       Row(
+          //         children: [
+          //           Container(child: GroupButton(
+          //             isRadio: true,
+          //             spacing: 10,
+          //             direction: Axis.horizontal,
+          //             selectedButtons: ["1Y"],
+          //             onSelected: (index, isSelected) {
+          //               const _dayMap = {0:7, 1:14, 2:30, 3:90, 4:183, 5:365, 6:730};
+          //               setState(() {
+          //                 _chartNumberOfDays = _dayMap[index];
+          //               });
+          //             },
+          //             buttons: ["7D", "14D", "1M", "3M", "6M", "1Y", "2Y"],
+          //           ))
+          //         ]
+          //       ),
+          //       Container(height: 50),
+          //       Text('Cumulative Profit/Loss',
+          //               style: TextStyle(fontWeight: FontWeight.bold)),
+          //       Container(
+          //         width: _chartWidth,
+          //         child: getProfitChart(_chartNumberOfDays, true),
+          //       ),
+          //
+          //           Text('Daily Profit/Loss',
+          //               style: TextStyle(fontWeight: FontWeight.bold)),
+          //       Container(
+          //         width: _chartWidth,
+          //         child: getProfitChart(_chartNumberOfDays, false),
+          //       ),
+          //
+          //       // This button toggles if we should show the price history of the
+          //       // coins.
+          //       Container(
+          //         width: _chartWidth,
+          //         child: Visibility(
+          //             visible: _bitcoinVisible,
+          //             child: Column(
+          //               children: [
+          //                 Text('Bitcoin Price History',
+          //                     style: TextStyle(fontWeight: FontWeight.bold)),
+          //                 getPriceChart(),
+          //               ],
+          //             )),
+          //       ),
+          //       // Container(
+          //       //   width: _chartWidth,
+          //       //   child: Visibility(
+          //       //     visible: _bitcoinVisible,
+          //       //     child: Visibility(
+          //       //         visible: _ethereumVisible,
+          //       //         child: Column(
+          //       //           children: [
+          //       //             Text('Ethereum Price History'),
+          //       //             getPriceChart('ethereum', _chartNumberOfDays),
+          //       //           ],
+          //       //         )),
+          //       //   ),
+          //       // ),
+          //     ],
+          //   )
+          // ])
         ],
       )),
     );

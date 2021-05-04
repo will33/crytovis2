@@ -91,7 +91,7 @@ class _ProfitChartState extends State<ProfitChart> {
           changedListener: _onSelectionChanged,
         )
       ],
-      animate: true,
+      animate: false,
     );
     var chartWidget = new Padding(
       padding: new EdgeInsets.all(32.0),
