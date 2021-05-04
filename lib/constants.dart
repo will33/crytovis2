@@ -243,4 +243,5 @@ class Constants {
   static const BITCOIN_BLOCK_REWARD = 6.25;
   static const BITCOIN_AVG_BLOCKTIME = 10;
   static const MINUTES_IN_DAY = 1440;
+  static const DAYS_IN_TWO_YEARS = 1825;
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:async/async.dart';
 import 'package:cryptovis2/profit_chart.dart';
 import 'package:cryptovis2/profit_per_day.dart';
 import 'package:cryptovis2/toggle_icons_icons.dart';
@@ -78,6 +79,9 @@ class _MyHomePageState extends State<MyHomePage> {
   ProcessorSet _processorSet1 = ProcessorSet();
   ProcessorSet _processorSet2 = ProcessorSet();
 
+  final AsyncMemoizer<http.Response> _historicalMemoizer = AsyncMemoizer();
+
+
   // String _selectedProcessorType1 = 'GPU';
   // String _selectedProcessorType2 = 'GPU';
   // String _selectedProcessor1 = 'GTX 1080 Ti';
@@ -116,6 +120,18 @@ class _MyHomePageState extends State<MyHomePage> {
   double _chartWidth = 610;
 
   bool isSwitched = false;
+
+  // This is for efficiency. On startup, the app fetches 2 years of prices for BTC and caches. All subsequent requests use the cached results.
+  Future<http.Response> _fetchData() {
+    return this._historicalMemoizer.runOnce(() async {
+      return http.get(Uri.https('api.coingecko.com',
+          'api/v3/coins/bitcoin/market_chart/range', <String, String>{
+            'vs_currency': 'aud',
+            'from': (DateTime.now().add(Duration(days: -Constants.DAYS_IN_TWO_YEARS)).millisecondsSinceEpoch / 1000).toString(),
+            'to': (DateTime.now().millisecondsSinceEpoch / 1000).toString()
+          }));
+    });
+  }
 
   void toggleSwitch(bool value) {
     setState(() {
@@ -533,12 +549,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       direction: Axis.horizontal,
                       selectedButtons: ["1Y"],
                       onSelected: (index, isSelected) {
-                        const _dayMap = {0:7, 1:14, 2:30, 3:90, 4:183, 5:365, 6:730, 7:1826};
+                        const _dayMap = {0:7, 1:14, 2:30, 3:90, 4:183, 5:365, 6:730};
                         setState(() {
                           _chartNumberOfDays = _dayMap[index];
                         });
                       },
-                      buttons: ["7D", "14D", "1M", "3M", "6M", "1Y", "2Y", "5Y"],
+                      buttons: ["7D", "14D", "1M", "3M", "6M", "1Y", "2Y"],
                     ))
                   ]
                 ),
@@ -547,14 +563,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: TextStyle(fontWeight: FontWeight.bold)),
                 Container(
                   width: _chartWidth,
-                  child: getProfitChart(_chartNumberOfDays, true, 'bitcoin'),
+                  child: getProfitChart(_chartNumberOfDays, true),
                 ),
 
                     Text('Daily Profit/Loss',
                         style: TextStyle(fontWeight: FontWeight.bold)),
                 Container(
                   width: _chartWidth,
-                  child: getProfitChart(_chartNumberOfDays, false, 'bitcoin'),
+                  child: getProfitChart(_chartNumberOfDays, false),
                 ),
 
                 // This button toggles if we should show the price history of the
@@ -567,24 +583,24 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           Text('Bitcoin Price History',
                               style: TextStyle(fontWeight: FontWeight.bold)),
-                          getPriceChart('bitcoin', _chartNumberOfDays),
+                          getPriceChart(),
                         ],
                       )),
                 ),
-                Container(
-                  width: _chartWidth,
-                  child: Visibility(
-                    visible: _bitcoinVisible,
-                    child: Visibility(
-                        visible: _ethereumVisible,
-                        child: Column(
-                          children: [
-                            Text('Ethereum Price History'),
-                            getPriceChart('ethereum', _chartNumberOfDays),
-                          ],
-                        )),
-                  ),
-                ),
+                // Container(
+                //   width: _chartWidth,
+                //   child: Visibility(
+                //     visible: _bitcoinVisible,
+                //     child: Visibility(
+                //         visible: _ethereumVisible,
+                //         child: Column(
+                //           children: [
+                //             Text('Ethereum Price History'),
+                //             getPriceChart('ethereum', _chartNumberOfDays),
+                //           ],
+                //         )),
+                //   ),
+                // ),
               ],
             )
           ])
@@ -597,23 +613,13 @@ class _MyHomePageState extends State<MyHomePage> {
   /// particular country.
   ///
   /// The [numberOfDays] is the amount of days to populate the chart with.
-  Widget getProfitChart(int numberOfDays, bool isCumulative, String coin) {
-    // we now get a range of dates explicitly
-    var startingDate = chartStartDate(_startDate, numberOfDays);
-    var endingDate = chartEndDate(_startDate, numberOfDays);
-
-    final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
-        'api/v3/coins/$coin/market_chart/range', <String, String>{
-      'vs_currency': 'aud',
-      'from': (startingDate.millisecondsSinceEpoch / 1000).toString(),
-      'to': (endingDate.millisecondsSinceEpoch / 1000).toString()
-    }));
+  Widget getProfitChart(int numberOfDays, bool isCumulative) {
 
     return FutureBuilder<http.Response>(
-        future: priceHistoryRequest,
+        future: _fetchData(),
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
           if (snapshot.hasData) {
-            DateTime startDate = startingDate;
+            DateTime startDate = chartStartDate(_startDate, numberOfDays);
             // TODO: once we start predicting the future we need to do this differently
             // right now if you set a start date of less than numberOfDays days ago.
             // the start date is set to now - numberOfDays and the end to now
@@ -626,7 +632,9 @@ class _MyHomePageState extends State<MyHomePage> {
             // first value in the response is the oldest, the last is the
             // current price.
             Map<String, dynamic> response = jsonDecode(snapshot.data.body);
-            for (int i = 0; i < numberOfDays; i++) {
+            // Splice the list so we only get the time period we want
+            var scopedList = response['prices'].skip(Constants.DAYS_IN_TWO_YEARS - numberOfDays);
+            for (int i = 0; i < scopedList.length; i++) {
               double coinPrice = response['prices'][i][1];
               double profitForDay = 0.0;
 
@@ -716,17 +724,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// Builds a graph displaying the price history of a [coin] for the past 30
   /// days.
-  Widget getPriceChart(String coin, int numDays) {
-    var startingDate = chartStartDate(_startDate, numDays);
-    var endingDate = chartEndDate(_startDate, numDays);
-    final priceHistoryRequest = http.get(Uri.https('api.coingecko.com',
-        'api/v3/coins/$coin/market_chart/range', <String, String>{
-      'vs_currency': 'aud',
-      'from': (startingDate.millisecondsSinceEpoch / 1000).toString(),
-      'to': (endingDate.millisecondsSinceEpoch / 1000).toString()
-    }));
+  Widget getPriceChart() {
     return FutureBuilder<http.Response>(
-        future: priceHistoryRequest,
+        future: _fetchData(),
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
           if (snapshot.hasData) {
             var priceSeries = getPriceSeries(snapshot.data.body);
@@ -743,8 +743,9 @@ class _MyHomePageState extends State<MyHomePage> {
   List<ProfitPerDay> getPriceSeries(String data) {
     var json = jsonDecode(data);
     var prices = json['prices'];
+    var scopedList = prices.skip(Constants.DAYS_IN_TWO_YEARS - _chartNumberOfDays);
     var series = <ProfitPerDay>[];
-    prices.forEach((element) => series.add(ProfitPerDay(
+    scopedList.forEach((element) => series.add(ProfitPerDay(
         DateTime.fromMillisecondsSinceEpoch(element[0]),
         element[1],
         Colors.blue)));
