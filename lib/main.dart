@@ -635,7 +635,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // Splice the list so we only get the time period we want
             var scopedList = response['prices'].skip(Constants.DAYS_IN_TWO_YEARS - numberOfDays);
             for (int i = 0; i < scopedList.length; i++) {
-              double coinPrice = response['prices'][i][1];
+              double coinPrice = scopedList[i][1];
               double profitForDay = 0.0;
 
               profitForDay = calculateProfitForDay(coinPrice, processors);
