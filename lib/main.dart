@@ -156,19 +156,21 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(flex: 1, child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
             child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(height: 5),
+                  Container(height: 40),
 
+                  // General Details
+                  Container(height: 20),
                   Text(
                     'Give us some details on your proposed Bitcoin Mining Operation',
                     style: TextStyle(fontWeight: FontWeight.bold),
                     textAlign: TextAlign.left,
                   ),
-
                   Container(height: 25),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     Column(
                       children: [
                         Text('Country'),
@@ -243,6 +245,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ]))
                   ]),
 
+                  // Processor Section
                   Container(height: 50),
                   Text(
                     'Give us some details about the processors you are looking to use',
@@ -250,7 +253,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Container(height: 25),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Column(
                         children: [
@@ -309,7 +312,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                       ),
                       Container(
-                        width: 50,
+                        width: 20,
                       ),
                       Column(
                         children: [
@@ -364,8 +367,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ],
                   ),
+                  Container(height: 15),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Column(
                         children: [
@@ -424,7 +428,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                       ),
                       Container(
-                        width: 50,
+                        width: 20,
                       ),
                       Column(
                         children: [
@@ -480,13 +484,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
 
+                  // Additional Costs Section
                   Container(height: 50),
                   Text(
                     'Enter any additional costs associated with running your operation',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   Container(height: 25),
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     Container(
                       width: 150,
                       child: Column(children: [
@@ -659,12 +664,13 @@ class _MyHomePageState extends State<MyHomePage> {
   double calculateInitialCapitalExpense(List<ProcessorSet> processors) {
     double totalInitialCapitalExpense = _otherCapitalExpenses;
 
-    for (var i = 0; i < processors.length; i++) {
-      if (processors[i].enabled && !processors[i].alreadyPurchased) {
+    processors.forEach((processor) {
+
+      if (processor.enabled && !processor.alreadyPurchased) {
         totalInitialCapitalExpense +=
-            Constants.INITIAL_CAPITALS[processors[i].processor];
+            Constants.INITIAL_CAPITALS[processor.processor];
       }
-    }
+    });
 
     return totalInitialCapitalExpense;
   }
@@ -681,14 +687,14 @@ class _MyHomePageState extends State<MyHomePage> {
     double totalFixedCosts = _otherFixedCosts;
 
     // Calculate the fixed daily costs of running all of the enabled processors
-    for (var i = 0; i < processors.length; i++) {
-      if (processors[i].enabled) {
+    processors.forEach((processor) {
+      if (processor.enabled) {
         totalFixedCosts += (_electricityPrice / Constants.WATTS_IN_KILOWATT) *
             Constants.HOURS_IN_DAY *
-            Constants.POWER_USAGES[processors[i].processor] *
-            processors[i].quantity;
+            Constants.POWER_USAGES[processor.processor] *
+            processor.quantity;
       }
-    }
+    });
 
     return totalFixedCosts;
   }
