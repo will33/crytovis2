@@ -70,12 +70,6 @@ class ProcessorSet {
 
 /// Stores the state of the [MyHomePage].
 class _MyHomePageState extends State<MyHomePage> {
-  /// Determines if Bitcoin price chart is shown. Defaults to false.
-  bool _bitcoinVisible = true;
-
-  /// Determines if Ethereum price chart is shown. Defaults to false.
-  bool _ethereumVisible = false;
-
   ProcessorSet _processorSet1 = ProcessorSet();
   ProcessorSet _processorSet2 = ProcessorSet();
 
@@ -98,9 +92,9 @@ class _MyHomePageState extends State<MyHomePage> {
   /// The crypto coin to use in the tool.
   ///
   /// True indicates the coin is active, False indicates the coins is inactive.
-  /// Only one coin can be active at a time. Index 0 is bitcoin.
-  /// Index 1 is ethereum. Must be a List<bool> and not a string so it can be
-  /// use as the `isSelected` option in the [ToggleButton] widget.
+  /// Only one coin can be active at a time. Index 0 is bitcoin. Index 1 is 
+  /// ethereum. Must be a List<bool> and not a string so it can be used as the 
+  /// `isSelected` option in the [ToggleButton] widget.
   final List<bool> _coinSelected = [true, false];
 
   // the Scenario start time
@@ -120,17 +114,6 @@ class _MyHomePageState extends State<MyHomePage> {
             'from': (DateTime.now().add(Duration(days: -Constants.DAYS_IN_TWO_YEARS)).millisecondsSinceEpoch / 1000).toString(),
             'to': (DateTime.now().millisecondsSinceEpoch / 1000).toString()
           }));
-    });
-  }
-
-  void toggleSwitch(bool value) {
-    setState(() {
-      isSwitched = !isSwitched;
-      if (_coinSelected[0] == true) {
-        _bitcoinVisible = !_bitcoinVisible;
-      } else {
-        _ethereumVisible = !_ethereumVisible;
-      }
     });
   }
 
@@ -224,22 +207,21 @@ class _MyHomePageState extends State<MyHomePage> {
                               Icon(ToggleIcons.bitcoin),
                               Icon(ToggleIcons.ethereum),
                             ],
-                            onPressed: null,
-                            /*  (int index) {
-                    setState(() {
-                      for (int i = 0; i < _coinSelected.length; i++) {
-                        if (i == index) {
-                          if (_coinSelected[index] != true) {
-                            _coinSelected[index] = true;
-                          }
-                        } else {
-                          if (_coinSelected[i] == true) {
-                            _coinSelected[i] = false;
-                          }
-                        }
-                      }
-                    });
-                  },*/
+                            onPressed: (int index) {
+                              setState(() {
+                                for (int i = 0; i < _coinSelected.length; i++) {
+                                  if (i == index) {
+                                    if (_coinSelected[index] != true) {
+                                      _coinSelected[index] = true;
+                                    }
+                                  } else {
+                                    if (_coinSelected[i] == true) {
+                                      _coinSelected[i] = false;
+                                    }
+                                  }
+                                }
+                              });
+                            },
                             isSelected: _coinSelected,
                           ),
                         ]))
@@ -573,29 +555,29 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     width: _chartWidth,
                     child: Visibility(
-                        visible: _bitcoinVisible,
-                        child: Column(
-                          children: [
-                            Text('Bitcoin Price History',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            getPriceChart(),
-                          ],
-                        )),
+                      visible: _coinSelected[0],
+                      child: Column(
+                        children: [
+                          Text('Bitcoin Price History',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                          getPriceChart(),
+                        ],
+                      )
+                    ),
                   ),
-                  // Container(
-                  //   width: _chartWidth,
-                  //   child: Visibility(
-                  //     visible: _bitcoinVisible,
-                  //     child: Visibility(
-                  //         visible: _ethereumVisible,
-                  //         child: Column(
-                  //           children: [
-                  //             Text('Ethereum Price History'),
-                  //             getPriceChart('ethereum', _chartNumberOfDays),
-                  //           ],
-                  //         )),
-                  //   ),
-                  // ),
+                  Container(
+                    width: _chartWidth,
+                    child: Visibility(
+                      visible: _coinSelected[1],
+                      child: Column(
+                        children: [
+                          Text('Ethereum Price History',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                          getPriceChart(),
+                        ],
+                      )
+                    ),
+                  ),
                 ],
               ),
           ),
