@@ -73,8 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
   ProcessorSet _processorSet1 = ProcessorSet();
   ProcessorSet _processorSet2 = ProcessorSet();
 
-  final AsyncMemoizer<http.Response> _BTCMemoizer = AsyncMemoizer();
-    final AsyncMemoizer<http.Response> _ETHMemoizer = AsyncMemoizer();
+  final AsyncMemoizer<http.Response> _btcMemoizer = AsyncMemoizer();
+  final AsyncMemoizer<http.Response> _ethMemoizer = AsyncMemoizer();
 
   /// The selected electricity price, in kW/Hs.
   double _electricityPrice = 0.32;
@@ -116,15 +116,14 @@ class _MyHomePageState extends State<MyHomePage> {
   /// This is for efficiency. On startup, the app fetches 2 years of prices for
   /// BTC and caches. All subsequent requests use the cached results.
   Future<http.Response> _fetchBTCData() {
-    return this._BTCMemoizer.runOnce(() async {
+    return this._btcMemoizer.runOnce(() async {
       return http.get(Uri.https('api.coingecko.com',
           'api/v3/coins/bitcoin/market_chart/range', <String, String>{
         'vs_currency': 'aud',
         'from': (DateTime.now()
                     .add(Duration(days: -Constants.DAYS_IN_TWO_YEARS))
                     .millisecondsSinceEpoch /
-                    1000
-                )
+                1000)
             .toString(),
         'to': (DateTime.now().millisecondsSinceEpoch / 1000).toString()
       }));
@@ -134,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /// This is for efficiency. On startup, the app fetches 2 years of prices for
   /// ETH and caches. All subsequent requests use the cached results.
   Future<http.Response> _fetchETHData() {
-    return this._ETHMemoizer.runOnce(() async {
+    return this._ethMemoizer.runOnce(() async {
       return http.get(Uri.https('api.coingecko.com',
           'api/v3/coins/ethereum/market_chart/range', <String, String>{
         'vs_currency': 'aud',
@@ -736,11 +735,27 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // Calculate the fixed daily income generated from running all of the enabled processors
     processors.forEach((processor) {
+      double blockReward, blockTime, networkHashRate,
+          hashRate; //TODO: Implement different hashrates for same processor.
+      switch (_activeCoin) {
+        case 'bitcoin':
+          blockReward = Constants.BITCOIN_BLOCK_REWARD;
+          blockTime = Constants.BITCOIN_AVG_BLOCKTIME;
+          hashRate = Constants.HASH_RATES[processor.processor];
+          networkHashRate = Constants.BITCOIN_NETWORK_HASHRATE;
+          break;
+        
+        case 'ethereum':
+          blockReward = Constants.ETHEREUM_BLOCK_REWARD;
+          blockTime = Constants.ETHEREUM_AVG_BLOCKTIME;
+          hashRate = Constants.HASH_RATES[processor.processor];
+          networkHashRate = Constants.ETHEREUM_NETWORK_HASHRATE;
+          break;
+      }
       if (processor.enabled) {
-        totalIncome += Constants.BITCOIN_BLOCK_REWARD *
-            (Constants.MINUTES_IN_DAY / Constants.BITCOIN_AVG_BLOCKTIME) *
-            (Constants.HASH_RATES[processor.processor] /
-                Constants.NETWORK_HASHRATE) *
+        totalIncome += blockReward *
+            (Constants.MINUTES_IN_DAY / blockTime) *
+            (hashRate / networkHashRate) *
             coinPrice *
             processor.quantity;
       }

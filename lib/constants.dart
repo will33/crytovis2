@@ -1,5 +1,4 @@
 class Constants {
-
   /// The electricity price of each country, in kW/Hs. Sourced from Statista,
   /// current as of September 2020. https://www.statista.com/aboutus/trust
   static const ELECTRICITY_PRICES = {
@@ -239,9 +238,12 @@ class Constants {
     'Core i7-3930K': 98 * 0.001
   };
 
-  static const NETWORK_HASHRATE = 149045000; // TODO: Make this variable per day
+  static const BITCOIN_NETWORK_HASHRATE = 149045000.0; // TODO: Make this variable per day
   static const BITCOIN_BLOCK_REWARD = 6.25;
-  static const BITCOIN_AVG_BLOCKTIME = 10;
+  static const BITCOIN_AVG_BLOCKTIME = 10.0;
+  static const ETHEREUM_NETWORK_HASHRATE = 580230000.0;
+  static const ETHEREUM_BLOCK_REWARD = 2.0;
+  static const ETHEREUM_AVG_BLOCKTIME = 0.25; // 15 Seconds
   static const MINUTES_IN_DAY = 1440;
   static const DAYS_IN_TWO_YEARS = 1825;
 }
