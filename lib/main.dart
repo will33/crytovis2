@@ -73,7 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
   ProcessorSet _processorSet1 = ProcessorSet();
   ProcessorSet _processorSet2 = ProcessorSet();
 
-  final AsyncMemoizer<http.Response> _historicalMemoizer = AsyncMemoizer();
+  final AsyncMemoizer<http.Response> _BTCMemoizer = AsyncMemoizer();
+    final AsyncMemoizer<http.Response> _ETHMemoizer = AsyncMemoizer();
 
   /// The selected electricity price, in kW/Hs.
   double _electricityPrice = 0.32;
@@ -92,29 +93,68 @@ class _MyHomePageState extends State<MyHomePage> {
   /// The crypto coin to use in the tool.
   ///
   /// True indicates the coin is active, False indicates the coins is inactive.
-  /// Only one coin can be active at a time. Index 0 is bitcoin. Index 1 is 
-  /// ethereum. Must be a List<bool> and not a string so it can be used as the 
+  /// Only one coin can be active at a time. Index 0 is bitcoin. Index 1 is
+  /// ethereum. Must be a List<bool> and not a string so it can be used as the
   /// `isSelected` option in the [ToggleButton] widget.
   final List<bool> _coinSelected = [true, false];
+
+  String _activeCoin = "bitcoin";
+
+  void updateActiveCoin() {
+    if (_coinSelected[0]) {
+      _activeCoin = "bitcoin";
+    } else {
+      _activeCoin = "ethereum";
+    }
+  }
 
   // the Scenario start time
   DateTime _startDate = DateTime.now();
   int _chartNumberOfDays = 365;
-
   double _chartWidth = 610;
 
-  bool isSwitched = false;
-
-  // This is for efficiency. On startup, the app fetches 2 years of prices for BTC and caches. All subsequent requests use the cached results.
-  Future<http.Response> _fetchData() {
-    return this._historicalMemoizer.runOnce(() async {
+  /// This is for efficiency. On startup, the app fetches 2 years of prices for
+  /// BTC and caches. All subsequent requests use the cached results.
+  Future<http.Response> _fetchBTCData() {
+    return this._BTCMemoizer.runOnce(() async {
       return http.get(Uri.https('api.coingecko.com',
           'api/v3/coins/bitcoin/market_chart/range', <String, String>{
-            'vs_currency': 'aud',
-            'from': (DateTime.now().add(Duration(days: -Constants.DAYS_IN_TWO_YEARS)).millisecondsSinceEpoch / 1000).toString(),
-            'to': (DateTime.now().millisecondsSinceEpoch / 1000).toString()
-          }));
+        'vs_currency': 'aud',
+        'from': (DateTime.now()
+                    .add(Duration(days: -Constants.DAYS_IN_TWO_YEARS))
+                    .millisecondsSinceEpoch /
+                    1000
+                )
+            .toString(),
+        'to': (DateTime.now().millisecondsSinceEpoch / 1000).toString()
+      }));
     });
+  }
+
+  /// This is for efficiency. On startup, the app fetches 2 years of prices for
+  /// ETH and caches. All subsequent requests use the cached results.
+  Future<http.Response> _fetchETHData() {
+    return this._ETHMemoizer.runOnce(() async {
+      return http.get(Uri.https('api.coingecko.com',
+          'api/v3/coins/ethereum/market_chart/range', <String, String>{
+        'vs_currency': 'aud',
+        'from': (DateTime.now()
+                    .add(Duration(days: -Constants.DAYS_IN_TWO_YEARS))
+                    .millisecondsSinceEpoch /
+                1000)
+            .toString(),
+        'to': (DateTime.now().millisecondsSinceEpoch / 1000).toString()
+      }));
+    });
+  }
+
+  /// Fetches the cached data for the [coin] provided.
+  Future<http.Response> _fetchData() {
+    if (_activeCoin == 'bitcoin') {
+      return _fetchBTCData();
+    } else {
+      return _fetchETHData();
+    }
   }
 
   @override
@@ -136,11 +176,13 @@ class _MyHomePageState extends State<MyHomePage> {
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(flex: 1, child: Padding(
-            padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
-            child: Column(
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(height: 40),
@@ -162,9 +204,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           onChanged: (String newCountry) {
                             setState(() {
                               _selectedCountry = newCountry;
-                              _electricityPrice =
-                              Constants.ELECTRICITY_PRICES[_selectedCountry];
-                              priceController.text = _electricityPrice.toString();
+                              _electricityPrice = Constants
+                                  .ELECTRICITY_PRICES[_selectedCountry];
+                              priceController.text =
+                                  _electricityPrice.toString();
                             });
                           },
                           items: Constants.ELECTRICITY_PRICES.keys
@@ -220,6 +263,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     }
                                   }
                                 }
+                                updateActiveCoin();
                               });
                             },
                             isSelected: _coinSelected,
@@ -271,12 +315,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           DropdownButton(
                             value: Constants
-                                .PROCESSORS[_processorSet1.processorType]
-                                .contains(_processorSet1.processor)
+                                    .PROCESSORS[_processorSet1.processorType]
+                                    .contains(_processorSet1.processor)
                                 ? _processorSet1.processor
                                 : Constants
-                                .PROCESSORS[_processorSet1.processorType]
-                                .first,
+                                    .PROCESSORS[_processorSet1.processorType]
+                                    .first,
                             onChanged: (String newValue) {
                               setState(() {
                                 _processorSet1.processor = newValue;
@@ -307,7 +351,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               onChanged: (String newValue) {
                                 setState(() {
                                   if (newValue != "")
-                                    _processorSet1.quantity = int.parse(newValue);
+                                    _processorSet1.quantity =
+                                        int.parse(newValue);
                                 });
                               },
                             ),
@@ -387,12 +432,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           DropdownButton(
                             value: Constants
-                                .PROCESSORS[_processorSet2.processorType]
-                                .contains(_processorSet2.processor)
+                                    .PROCESSORS[_processorSet2.processorType]
+                                    .contains(_processorSet2.processor)
                                 ? _processorSet2.processor
                                 : Constants
-                                .PROCESSORS[_processorSet2.processorType]
-                                .first,
+                                    .PROCESSORS[_processorSet2.processorType]
+                                    .first,
                             onChanged: (String newValue) {
                               setState(() {
                                 _processorSet2.processor = newValue;
@@ -423,7 +468,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               onChanged: (String newValue) {
                                 setState(() {
                                   if (newValue != "")
-                                    _processorSet2.quantity = int.parse(newValue);
+                                    _processorSet2.quantity =
+                                        int.parse(newValue);
                                 });
                               },
                             ),
@@ -510,31 +556,39 @@ class _MyHomePageState extends State<MyHomePage> {
                   ]),
                 ],
               ),
+            ),
           ),
-          ),
-          Expanded(flex: 1, child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
                 children: [
                   Container(height: 50),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(child: GroupButton(
-                          isRadio: true,
-                          spacing: 10,
-                          direction: Axis.horizontal,
-                          selectedButtons: ["1Y"],
-                          onSelected: (index, isSelected) {
-                            const _dayMap = {0:7, 1:14, 2:30, 3:90, 4:183, 5:365, 6:730};
-                            setState(() {
-                              _chartNumberOfDays = _dayMap[index];
-                            });
-                          },
-                          buttons: ["7D", "14D", "1M", "3M", "6M", "1Y", "2Y"],
-                        ))
-                      ]
-                  ),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Container(
+                        child: GroupButton(
+                      isRadio: true,
+                      spacing: 10,
+                      direction: Axis.horizontal,
+                      selectedButtons: ["1Y"],
+                      onSelected: (index, isSelected) {
+                        const _dayMap = {
+                          0: 7,
+                          1: 14,
+                          2: 30,
+                          3: 90,
+                          4: 183,
+                          5: 365,
+                          6: 730
+                        };
+                        setState(() {
+                          _chartNumberOfDays = _dayMap[index];
+                        });
+                      },
+                      buttons: ["7D", "14D", "1M", "3M", "6M", "1Y", "2Y"],
+                    ))
+                  ]),
                   Container(height: 50),
                   Text('Cumulative Profit/Loss',
                       style: TextStyle(fontWeight: FontWeight.bold)),
@@ -555,32 +609,30 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     width: _chartWidth,
                     child: Visibility(
-                      visible: _coinSelected[0],
-                      child: Column(
-                        children: [
-                          Text('Bitcoin Price History',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                          getPriceChart(),
-                        ],
-                      )
-                    ),
+                        visible: _coinSelected[0],
+                        child: Column(
+                          children: [
+                            Text('Bitcoin Price History',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            getPriceChart(),
+                          ],
+                        )),
                   ),
                   Container(
                     width: _chartWidth,
                     child: Visibility(
-                      visible: _coinSelected[1],
-                      child: Column(
-                        children: [
-                          Text('Ethereum Price History',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                          getPriceChart(),
-                        ],
-                      )
-                    ),
+                        visible: _coinSelected[1],
+                        child: Column(
+                          children: [
+                            Text('Ethereum Price History',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            getPriceChart(),
+                          ],
+                        )),
                   ),
                 ],
               ),
-          ),
+            ),
           ),
         ],
       )),
@@ -592,15 +644,11 @@ class _MyHomePageState extends State<MyHomePage> {
   ///
   /// The [numberOfDays] is the amount of days to populate the chart with.
   Widget getProfitChart(int numberOfDays, bool isCumulative) {
-
     return FutureBuilder<http.Response>(
         future: _fetchData(),
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
           if (snapshot.hasData) {
             DateTime startDate = chartStartDate(_startDate, numberOfDays);
-            // TODO: once we start predicting the future we need to do this differently
-            // right now if you set a start date of less than numberOfDays days ago.
-            // the start date is set to now - numberOfDays and the end to now
             List<ProcessorSet> processors = [_processorSet1, _processorSet2];
             List<ProfitPerDay> processorSeries = [];
             double cumulativeProfit =
@@ -611,7 +659,8 @@ class _MyHomePageState extends State<MyHomePage> {
             // current price.
             Map<String, dynamic> response = jsonDecode(snapshot.data.body);
             // Splice the list so we only get the time period we want
-            var scopedList = response['prices'].skip(Constants.DAYS_IN_TWO_YEARS - numberOfDays);
+            var scopedList = response['prices']
+                .skip(Constants.DAYS_IN_TWO_YEARS - numberOfDays);
             for (int i = 0; i < scopedList.length; i++) {
               double coinPrice = scopedList.elementAt(i)[1];
               double profitForDay = 0.0;
@@ -647,7 +696,6 @@ class _MyHomePageState extends State<MyHomePage> {
     double totalInitialCapitalExpense = _otherCapitalExpenses;
 
     processors.forEach((processor) {
-
       if (processor.enabled && !processor.alreadyPurchased) {
         totalInitialCapitalExpense +=
             Constants.INITIAL_CAPITALS[processor.processor];
@@ -722,7 +770,8 @@ class _MyHomePageState extends State<MyHomePage> {
   List<ProfitPerDay> getPriceSeries(String data) {
     var json = jsonDecode(data);
     var prices = json['prices'];
-    var scopedList = prices.skip(Constants.DAYS_IN_TWO_YEARS - _chartNumberOfDays);
+    var scopedList =
+        prices.skip(Constants.DAYS_IN_TWO_YEARS - _chartNumberOfDays);
     var series = <ProfitPerDay>[];
     scopedList.forEach((element) => series.add(ProfitPerDay(
         DateTime.fromMillisecondsSinceEpoch(element[0]),
@@ -732,7 +781,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// Calculate a sensible date for the chart to start
-  /// TODO: predict the future and deprecate this function
   DateTime chartStartDate(DateTime startingDate, int numberOfDays) {
     var nDaysAgo = DateTime.now().subtract(Duration(days: numberOfDays));
     if (startingDate.isAfter(nDaysAgo)) {
@@ -743,7 +791,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// Calculate a sensible date for the chart to end
-  /// TODO: predict the future
   DateTime chartEndDate(DateTime startingDate, int numberOfDays) {
     var nDaysAgo = DateTime.now().subtract(Duration(days: numberOfDays));
     if (startingDate.isAfter(nDaysAgo)) {

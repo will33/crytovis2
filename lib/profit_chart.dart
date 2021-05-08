@@ -35,7 +35,7 @@ class _ProfitChartState extends State<ProfitChart> {
     final selectedDatum = model.selectedDatum;
     /// The day the selection was changed.
     DateTime time;
-    /// TODO: I don't know what a 'measures' is. Is it the chartData?
+    /// I don't know what a 'measures' is. Is it the chartData?
     final measures = <String, num>{};
 
     // We get the model that updated with a list of [SeriesDatum] which is
