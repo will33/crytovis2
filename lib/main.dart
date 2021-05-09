@@ -94,19 +94,10 @@ class _MyHomePageState extends State<MyHomePage> {
   ///
   /// True indicates the coin is active, False indicates the coins is inactive.
   /// Only one coin can be active at a time. Index 0 is bitcoin. Index 1 is
-  /// ethereum. Must be a List<bool> and not a string so it can be used as the
-  /// `isSelected` option in the [ToggleButton] widget.
-  final List<bool> _coinSelected = [true, false];
-
-  String _activeCoin = "bitcoin";
-
-  void updateActiveCoin() {
-    if (_coinSelected[0]) {
-      _activeCoin = "bitcoin";
-    } else {
-      _activeCoin = "ethereum";
-    }
-  }
+  /// ethereum. Index 2 is dogecoin. Index 3 is monero. Must be a List<bool>
+  /// and not a string so it can be used as the `isSelected` option in the
+  /// [ToggleButton] widget.
+  final List<bool> _coinSelected = [true, false, false, false];
 
   // the Scenario start time
   DateTime _startDate = DateTime.now();
@@ -147,12 +138,50 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  /// This is for efficiency. On startup, the app fetches 2 years of prices for
+  /// DOGE and caches. All subsequent requests use the cached results.
+  Future<http.Response> _fetchDOGEData() {
+    return this._ethMemoizer.runOnce(() async {
+      return http.get(Uri.https('api.coingecko.com',
+          'api/v3/coins/dogecoin/market_chart/range', <String, String>{
+        'vs_currency': 'aud',
+        'from': (DateTime.now()
+                    .add(Duration(days: -Constants.DAYS_IN_TWO_YEARS))
+                    .millisecondsSinceEpoch /
+                1000)
+            .toString(),
+        'to': (DateTime.now().millisecondsSinceEpoch / 1000).toString()
+      }));
+    });
+  }
+
+  /// This is for efficiency. On startup, the app fetches 2 years of prices for
+  /// XMR and caches. All subsequent requests use the cached results.
+  Future<http.Response> _fetchXMRData() {
+    return this._ethMemoizer.runOnce(() async {
+      return http.get(Uri.https('api.coingecko.com',
+          'api/v3/coins/monero/market_chart/range', <String, String>{
+        'vs_currency': 'aud',
+        'from': (DateTime.now()
+                    .add(Duration(days: -Constants.DAYS_IN_TWO_YEARS))
+                    .millisecondsSinceEpoch /
+                1000)
+            .toString(),
+        'to': (DateTime.now().millisecondsSinceEpoch / 1000).toString()
+      }));
+    });
+  }
+
   /// Fetches the cached data for the [coin] provided.
   Future<http.Response> _fetchData() {
-    if (_activeCoin == 'bitcoin') {
+    if (_coinSelected[0]) {
       return _fetchBTCData();
-    } else {
+    } else if (_coinSelected[1]) {
       return _fetchETHData();
+    } else if (_coinSelected[2]) {
+      return _fetchDOGEData();
+    } else {
+      return _fetchXMRData();
     }
   }
 
@@ -248,6 +277,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             children: <Widget>[
                               Icon(ToggleIcons.bitcoin),
                               Icon(ToggleIcons.ethereum),
+                              Icon(ToggleIcons.bitcoin),
+                              Icon(ToggleIcons.monero),
                             ],
                             onPressed: (int index) {
                               setState(() {
@@ -262,7 +293,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                     }
                                   }
                                 }
-                                updateActiveCoin();
                               });
                             },
                             isSelected: _coinSelected,
@@ -750,43 +780,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // Calculate the fixed daily income generated from running all of the enabled processors
     processors.forEach((processor) {
-      double blockReward,
-          blockTime,
-          networkHashRate,
-          hashRate;
-      switch (_activeCoin) {
-        case 'bitcoin':
-          blockReward = Constants.BLOCK_REWARD[0];
-          blockTime = Constants.BLOCKTIME[0];
-          hashRate = Constants.PROCESSORS[processor.processorType]
-              [processor.processor][2];
-          networkHashRate = Constants.NETWORK_HASHRATE[0];
-          break;
-
-        case 'ethereum':
-          blockReward = Constants.BLOCK_REWARD[1];
-          blockTime = Constants.BLOCKTIME[1];
-          hashRate = Constants.PROCESSORS[processor.processorType]
-              [processor.processor][3];
-          networkHashRate = Constants.NETWORK_HASHRATE[1];
-          break;
-
-        case 'dogecoin':
-          blockReward = Constants.BLOCK_REWARD[2];
-          blockTime = Constants.BLOCKTIME[2];
-          hashRate = Constants.PROCESSORS[processor.processorType]
-              [processor.processor][4];
-          networkHashRate = Constants.NETWORK_HASHRATE[2];
-          break;
-
-        case 'monero':
-          blockReward = Constants.BLOCK_REWARD[3];
-          blockTime = Constants.BLOCKTIME[3];
-          hashRate = Constants.PROCESSORS[processor.processorType]
-              [processor.processor][5];
-          networkHashRate = Constants.NETWORK_HASHRATE[3];
-          break;
+      double blockReward, blockTime, networkHashRate, hashRate;
+      int index;
+      if (_coinSelected[0]) {
+        index = 0;
+      } else if (_coinSelected[1]) {
+        index = 1;
+      } else if (_coinSelected[2]) {
+        index = 2;
+      } else {
+        index = 3;
       }
+      blockReward = Constants.BLOCK_REWARD[index];
+      blockTime = Constants.BLOCKTIME[index];
+      hashRate = Constants.PROCESSORS[processor.processorType]
+          [processor.processor][index + 2];
+      networkHashRate = Constants.NETWORK_HASHRATE[index];
 
       if (processor.enabled) {
         totalIncome += blockReward *
@@ -796,7 +805,6 @@ class _MyHomePageState extends State<MyHomePage> {
             processor.quantity;
       }
     });
-
     return totalIncome;
   }
 
