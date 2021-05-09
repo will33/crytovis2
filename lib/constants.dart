@@ -36,209 +36,90 @@ class Constants {
   };
 
   static const PROCESSOR_TYPES = ['ASIC', 'GPU', 'CPU'];
+
+  /// List of processors of format [processor]: [Cost, Power, SHA256, Ethash, Scrypt, RandomX]
   static const PROCESSORS = {
-    'ASIC': [
-      // Original hardware
-      'AntMiner', 'AC130', 'SPS320',
-      // Hardware taken from research (cointopper.com)
-      'AntMiner S2', 'AntMiner S4', 'AntMiner S5', 'ASICMiner BE Prisma',
-      'BFL Monarch', 'Black Arrow Prospero X-3', 'CoinTera TerraMiner IV',
-      'HashCoins Apollo V3', 'HashCoins Zeus v3', 'KnC Neptune',
-      'Spondooliestech SP10', 'Spondooliestech SP35'
-    ],
-    'GPU': [
-      // Original hardware
-      'GTX 1080 Ti', 'RTX 2070S', 'RX 480',
-      // Hardware taken from research (cointopper.com)
-      'AMD 4870', 'AMD 5770', 'AMD 5830', 'AMD 5850', 'AMD 5870', 'AMD 5970',
-      'AMD 6990', 'NVIDIA GT-210', 'NVIDIA GTX-280', 'NVIDIA GTX-480',
-      'NVIDIA Tesla S1070', 'NVIDIA Tesla S2070'
-    ],
-    'CPU': [
-      // Original hardware
-      'i7 7700k', 'i5 3750k', '5700X',
-      // Hardware taken from research (cointopper.com)
-      'Athlon 64 X2 5600+', 'Athlon II X3 425', 'Phenom II X4 955', 'FX-8120',
-      'FX-8350', 'Core 2 Quad Q6600', 'Core 2 Quad Q9550', 'Core i3-2130',
-      'Core i5-2500K', 'Core i5-3570K', 'Core i7-3930K'
-    ]
+    // Price data from Amazon, Cryptocompare.com and various other online sources (converted to AUD on 09/05/2021), other data from nicehash.com
+    'ASIC': {
+      'BITMAIN AntMiner L3++': [4062, 1050, 0, 0, 596, 0],
+      'BITMAIN AntMiner S19 Pro': [22933, 3250, 110000000, 0, 0, 0],
+      'BITMAIN AntMiner S19': [20830, 3250, 95000000, 0, 0, 0],
+      'BITMAIN AntMiner S17 Pro': [15971, 1975, 84000000, 0, 0, 0],
+      'BITMAIN AntMiner S17+': [15925, 2920, 80000000, 0, 0, 0],
+      'BITMAIN AntMiner S17': [3187, 2385, 85000000, 0, 0, 0],
+      'BITMAIN AntMine S17e': [1019, 2880, 64000000, 0, 0, 0],
+      'BITMAIN AntMiner T17+': [2410, 3200, 73000000, 0, 0, 0],
+      'BITMAIN AntMiner T17': [876, 2200, 60000000, 0, 0, 0],
+      'BITMAIN AntMiner T17e': [887, 2915, 53000000, 0, 0, 0],
+      'Innosilicon A6': [3076, 1500, 0, 0, 1230, 0],
+      'Innosilicon T3+ 57T': [2124, 3300, 57000000, 0, 0],
+      'MicroBT Whatsminer M31S': [2486, 3220, 70000000, 0, 0, 0],
+      'MicroBT Whatsminer M30S': [3436, 3268, 86000000, 0, 0, 0],
+      'MicroBT Whatsminer M21S': [2293, 3360, 56000000, 0, 0, 0],
+      'MicroBT Whatsminer M20S': [2952, 3360, 68000000, 0, 0, 0],
+      'MicroBT Whatsminer M10S': [2558, 3500, 55000000, 0, 0, 0],
+    },
+    'GPU': {
+      'AMD Radeon VII': [0, 220, 0, 90.56, 0, 0.0017],
+      'AMD RX 6900 XT': [0, 220, 0, 64, 0, 0],
+      'AMD RX 6800 XT': [0, 190, 0, 64.4, 0, 0],
+      'AMD RX 6800': [0, 175, 0, 63.4, 0, 0],
+      'AMD RX 6700 XT': [0, 170, 0, 47, 0, 0],
+      'AMD RX 5700 XT': [0, 140, 0, 54.76, 0, 0],
+      'AMD RX 5700': [0, 160, 0, 53.56, 0, 0],
+      'AMD RX 5600 XT': [0, 100, 0, 37, 0, 0],
+      'NVIDIA A100': [0, 210, 0, 171, 0, 0],
+      'NVIDIA P102-100': [0, 190, 0, 47.56, 0, 0],
+      'NVIDIA P104-100': [0, 120, 0, 37, 0, 0],
+      'NVIDIA RTX 3090': [0, 285, 0, 120, 0, 0],
+      'NVIDIA RTX 3080': [0, 220, 0, 96, 0, 0],
+      'NVIDIA RTX 3070': [0, 120, 0, 29.53, 0, 0],
+      'NVIDIA RTX 3060 Ti': [0, 115, 0, 60.5, 0, 0],
+      'NVIDIA RTX 3060': [0, 115, 0, 49, 0, 0],
+      'NVIDIA RTX 2080 Ti': [0, 230, 0, 59.21, 0, 0],
+      'NVIDIA RTX 2080': [0, 108, 0, 43, 0, 0],
+      'NVIDIA RTX 2070': [0, 110, 0, 42.7, 0, 0],
+      'NVIDIA GTX 1080 Ti': [0, 170, 0, 45.69, 0, 0.0009],
+      'NVIDIA TITAN V': [0, 160, 0, 78.2, 0, 0],
+      'NVIDIA TITAN RTX': [0, 250, 0, 66, 0, 0],
+      'NVIDIA TITAN XP': [0, 240, 0, 45.49, 0, 0],
+    },
+    'CPU': {
+      'AMD EPYC 7742': [0, 225, 0, 0, 0, 0.039],
+      'AMD EPYC 7601': [0, 180, 0, 0, 0, 0.0283],
+      'AMD EPYC 7551': [0, 180, 0, 0, 0, 0.0289],
+      'AMD EPYC 7402P': [0, 200, 0, 0, 0, 0.023],
+      'AMD EPYC 7402': [0, 200, 0, 0, 0, 0.023],
+      'AMD EPYC 7352': [0, 155, 0, 0, 0, 0.0215],
+      'AMD EPYC 7302': [0, 155, 0, 0, 0, 0.0244],
+      'AMD Threadripper 3990X': [0, 280, 0, 0, 0, 0.053],
+      'AMD Threadripper 3970X': [0, 280, 0, 0, 0, 0.032],
+      'AMD Threadripper 3960X': [0, 280, 0, 0, 0, 0.0268],
+      'AMD Threadripper 2990WX': [0, 250, 0, 0, 0, 0.1451],
+      'AMD Ryzen 9 5950X': [0, 105, 0, 0, 0, 0.018],
+      'AMD Ryzen 9 5900X': [0, 105, 0, 0, 0, 0.014],
+      'AMD Ryzen 9 3950X': [0, 105, 0, 0, 0, 0.01651],
+      'AMD Ryzen 9 3900XT': [0, 105, 0, 0, 0, 0.0131],
+      'AMD Ryzen 9 3900X': [0, 105, 0, 0, 0, 0.01317],
+      'AMD Ryzen 7 5800X': [0, 105, 0, 0, 0, 0.010],
+      'AMD Ryzen 7 3800X': [0, 105, 0, 0, 0, 0.0092],
+      'AMD Ryzen 7 3700X': [0, 105, 0, 0, 0, 0.0092],
+      'AMD Ryzen 5 5600X': [0, 65, 0, 0, 0, 0.008],
+      'AMD Ryzen 5 3600X': [0, 95, 0, 0, 0, 0.007],
+      'Intel i9-10900KF': [0, 125, 0, 0, 0, 0.0072],
+      'Intel i9-10900K': [0, 125, 0, 0, 0, 0.0071],
+      'Intel i9-9980XE': [0, 95, 0, 0, 0, 0.0098],
+      'Intel i9-7980XE': [0, 95, 0, 0, 0, 0.0083],
+      'Intel i9-7940X': [0, 95, 0, 0, 0, 0.0064],
+      'Intel i9-7920X': [0, 95, 0, 0, 0, 0.00704],
+      'Intel i9-7900X': [0, 95, 0, 0, 0, 0.00588],
+      'Intel i7-10700KF': [0, 95, 0, 0, 0, 0.0064],
+      'Intel i7-10700K': [0, 95, 0, 0, 0, 0.0063],
+    },
   };
 
-  /// The initial capital expense associated with each processor.
-  /// Values currently taken from Google
-  static const INITIAL_CAPITALS = {
-    // ASIC
-    'AntMiner': 1000,
-    'AC130': 1000,
-    'SPS320': 1000,
-
-    'AntMiner S2': 2259,
-    'AntMiner S4': 1400,
-    'AntMiner S5': 550,
-    'ASICMiner BE Prisma': 600,
-    'BFL Monarch': 1379,
-    'Black Arrow Prospero X-3': 899,
-    'CoinTera TerraMiner IV': 5999,
-    'HashCoins Apollo V3': 599,
-    'HashCoins Zeus v3': 2299,
-    'KnC Neptune': 120,
-    'Spondooliestech SP10': 489,
-    'Spondooliestech SP35': 2000,
-
-    // GPU
-    'GTX 1080 Ti': 1000,
-    'RTX 2070S': 1000,
-    'RX 480': 1000,
-
-    'AMD 4870': 299,
-    'AMD 5770': 149,
-    'AMD 5830': 299,
-    'AMD 5850': 259,
-    'AMD 5870': 379,
-    'AMD 5970': 249,
-    'AMD 6990': 699,
-    'NVIDIA GT-210': 56,
-    'NVIDIA GTX-280': 135,
-    'NVIDIA GTX-480': 499,
-    'NVIDIA Tesla S1070': 400,
-    'NVIDIA Tesla S2070': 18995,
-
-    // CPU
-    'i7 7700k': 1000,
-    'i5 3750k': 1000,
-    '5700X': 1000,
-
-    'Athlon 64 X2 5600+': 110,
-    'Athlon II X3 425': 31,
-    'Phenom II X4 955': 88,
-    'FX-8120': 120,
-    'FX-8350': 195,
-    'Core 2 Quad Q6600': 15,
-    'Core 2 Quad Q9550': 60,
-    'Core i3-2130': 102,
-    'Core i5-2500K': 289,
-    'Core i5-3570K': 235,
-    'Core i7-3930K': 594
-  };
-
-  /// The power usage of each processor, in Watts.
-  /// Values from cointopper.com
-  static const POWER_USAGES = {
-    // ASIC
-    'AntMiner': 1000,
-    'AC130': 800,
-    'SPS320': 900,
-
-    'AntMiner S2': 1100,
-    'AntMiner S4': 1400,
-    'AntMiner S5': 590,
-    'ASICMiner BE Prisma': 1100,
-    'BFL Monarch': 490,
-    'Black Arrow Prospero X-3': 2000,
-    'CoinTera TerraMiner IV': 2100,
-    'HashCoins Apollo V3': 1000,
-    'HashCoins Zeus v3': 3000,
-    'KnC Neptune': 2100,
-    'Spondooliestech SP10': 1250,
-    'Spondooliestech SP35': 2650,
-
-    // GPU
-    'GTX 1080 Ti': 500,
-    'RTX 2070S': 400,
-    'RX 480': 300,
-
-    'AMD 4870': 150,
-    'AMD 5770': 100,
-    'AMD 5830': 125,
-    'AMD 5850': 180,
-    'AMD 5870': 200,
-    'AMD 5970': 350,
-    'AMD 6990': 400,
-    'NVIDIA GT-210': 30,
-    'NVIDIA GTX-280': 230,
-    'NVIDIA GTX-480': 250,
-    'NVIDIA Tesla S1070': 800,
-    'NVIDIA Tesla S2070': 900,
-
-    // CPU
-    'i7 7700k': 180,
-    'i5 3750k': 100,
-    '5700X': 200,
-
-    'Athlon 64 X2 5600+': 89,
-    'Athlon II X3 425': 125,
-    'Phenom II X4 955': 125,
-    'FX-8120': 125,
-    'FX-8350': 125,
-    'Core 2 Quad Q6600': 100,
-    'Core 2 Quad Q9550': 125,
-    'Core i3-2130': 65,
-    'Core i5-2500K': 90,
-    'Core i5-3570K': 90,
-    'Core i7-3930K': 200
-  };
-
-  static const int HOURS_IN_DAY = 24;
-  static const int WATTS_IN_KILOWATT = 1000;
-
-  /// The hash rate of each processor in MH/s
-  /// Values from cointopper.com
-  static const HASH_RATES = {
-    // ASIC
-    'AntMiner': 700,
-    'AC130': 800,
-    'SPS320': 900,
-
-    'AntMiner S2': 1000000,
-    'AntMiner S4': 2000000,
-    'AntMiner S5': 1155000,
-    'ASICMiner BE Prisma': 1400000,
-    'BFL Monarch': 700000,
-    'Black Arrow Prospero X-3': 2000000,
-    'CoinTera TerraMiner IV': 1600000,
-    'HashCoins Apollo V3': 1100000,
-    'HashCoins Zeus v3': 4500000,
-    'KnC Neptune': 3000000,
-    'Spondooliestech SP10': 1400000,
-    'Spondooliestech SP35': 5500000,
-
-    // GPU
-    'GTX 1080 Ti': 45.69,
-    'RTX 2070S': 43,
-    'RX 480': 30.29,
-
-    'AMD 4870': 90,
-    'AMD 5770': 240,
-    'AMD 5830': 300,
-    'AMD 5850': 400,
-    'AMD 5870': 480,
-    'AMD 5970': 800,
-    'AMD 6990': 800,
-    'NVIDIA GT-210': 4,
-    'NVIDIA GTX-280': 60,
-    'NVIDIA GTX-480': 140,
-    'NVIDIA Tesla S1070': 155,
-    'NVIDIA Tesla S2070': 750,
-
-    // CPU
-    'i7 7700k': 5,
-    'i5 3750k': 4,
-    '5700X': 6,
-
-    'Athlon 64 X2 5600+': 6.07 * 0.001,
-    'Athlon II X3 425': 9.5 * 0.001,
-    'Phenom II X4 955': 22 * 0.001,
-    'FX-8120': 46 * 0.001,
-    'FX-8350': 65 * 0.001,
-    'Core 2 Quad Q6600': 9.68 * 0.001,
-    'Core 2 Quad Q9550': 32.2 * 0.001,
-    'Core i3-2130': 23 * 0.001,
-    'Core i5-2500K': 48 * 0.001,
-    'Core i5-3570K': 55 * 0.001,
-    'Core i7-3930K': 98 * 0.001
-  };
-
-  static const BITCOIN_NETWORK_HASHRATE = 149045000.0; // TODO: Make this variable per day
+  static const BITCOIN_NETWORK_HASHRATE =
+      149045000.0; // TODO: Make this variable per day
   static const BITCOIN_BLOCK_REWARD = 6.25;
   static const BITCOIN_AVG_BLOCKTIME = 10.0;
   static const ETHEREUM_NETWORK_HASHRATE = 580230000.0;
