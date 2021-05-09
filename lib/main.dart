@@ -61,8 +61,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class ProcessorSet {
-  String processorType = 'GPU';
-  String processor = 'NVIDIA GTX 1080 Ti';
+  String processorType = 'ASIC';
+  String processor = 'BITMAIN AntMiner S19 Pro';
   bool enabled = true;
   int quantity = 1;
   bool alreadyPurchased = false;
@@ -75,6 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final AsyncMemoizer<http.Response> _btcMemoizer = AsyncMemoizer();
   final AsyncMemoizer<http.Response> _ethMemoizer = AsyncMemoizer();
+  final AsyncMemoizer<http.Response> _dogeMemoizer = AsyncMemoizer();
+  final AsyncMemoizer<http.Response> _xmrMemoizer = AsyncMemoizer();
 
   /// The selected electricity price, in kW/Hs.
   double _electricityPrice = 0.32;
@@ -141,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /// This is for efficiency. On startup, the app fetches 2 years of prices for
   /// DOGE and caches. All subsequent requests use the cached results.
   Future<http.Response> _fetchDOGEData() {
-    return this._ethMemoizer.runOnce(() async {
+    return this._dogeMemoizer.runOnce(() async {
       return http.get(Uri.https('api.coingecko.com',
           'api/v3/coins/dogecoin/market_chart/range', <String, String>{
         'vs_currency': 'aud',
@@ -158,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
   /// This is for efficiency. On startup, the app fetches 2 years of prices for
   /// XMR and caches. All subsequent requests use the cached results.
   Future<http.Response> _fetchXMRData() {
-    return this._ethMemoizer.runOnce(() async {
+    return this._xmrMemoizer.runOnce(() async {
       return http.get(Uri.https('api.coingecko.com',
           'api/v3/coins/monero/market_chart/range', <String, String>{
         'vs_currency': 'aud',
@@ -269,7 +271,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: 50,
                     ),
                     Container(
-                        width: 150,
+                        //width: 150,
                         child: Column(children: [
                           Text("Cryptocurrency Select"),
                           Container(height: 5),
@@ -668,6 +670,30 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Column(
                           children: [
                             Text('Ethereum Price History',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            getPriceChart(),
+                          ],
+                        )),
+                  ),
+                  Container(
+                    width: _chartWidth,
+                    child: Visibility(
+                        visible: _coinSelected[2],
+                        child: Column(
+                          children: [
+                            Text('Dogecoin Price History',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            getPriceChart(),
+                          ],
+                        )),
+                  ),
+                  Container(
+                    width: _chartWidth,
+                    child: Visibility(
+                        visible: _coinSelected[3],
+                        child: Column(
+                          children: [
+                            Text('Monero Price History',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             getPriceChart(),
                           ],
