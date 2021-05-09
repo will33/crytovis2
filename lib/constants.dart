@@ -124,7 +124,7 @@ class Constants {
   static const int HOURS_IN_DAY = 24;
   static const DAYS_IN_TWO_YEARS = 1825;
 
-  static const NETWORK_HASHRATE = [149045000.0, 580230000.0, 321080000, 2566]; // TODO: Make this variable per day
+  static const NETWORK_HASHRATE = [149000000045000.0, 580230000.0, 321080000, 2566]; // TODO: Make this variable per day
   static const BLOCK_REWARD = [6.25, 2.0, 10000, 1.03];
   static const BLOCKTIME = [10.0, 0.25, 1, 2];
 }
