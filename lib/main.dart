@@ -660,18 +660,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         visible: _coinSelected[2],
                         child: Column(
                           children: [
-                            Text('Dogecoin Price History',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            getPriceChart(),
-                          ],
-                        )),
-                  ),
-                  Container(
-                    width: _chartWidth,
-                    child: Visibility(
-                        visible: _coinSelected[3],
-                        child: Column(
-                          children: [
                             Text('Monero Price History',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             getPriceChart(),
