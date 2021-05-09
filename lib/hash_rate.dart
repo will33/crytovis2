@@ -1467,5 +1467,4392 @@ class HashRates {
     "1620432000": 592468.3454,
   };
 
-  static const MONERO = {};
+  static const MONERO = {
+    "2019-05-09": {
+      "hashrate": 323.18263839713,
+      "difficulty": 38781916608,
+      "reward": 2.82,
+      "algo_id": 25
+    },
+    "2019-05-10": {
+      "hashrate": 336.90609898999,
+      "difficulty": 40428731879,
+      "reward": 2.82,
+      "algo_id": 25
+    },
+    "2019-05-11": {
+      "hashrate": 346.95337207335,
+      "difficulty": 41634404649,
+      "reward": 2.81,
+      "algo_id": 25
+    },
+    "2019-05-12": {
+      "hashrate": 318.02390477948,
+      "difficulty": 38162868574,
+      "reward": 2.81,
+      "algo_id": 25
+    },
+    "2019-05-13": {
+      "hashrate": 335.4590131226,
+      "difficulty": 40255081575,
+      "reward": 2.81,
+      "algo_id": 25
+    },
+    "2019-05-14": {
+      "hashrate": 341.43718763024,
+      "difficulty": 40972462516,
+      "reward": 2.8,
+      "algo_id": 25
+    },
+    "2019-05-15": {
+      "hashrate": 339.85323081108,
+      "difficulty": 40782387697,
+      "reward": 2.8,
+      "algo_id": 25
+    },
+    "2019-05-16": {
+      "hashrate": 329.61252246479,
+      "difficulty": 39553502696,
+      "reward": 2.8,
+      "algo_id": 25
+    },
+    "2019-05-17": {
+      "hashrate": 320.74888068958,
+      "difficulty": 38489865683,
+      "reward": 2.79,
+      "algo_id": 25
+    },
+    "2019-05-18": {
+      "hashrate": 317.55047212708,
+      "difficulty": 38106056655,
+      "reward": 2.79,
+      "algo_id": 25
+    },
+    "2019-05-19": {
+      "hashrate": 326.26579407109,
+      "difficulty": 39151895289,
+      "reward": 2.79,
+      "algo_id": 25
+    },
+    "2019-05-20": {
+      "hashrate": 300.27622938183,
+      "difficulty": 36033147526,
+      "reward": 2.78,
+      "algo_id": 25
+    },
+    "2019-05-21": {
+      "hashrate": 279.67055722572,
+      "difficulty": 33560466867,
+      "reward": 2.77,
+      "algo_id": 25
+    },
+    "2019-05-22": {
+      "hashrate": 282.95690298808,
+      "difficulty": 33954828359,
+      "reward": 2.77,
+      "algo_id": 25
+    },
+    "2019-05-23": {
+      "hashrate": 269.00746365391,
+      "difficulty": 32280895638,
+      "reward": 2.77,
+      "algo_id": 25
+    },
+    "2019-05-24": {
+      "hashrate": 312.02599187957,
+      "difficulty": 37443119026,
+      "reward": 2.76,
+      "algo_id": 25
+    },
+    "2019-05-25": {
+      "hashrate": 321.33198777543,
+      "difficulty": 38559838533,
+      "reward": 2.76,
+      "algo_id": 25
+    },
+    "2019-05-26": {
+      "hashrate": 306.82848693003,
+      "difficulty": 36819418432,
+      "reward": 2.76,
+      "algo_id": 25
+    },
+    "2019-05-27": {
+      "hashrate": 319.04269213828,
+      "difficulty": 38285123057,
+      "reward": 2.75,
+      "algo_id": 25
+    },
+    "2019-05-28": {
+      "hashrate": 323.09589633377,
+      "difficulty": 38771507560,
+      "reward": 2.75,
+      "algo_id": 25
+    },
+    "2019-05-29": {
+      "hashrate": 320.33920188079,
+      "difficulty": 38440704226,
+      "reward": 2.74,
+      "algo_id": 25
+    },
+    "2019-05-30": {
+      "hashrate": 335.03817543333,
+      "difficulty": 40204581052,
+      "reward": 2.74,
+      "algo_id": 25
+    },
+    "2019-05-31": {
+      "hashrate": 313.73333350558,
+      "difficulty": 37648000021,
+      "reward": 2.74,
+      "algo_id": 25
+    },
+    "2019-06-01": {
+      "hashrate": 314.92871433154,
+      "difficulty": 37791445720,
+      "reward": 2.74,
+      "algo_id": 25
+    },
+    "2019-06-02": {
+      "hashrate": 324.09615760723,
+      "difficulty": 38891538913,
+      "reward": 2.73,
+      "algo_id": 25
+    },
+    "2019-06-03": {
+      "hashrate": 332.1191789036,
+      "difficulty": 39854301468,
+      "reward": 2.73,
+      "algo_id": 25
+    },
+    "2019-06-04": {
+      "hashrate": 330.42133402451,
+      "difficulty": 39650560083,
+      "reward": 2.72,
+      "algo_id": 25
+    },
+    "2019-06-05": {
+      "hashrate": 313.46608650787,
+      "difficulty": 37615930381,
+      "reward": 2.72,
+      "algo_id": 25
+    },
+    "2019-06-06": {
+      "hashrate": 308.15639721551,
+      "difficulty": 36978767666,
+      "reward": 2.71,
+      "algo_id": 25
+    },
+    "2019-06-07": {
+      "hashrate": 337.25241108785,
+      "difficulty": 40470289331,
+      "reward": 2.71,
+      "algo_id": 25
+    },
+    "2019-06-08": {
+      "hashrate": 336.31723632873,
+      "difficulty": 40358068359,
+      "reward": 2.71,
+      "algo_id": 25
+    },
+    "2019-06-09": {
+      "hashrate": 298.98872972054,
+      "difficulty": 35878647566,
+      "reward": 2.7,
+      "algo_id": 25
+    },
+    "2019-06-10": {
+      "hashrate": 289.54733841464,
+      "difficulty": 34745680610,
+      "reward": 2.7,
+      "algo_id": 25
+    },
+    "2019-06-11": {
+      "hashrate": 312.29303656085,
+      "difficulty": 37475164387,
+      "reward": 2.69,
+      "algo_id": 25
+    },
+    "2019-06-12": {
+      "hashrate": 316.26670926247,
+      "difficulty": 37952005111,
+      "reward": 2.69,
+      "algo_id": 25
+    },
+    "2019-06-13": {
+      "hashrate": 308.29222950032,
+      "difficulty": 36995067540,
+      "reward": 2.69,
+      "algo_id": 25
+    },
+    "2019-06-14": {
+      "hashrate": 306.24402219806,
+      "difficulty": 36749282664,
+      "reward": 2.68,
+      "algo_id": 25
+    },
+    "2019-06-15": {
+      "hashrate": 294.79544598889,
+      "difficulty": 35375453519,
+      "reward": 2.68,
+      "algo_id": 25
+    },
+    "2019-06-16": {
+      "hashrate": 302.79396303591,
+      "difficulty": 36335275564,
+      "reward": 2.68,
+      "algo_id": 25
+    },
+    "2019-06-17": {
+      "hashrate": 317.72475422869,
+      "difficulty": 38126970507,
+      "reward": 2.67,
+      "algo_id": 25
+    },
+    "2019-06-18": {
+      "hashrate": 324.5255487792,
+      "difficulty": 38943065854,
+      "reward": 2.67,
+      "algo_id": 25
+    },
+    "2019-06-19": {
+      "hashrate": 307.60278759146,
+      "difficulty": 36912334511,
+      "reward": 2.67,
+      "algo_id": 25
+    },
+    "2019-06-20": {
+      "hashrate": 324.92817681918,
+      "difficulty": 38991381218,
+      "reward": 2.66,
+      "algo_id": 25
+    },
+    "2019-06-21": {
+      "hashrate": 313.71598020428,
+      "difficulty": 37645917625,
+      "reward": 2.66,
+      "algo_id": 25
+    },
+    "2019-06-22": {
+      "hashrate": 335.00842441195,
+      "difficulty": 40201010929,
+      "reward": 2.66,
+      "algo_id": 25
+    },
+    "2019-06-23": {
+      "hashrate": 329.06444589991,
+      "difficulty": 39487733508,
+      "reward": 2.65,
+      "algo_id": 25
+    },
+    "2019-06-24": {
+      "hashrate": 325.24631817977,
+      "difficulty": 39029558182,
+      "reward": 2.65,
+      "algo_id": 25
+    },
+    "2019-06-25": {
+      "hashrate": 308.08581706522,
+      "difficulty": 36970298048,
+      "reward": 2.65,
+      "algo_id": 25
+    },
+    "2019-06-26": {
+      "hashrate": 318.56426575026,
+      "difficulty": 38227711890,
+      "reward": 2.64,
+      "algo_id": 25
+    },
+    "2019-06-27": {
+      "hashrate": 307.93109788539,
+      "difficulty": 36951731746,
+      "reward": 2.64,
+      "algo_id": 25
+    },
+    "2019-06-28": {
+      "hashrate": 302.07462361652,
+      "difficulty": 36248954834,
+      "reward": 2.64,
+      "algo_id": 25
+    },
+    "2019-06-29": {
+      "hashrate": 310.54897315399,
+      "difficulty": 37265876778,
+      "reward": 2.63,
+      "algo_id": 25
+    },
+    "2019-06-30": {
+      "hashrate": 321.11976424097,
+      "difficulty": 38534371709,
+      "reward": 2.63,
+      "algo_id": 25
+    },
+    "2019-07-01": {
+      "hashrate": 320.84222279702,
+      "difficulty": 38501066736,
+      "reward": 2.62,
+      "algo_id": 25
+    },
+    "2019-07-02": {
+      "hashrate": 317.53113601013,
+      "difficulty": 38103736321,
+      "reward": 2.62,
+      "algo_id": 25
+    },
+    "2019-07-03": {
+      "hashrate": 324.7542294754,
+      "difficulty": 38970507537,
+      "reward": 2.62,
+      "algo_id": 25
+    },
+    "2019-07-04": {
+      "hashrate": 323.05812304219,
+      "difficulty": 38766974765,
+      "reward": 2.61,
+      "algo_id": 25
+    },
+    "2019-07-05": {
+      "hashrate": 315.33668119138,
+      "difficulty": 37840401743,
+      "reward": 2.61,
+      "algo_id": 25
+    },
+    "2019-07-06": {
+      "hashrate": 315.62065621131,
+      "difficulty": 37874478745,
+      "reward": 2.61,
+      "algo_id": 25
+    },
+    "2019-07-07": {
+      "hashrate": 312.35873052899,
+      "difficulty": 37483047663,
+      "reward": 2.6,
+      "algo_id": 25
+    },
+    "2019-07-08": {
+      "hashrate": 319.64806814884,
+      "difficulty": 38357768178,
+      "reward": 2.6,
+      "algo_id": 25
+    },
+    "2019-07-09": {
+      "hashrate": 312.36701953128,
+      "difficulty": 37484042344,
+      "reward": 2.6,
+      "algo_id": 25
+    },
+    "2019-07-10": {
+      "hashrate": 330.37365431522,
+      "difficulty": 39644838518,
+      "reward": 2.59,
+      "algo_id": 25
+    },
+    "2019-07-11": {
+      "hashrate": 329.53169892164,
+      "difficulty": 39543803871,
+      "reward": 2.59,
+      "algo_id": 25
+    },
+    "2019-07-12": {
+      "hashrate": 303.32922190365,
+      "difficulty": 36399506628,
+      "reward": 2.58,
+      "algo_id": 25
+    },
+    "2019-07-13": {
+      "hashrate": 312.29993738079,
+      "difficulty": 37475992486,
+      "reward": 2.58,
+      "algo_id": 25
+    },
+    "2019-07-14": {
+      "hashrate": 303.3386276899,
+      "difficulty": 36400635323,
+      "reward": 2.58,
+      "algo_id": 25
+    },
+    "2019-07-15": {
+      "hashrate": 306.60240558397,
+      "difficulty": 36792288670,
+      "reward": 2.57,
+      "algo_id": 25
+    },
+    "2019-07-16": {
+      "hashrate": 306.10567293351,
+      "difficulty": 36732680752,
+      "reward": 2.57,
+      "algo_id": 25
+    },
+    "2019-07-17": {
+      "hashrate": 304.01933622931,
+      "difficulty": 36482320348,
+      "reward": 2.57,
+      "algo_id": 25
+    },
+    "2019-07-18": {
+      "hashrate": 318.22972670654,
+      "difficulty": 38187567205,
+      "reward": 2.56,
+      "algo_id": 25
+    },
+    "2019-07-19": {
+      "hashrate": 316.56306489635,
+      "difficulty": 37987567788,
+      "reward": 2.56,
+      "algo_id": 25
+    },
+    "2019-07-20": {
+      "hashrate": 308.2636036794,
+      "difficulty": 36991632442,
+      "reward": 2.55,
+      "algo_id": 25
+    },
+    "2019-07-21": {
+      "hashrate": 318.93312801221,
+      "difficulty": 38271975361,
+      "reward": 2.55,
+      "algo_id": 25
+    },
+    "2019-07-22": {
+      "hashrate": 319.37057973275,
+      "difficulty": 38324469568,
+      "reward": 2.55,
+      "algo_id": 25
+    },
+    "2019-07-23": {
+      "hashrate": 301.78513974557,
+      "difficulty": 36214216769,
+      "reward": 2.54,
+      "algo_id": 25
+    },
+    "2019-07-24": {
+      "hashrate": 311.35636319983,
+      "difficulty": 37362763584,
+      "reward": 2.54,
+      "algo_id": 25
+    },
+    "2019-07-25": {
+      "hashrate": 309.60839328099,
+      "difficulty": 37153007194,
+      "reward": 2.54,
+      "algo_id": 25
+    },
+    "2019-07-26": {
+      "hashrate": 321.27246913087,
+      "difficulty": 38552696296,
+      "reward": 2.53,
+      "algo_id": 25
+    },
+    "2019-07-27": {
+      "hashrate": 289.72359530379,
+      "difficulty": 34766831436,
+      "reward": 2.53,
+      "algo_id": 25
+    },
+    "2019-07-28": {
+      "hashrate": 308.20448843084,
+      "difficulty": 36984538612,
+      "reward": 2.53,
+      "algo_id": 25
+    },
+    "2019-07-29": {
+      "hashrate": 309.89476941513,
+      "difficulty": 37187372330,
+      "reward": 2.52,
+      "algo_id": 25
+    },
+    "2019-07-30": {
+      "hashrate": 305.40877437517,
+      "difficulty": 36649052925,
+      "reward": 2.52,
+      "algo_id": 25
+    },
+    "2019-07-31": {
+      "hashrate": 315.57022881392,
+      "difficulty": 37868427458,
+      "reward": 2.52,
+      "algo_id": 25
+    },
+    "2019-08-01": {
+      "hashrate": 307.282423989,
+      "difficulty": 36873890879,
+      "reward": 2.51,
+      "algo_id": 25
+    },
+    "2019-08-02": {
+      "hashrate": 297.45617515567,
+      "difficulty": 35694741019,
+      "reward": 2.51,
+      "algo_id": 25
+    },
+    "2019-08-03": {
+      "hashrate": 312.92664052367,
+      "difficulty": 37551196863,
+      "reward": 2.51,
+      "algo_id": 25
+    },
+    "2019-08-04": {
+      "hashrate": 309.02812226299,
+      "difficulty": 37083374672,
+      "reward": 2.5,
+      "algo_id": 25
+    },
+    "2019-08-05": {
+      "hashrate": 311.31295800981,
+      "difficulty": 37357554961,
+      "reward": 2.5,
+      "algo_id": 25
+    },
+    "2019-08-06": {
+      "hashrate": 318.1293210412,
+      "difficulty": 38175518525,
+      "reward": 2.5,
+      "algo_id": 25
+    },
+    "2019-08-07": {
+      "hashrate": 316.51322324789,
+      "difficulty": 37981586790,
+      "reward": 2.49,
+      "algo_id": 25
+    },
+    "2019-08-08": {
+      "hashrate": 331.69264243776,
+      "difficulty": 39803117093,
+      "reward": 2.49,
+      "algo_id": 25
+    },
+    "2019-08-09": {
+      "hashrate": 320.35323857338,
+      "difficulty": 38442388629,
+      "reward": 2.48,
+      "algo_id": 25
+    },
+    "2019-08-10": {
+      "hashrate": 332.59895296487,
+      "difficulty": 39911874356,
+      "reward": 2.48,
+      "algo_id": 25
+    },
+    "2019-08-11": {
+      "hashrate": 332.76310840715,
+      "difficulty": 39931573009,
+      "reward": 2.48,
+      "algo_id": 25
+    },
+    "2019-08-12": {
+      "hashrate": 335.51228435637,
+      "difficulty": 40261474123,
+      "reward": 2.48,
+      "algo_id": 25
+    },
+    "2019-08-13": {
+      "hashrate": 337.88982251542,
+      "difficulty": 40546778702,
+      "reward": 2.47,
+      "algo_id": 25
+    },
+    "2019-08-14": {
+      "hashrate": 335.14712796036,
+      "difficulty": 40217655355,
+      "reward": 2.47,
+      "algo_id": 25
+    },
+    "2019-08-15": {
+      "hashrate": 346.22434737344,
+      "difficulty": 41546921685,
+      "reward": 2.46,
+      "algo_id": 25
+    },
+    "2019-08-16": {
+      "hashrate": 346.321968157,
+      "difficulty": 41558636179,
+      "reward": 2.46,
+      "algo_id": 25
+    },
+    "2019-08-17": {
+      "hashrate": 344.82225603568,
+      "difficulty": 41378670724,
+      "reward": 2.46,
+      "algo_id": 25
+    },
+    "2019-08-18": {
+      "hashrate": 327.0778568329,
+      "difficulty": 39249342820,
+      "reward": 2.45,
+      "algo_id": 25
+    },
+    "2019-08-19": {
+      "hashrate": 331.342651675,
+      "difficulty": 39761118201,
+      "reward": 2.45,
+      "algo_id": 25
+    },
+    "2019-08-20": {
+      "hashrate": 335.04975637995,
+      "difficulty": 40205970766,
+      "reward": 2.45,
+      "algo_id": 25
+    },
+    "2019-08-21": {
+      "hashrate": 338.21520910955,
+      "difficulty": 40585825093,
+      "reward": 2.45,
+      "algo_id": 25
+    },
+    "2019-08-22": {
+      "hashrate": 338.67919768944,
+      "difficulty": 40641503723,
+      "reward": 2.44,
+      "algo_id": 25
+    },
+    "2019-08-23": {
+      "hashrate": 339.33586034682,
+      "difficulty": 40720303242,
+      "reward": 2.44,
+      "algo_id": 25
+    },
+    "2019-08-24": {
+      "hashrate": 333.3315943342,
+      "difficulty": 39999791320,
+      "reward": 2.43,
+      "algo_id": 25
+    },
+    "2019-08-25": {
+      "hashrate": 356.8140816094,
+      "difficulty": 42817689793,
+      "reward": 2.43,
+      "algo_id": 25
+    },
+    "2019-08-26": {
+      "hashrate": 353.3160450794,
+      "difficulty": 42397925410,
+      "reward": 2.43,
+      "algo_id": 25
+    },
+    "2019-08-27": {
+      "hashrate": 344.89203488689,
+      "difficulty": 41387044186,
+      "reward": 2.43,
+      "algo_id": 25
+    },
+    "2019-08-28": {
+      "hashrate": 317.76732315032,
+      "difficulty": 38132078778,
+      "reward": 2.42,
+      "algo_id": 25
+    },
+    "2019-08-29": {
+      "hashrate": 330.60793792818,
+      "difficulty": 39672952551,
+      "reward": 2.42,
+      "algo_id": 25
+    },
+    "2019-08-30": {
+      "hashrate": 313.90191700796,
+      "difficulty": 37668230041,
+      "reward": 2.42,
+      "algo_id": 25
+    },
+    "2019-08-31": {
+      "hashrate": 339.043240889,
+      "difficulty": 40685188907,
+      "reward": 2.41,
+      "algo_id": 25
+    },
+    "2019-09-01": {
+      "hashrate": 326.45104421959,
+      "difficulty": 39174125306,
+      "reward": 2.41,
+      "algo_id": 25
+    },
+    "2019-09-02": {
+      "hashrate": 326.57839517509,
+      "difficulty": 39189407421,
+      "reward": 2.4,
+      "algo_id": 25
+    },
+    "2019-09-03": {
+      "hashrate": 338.22708788382,
+      "difficulty": 40587250546,
+      "reward": 2.41,
+      "algo_id": 25
+    },
+    "2019-09-04": {
+      "hashrate": 337.44816133521,
+      "difficulty": 40493779360,
+      "reward": 2.4,
+      "algo_id": 25
+    },
+    "2019-09-05": {
+      "hashrate": 339.8617168077,
+      "difficulty": 40783406017,
+      "reward": 2.4,
+      "algo_id": 25
+    },
+    "2019-09-06": {
+      "hashrate": 346.07922376337,
+      "difficulty": 41529506852,
+      "reward": 2.39,
+      "algo_id": 25
+    },
+    "2019-09-07": {
+      "hashrate": 333.9830147204,
+      "difficulty": 40077961766,
+      "reward": 2.39,
+      "algo_id": 25
+    },
+    "2019-09-08": {
+      "hashrate": 332.41669990425,
+      "difficulty": 39890003989,
+      "reward": 2.39,
+      "algo_id": 25
+    },
+    "2019-09-09": {
+      "hashrate": 335.71936061701,
+      "difficulty": 40286323274,
+      "reward": 2.38,
+      "algo_id": 25
+    },
+    "2019-09-10": {
+      "hashrate": 340.21200446392,
+      "difficulty": 40825440536,
+      "reward": 2.38,
+      "algo_id": 25
+    },
+    "2019-09-11": {
+      "hashrate": 351.02471724566,
+      "difficulty": 42122966069,
+      "reward": 2.37,
+      "algo_id": 25
+    },
+    "2019-09-12": {
+      "hashrate": 336.89259506727,
+      "difficulty": 40427111408,
+      "reward": 2.37,
+      "algo_id": 25
+    },
+    "2019-09-13": {
+      "hashrate": 348.61087683874,
+      "difficulty": 41833305221,
+      "reward": 2.37,
+      "algo_id": 25
+    },
+    "2019-09-14": {
+      "hashrate": 336.44289655576,
+      "difficulty": 40373147587,
+      "reward": 2.37,
+      "algo_id": 25
+    },
+    "2019-09-15": {
+      "hashrate": 324.79316361834,
+      "difficulty": 38975179634,
+      "reward": 2.36,
+      "algo_id": 25
+    },
+    "2019-09-16": {
+      "hashrate": 349.9589906149,
+      "difficulty": 41995078874,
+      "reward": 2.36,
+      "algo_id": 25
+    },
+    "2019-09-17": {
+      "hashrate": 360.59700661371,
+      "difficulty": 43271640794,
+      "reward": 2.36,
+      "algo_id": 25
+    },
+    "2019-09-18": {
+      "hashrate": 348.6822909465,
+      "difficulty": 41841874914,
+      "reward": 2.36,
+      "algo_id": 25
+    },
+    "2019-09-19": {
+      "hashrate": 327.04335484288,
+      "difficulty": 39245202581,
+      "reward": 2.35,
+      "algo_id": 25
+    },
+    "2019-09-20": {
+      "hashrate": 320.49108446727,
+      "difficulty": 38458930136,
+      "reward": 2.35,
+      "algo_id": 25
+    },
+    "2019-09-21": {
+      "hashrate": 333.58793197648,
+      "difficulty": 40030551837,
+      "reward": 2.34,
+      "algo_id": 25
+    },
+    "2019-09-22": {
+      "hashrate": 322.02127942219,
+      "difficulty": 38642553531,
+      "reward": 2.34,
+      "algo_id": 25
+    },
+    "2019-09-23": {
+      "hashrate": 313.18738701382,
+      "difficulty": 37582486442,
+      "reward": 2.34,
+      "algo_id": 25
+    },
+    "2019-09-24": {
+      "hashrate": 303.41594963718,
+      "difficulty": 36409913956,
+      "reward": 2.34,
+      "algo_id": 25
+    },
+    "2019-09-25": {
+      "hashrate": 309.23297455061,
+      "difficulty": 37107956946,
+      "reward": 2.33,
+      "algo_id": 25
+    },
+    "2019-09-26": {
+      "hashrate": 319.96062216817,
+      "difficulty": 38395274660,
+      "reward": 2.33,
+      "algo_id": 25
+    },
+    "2019-09-27": {
+      "hashrate": 326.23509945182,
+      "difficulty": 39148211934,
+      "reward": 2.32,
+      "algo_id": 25
+    },
+    "2019-09-28": {
+      "hashrate": 307.17330741525,
+      "difficulty": 36860796890,
+      "reward": 2.32,
+      "algo_id": 25
+    },
+    "2019-09-29": {
+      "hashrate": 327.1185045511,
+      "difficulty": 39254220546,
+      "reward": 2.32,
+      "algo_id": 25
+    },
+    "2019-09-30": {
+      "hashrate": 311.56438029572,
+      "difficulty": 37387725635,
+      "reward": 2.32,
+      "algo_id": 25
+    },
+    "2019-10-01": {
+      "hashrate": 309.47224073041,
+      "difficulty": 37136668888,
+      "reward": 2.31,
+      "algo_id": 25
+    },
+    "2019-10-02": {
+      "hashrate": 313.3650360886,
+      "difficulty": 37603804331,
+      "reward": 2.31,
+      "algo_id": 25
+    },
+    "2019-10-03": {
+      "hashrate": 310.91109292899,
+      "difficulty": 37309331151,
+      "reward": 2.31,
+      "algo_id": 25
+    },
+    "2019-10-04": {
+      "hashrate": 324.91083240347,
+      "difficulty": 38989299888,
+      "reward": 2.3,
+      "algo_id": 25
+    },
+    "2019-10-05": {
+      "hashrate": 311.84908886455,
+      "difficulty": 37421890664,
+      "reward": 2.3,
+      "algo_id": 25
+    },
+    "2019-10-06": {
+      "hashrate": 322.24710018365,
+      "difficulty": 38669652022,
+      "reward": 2.29,
+      "algo_id": 25
+    },
+    "2019-10-07": {
+      "hashrate": 308.13327749543,
+      "difficulty": 36975993299,
+      "reward": 2.29,
+      "algo_id": 25
+    },
+    "2019-10-08": {
+      "hashrate": 318.82785422868,
+      "difficulty": 38259342507,
+      "reward": 2.29,
+      "algo_id": 25
+    },
+    "2019-10-09": {
+      "hashrate": 328.83113316652,
+      "difficulty": 39459735980,
+      "reward": 2.29,
+      "algo_id": 25
+    },
+    "2019-10-10": {
+      "hashrate": 301.64176310454,
+      "difficulty": 36197011573,
+      "reward": 2.28,
+      "algo_id": 25
+    },
+    "2019-10-11": {
+      "hashrate": 295.1922629601,
+      "difficulty": 35423071555,
+      "reward": 2.28,
+      "algo_id": 25
+    },
+    "2019-10-12": {
+      "hashrate": 320.88070871024,
+      "difficulty": 38505685045,
+      "reward": 2.28,
+      "algo_id": 25
+    },
+    "2019-10-13": {
+      "hashrate": 316.17524519802,
+      "difficulty": 37941029424,
+      "reward": 2.27,
+      "algo_id": 25
+    },
+    "2019-10-14": {
+      "hashrate": 322.72738935845,
+      "difficulty": 38727286723,
+      "reward": 2.27,
+      "algo_id": 25
+    },
+    "2019-10-15": {
+      "hashrate": 314.85303927841,
+      "difficulty": 37782364713,
+      "reward": 2.27,
+      "algo_id": 25
+    },
+    "2019-10-16": {
+      "hashrate": 326.028927159,
+      "difficulty": 39123471259,
+      "reward": 2.27,
+      "algo_id": 25
+    },
+    "2019-10-17": {
+      "hashrate": 330.24207869687,
+      "difficulty": 39629049444,
+      "reward": 2.26,
+      "algo_id": 25
+    },
+    "2019-10-18": {
+      "hashrate": 330.19796945911,
+      "difficulty": 39623756335,
+      "reward": 2.26,
+      "algo_id": 25
+    },
+    "2019-10-19": {
+      "hashrate": 318.92713165859,
+      "difficulty": 38271255799,
+      "reward": 2.26,
+      "algo_id": 25
+    },
+    "2019-10-20": {
+      "hashrate": 341.66036930868,
+      "difficulty": 40999244317,
+      "reward": 2.25,
+      "algo_id": 25
+    },
+    "2019-10-21": {
+      "hashrate": 331.108911098,
+      "difficulty": 39733069332,
+      "reward": 2.25,
+      "algo_id": 25
+    },
+    "2019-10-22": {
+      "hashrate": 326.91608441123,
+      "difficulty": 39229930129,
+      "reward": 2.25,
+      "algo_id": 25
+    },
+    "2019-10-23": {
+      "hashrate": 325.96789914468,
+      "difficulty": 39116147897,
+      "reward": 2.24,
+      "algo_id": 25
+    },
+    "2019-10-24": {
+      "hashrate": 326.93266549372,
+      "difficulty": 39231919859,
+      "reward": 2.24,
+      "algo_id": 25
+    },
+    "2019-10-25": {
+      "hashrate": 298.01595569314,
+      "difficulty": 35761914683,
+      "reward": 2.24,
+      "algo_id": 25
+    },
+    "2019-10-26": {
+      "hashrate": 314.096953423,
+      "difficulty": 37691634411,
+      "reward": 2.23,
+      "algo_id": 25
+    },
+    "2019-10-27": {
+      "hashrate": 311.1589860335,
+      "difficulty": 37339078324,
+      "reward": 2.23,
+      "algo_id": 25
+    },
+    "2019-10-28": {
+      "hashrate": 312.53664943111,
+      "difficulty": 37504397932,
+      "reward": 2.23,
+      "algo_id": 25
+    },
+    "2019-10-29": {
+      "hashrate": 326.36191750666,
+      "difficulty": 39163430101,
+      "reward": 2.23,
+      "algo_id": 25
+    },
+    "2019-10-30": {
+      "hashrate": 350.56076057708,
+      "difficulty": 42067291269,
+      "reward": 2.22,
+      "algo_id": 25
+    },
+    "2019-10-31": {
+      "hashrate": 326.51897724097,
+      "difficulty": 39182277269,
+      "reward": 2.22,
+      "algo_id": 25
+    },
+    "2019-11-01": {
+      "hashrate": 319.76447900914,
+      "difficulty": 38371737481,
+      "reward": 2.22,
+      "algo_id": 25
+    },
+    "2019-11-02": {
+      "hashrate": 314.48115770341,
+      "difficulty": 37737738924,
+      "reward": 2.21,
+      "algo_id": 25
+    },
+    "2019-11-03": {
+      "hashrate": 316.89508345532,
+      "difficulty": 38027410015,
+      "reward": 2.21,
+      "algo_id": 25
+    },
+    "2019-11-04": {
+      "hashrate": 305.10866384948,
+      "difficulty": 36613039662,
+      "reward": 2.21,
+      "algo_id": 25
+    },
+    "2019-11-05": {
+      "hashrate": 314.58967533067,
+      "difficulty": 37750761040,
+      "reward": 2.2,
+      "algo_id": 25
+    },
+    "2019-11-06": {
+      "hashrate": 292.76469056152,
+      "difficulty": 35131762867,
+      "reward": 2.2,
+      "algo_id": 25
+    },
+    "2019-11-07": {
+      "hashrate": 311.56877213524,
+      "difficulty": 37388252656,
+      "reward": 2.2,
+      "algo_id": 25
+    },
+    "2019-11-08": {
+      "hashrate": 311.4323750557,
+      "difficulty": 37371885007,
+      "reward": 2.19,
+      "algo_id": 25
+    },
+    "2019-11-09": {
+      "hashrate": 310.87486751881,
+      "difficulty": 37304984102,
+      "reward": 2.19,
+      "algo_id": 25
+    },
+    "2019-11-10": {
+      "hashrate": 299.09011169129,
+      "difficulty": 35890813403,
+      "reward": 2.19,
+      "algo_id": 25
+    },
+    "2019-11-11": {
+      "hashrate": 305.70996212662,
+      "difficulty": 36685195455,
+      "reward": 2.19,
+      "algo_id": 25
+    },
+    "2019-11-12": {
+      "hashrate": 293.20520156557,
+      "difficulty": 35184624188,
+      "reward": 2.18,
+      "algo_id": 25
+    },
+    "2019-11-13": {
+      "hashrate": 291.56070567717,
+      "difficulty": 34987284681,
+      "reward": 2.18,
+      "algo_id": 25
+    },
+    "2019-11-14": {
+      "hashrate": 310.04583118336,
+      "difficulty": 37205499742,
+      "reward": 2.18,
+      "algo_id": 25
+    },
+    "2019-11-15": {
+      "hashrate": 294.1314557094,
+      "difficulty": 35295774685,
+      "reward": 2.18,
+      "algo_id": 25
+    },
+    "2019-11-16": {
+      "hashrate": 314.06981484436,
+      "difficulty": 37688377781,
+      "reward": 2.17,
+      "algo_id": 25
+    },
+    "2019-11-17": {
+      "hashrate": 288.92799675888,
+      "difficulty": 34671359611,
+      "reward": 2.17,
+      "algo_id": 25
+    },
+    "2019-11-18": {
+      "hashrate": 292.56768559552,
+      "difficulty": 35108122271,
+      "reward": 2.17,
+      "algo_id": 25
+    },
+    "2019-11-19": {
+      "hashrate": 271.40873961215,
+      "difficulty": 32569048753,
+      "reward": 2.17,
+      "algo_id": 25
+    },
+    "2019-11-20": {
+      "hashrate": 251.93476443148,
+      "difficulty": 30232171732,
+      "reward": 2.16,
+      "algo_id": 25
+    },
+    "2019-11-21": {
+      "hashrate": 291.5842090452,
+      "difficulty": 34990105085,
+      "reward": 2.16,
+      "algo_id": 25
+    },
+    "2019-11-22": {
+      "hashrate": 291.55611193573,
+      "difficulty": 34986733432,
+      "reward": 2.16,
+      "algo_id": 25
+    },
+    "2019-11-23": {
+      "hashrate": 297.32481957798,
+      "difficulty": 35678978349,
+      "reward": 2.15,
+      "algo_id": 25
+    },
+    "2019-11-24": {
+      "hashrate": 310.91901329893,
+      "difficulty": 37310281596,
+      "reward": 2.15,
+      "algo_id": 25
+    },
+    "2019-11-25": {
+      "hashrate": 296.95607090095,
+      "difficulty": 35634728508,
+      "reward": 2.14,
+      "algo_id": 25
+    },
+    "2019-11-26": {
+      "hashrate": 282.70334811777,
+      "difficulty": 33924401774,
+      "reward": 2.14,
+      "algo_id": 25
+    },
+    "2019-11-27": {
+      "hashrate": 296.0048587419,
+      "difficulty": 35520583049,
+      "reward": 2.14,
+      "algo_id": 25
+    },
+    "2019-11-28": {
+      "hashrate": 297.00098649065,
+      "difficulty": 35640118379,
+      "reward": 2.14,
+      "algo_id": 25
+    },
+    "2019-11-29": {
+      "hashrate": 300.56208332737,
+      "difficulty": 36067449999,
+      "reward": 2.13,
+      "algo_id": 25
+    },
+    "2019-11-30": {
+      "hashrate": 284.76105718782,
+      "difficulty": 34171326863,
+      "reward": 2.13,
+      "algo_id": 25
+    },
+    "2019-12-01": {
+      "hashrate": 530.3289601833,
+      "difficulty": 63639475222,
+      "reward": 2.12,
+      "algo_id": 31
+    },
+    "2019-12-02": {
+      "hashrate": 721.61602493108,
+      "difficulty": 86593922992,
+      "reward": 2.12,
+      "algo_id": 31
+    },
+    "2019-12-03": {
+      "hashrate": 743.83163361215,
+      "difficulty": 89259796033,
+      "reward": 2.12,
+      "algo_id": 31
+    },
+    "2019-12-04": {
+      "hashrate": 802.00332474728,
+      "difficulty": 96240398970,
+      "reward": 2.12,
+      "algo_id": 31
+    },
+    "2019-12-05": {
+      "hashrate": 828.35782129638,
+      "difficulty": 99402938556,
+      "reward": 2.12,
+      "algo_id": 31
+    },
+    "2019-12-06": {
+      "hashrate": 774.20125171233,
+      "difficulty": 92904150205,
+      "reward": 2.11,
+      "algo_id": 31
+    },
+    "2019-12-07": {
+      "hashrate": 881.46238732902,
+      "difficulty": 105775486479,
+      "reward": 2.11,
+      "algo_id": 31
+    },
+    "2019-12-08": {
+      "hashrate": 902.13768308403,
+      "difficulty": 108256521970,
+      "reward": 2.1,
+      "algo_id": 31
+    },
+    "2019-12-09": {
+      "hashrate": 842.59738843872,
+      "difficulty": 101111686613,
+      "reward": 2.1,
+      "algo_id": 31
+    },
+    "2019-12-10": {
+      "hashrate": 829.23715373336,
+      "difficulty": 99508458448,
+      "reward": 2.1,
+      "algo_id": 31
+    },
+    "2019-12-11": {
+      "hashrate": 894.18581469592,
+      "difficulty": 107302297764,
+      "reward": 2.1,
+      "algo_id": 31
+    },
+    "2019-12-12": {
+      "hashrate": 889.88851524401,
+      "difficulty": 106786621829,
+      "reward": 2.09,
+      "algo_id": 31
+    },
+    "2019-12-13": {
+      "hashrate": 869.86880673785,
+      "difficulty": 104384256809,
+      "reward": 2.09,
+      "algo_id": 31
+    },
+    "2019-12-14": {
+      "hashrate": 926.3048323592,
+      "difficulty": 111156579883,
+      "reward": 2.09,
+      "algo_id": 31
+    },
+    "2019-12-15": {
+      "hashrate": 925.29949776149,
+      "difficulty": 111035939731,
+      "reward": 2.09,
+      "algo_id": 31
+    },
+    "2019-12-16": {
+      "hashrate": 1024.3202479558,
+      "difficulty": 122918429755,
+      "reward": 2.08,
+      "algo_id": 31
+    },
+    "2019-12-17": {
+      "hashrate": 981.26298718947,
+      "difficulty": 117751558463,
+      "reward": 2.08,
+      "algo_id": 31
+    },
+    "2019-12-18": {
+      "hashrate": 968.34013534777,
+      "difficulty": 116200816242,
+      "reward": 2.08,
+      "algo_id": 31
+    },
+    "2019-12-19": {
+      "hashrate": 1070.6991191189,
+      "difficulty": 128483894294,
+      "reward": 2.07,
+      "algo_id": 31
+    },
+    "2019-12-20": {
+      "hashrate": 943.80900721557,
+      "difficulty": 113257080866,
+      "reward": 2.07,
+      "algo_id": 31
+    },
+    "2019-12-21": {
+      "hashrate": 975.00361557702,
+      "difficulty": 117000433869,
+      "reward": 2.07,
+      "algo_id": 31
+    },
+    "2019-12-22": {
+      "hashrate": 923.2150472348,
+      "difficulty": 110785805668,
+      "reward": 2.06,
+      "algo_id": 31
+    },
+    "2019-12-23": {
+      "hashrate": 970.68683531696,
+      "difficulty": 116482420238,
+      "reward": 2.06,
+      "algo_id": 31
+    },
+    "2019-12-24": {
+      "hashrate": 946.43311130744,
+      "difficulty": 113571973357,
+      "reward": 2.06,
+      "algo_id": 31
+    },
+    "2019-12-25": {
+      "hashrate": 971.66311363001,
+      "difficulty": 116599573636,
+      "reward": 2.06,
+      "algo_id": 31
+    },
+    "2019-12-26": {
+      "hashrate": 943.87666998079,
+      "difficulty": 113265200398,
+      "reward": 2.05,
+      "algo_id": 31
+    },
+    "2019-12-27": {
+      "hashrate": 948.41204371212,
+      "difficulty": 113809445245,
+      "reward": 2.05,
+      "algo_id": 31
+    },
+    "2019-12-28": {
+      "hashrate": 1026.0531672734,
+      "difficulty": 123126380073,
+      "reward": 2.05,
+      "algo_id": 31
+    },
+    "2019-12-29": {
+      "hashrate": 1007.0547111498,
+      "difficulty": 120846565338,
+      "reward": 2.05,
+      "algo_id": 31
+    },
+    "2019-12-30": {
+      "hashrate": 1057.7470619212,
+      "difficulty": 126929647431,
+      "reward": 2.04,
+      "algo_id": 31
+    },
+    "2019-12-31": {
+      "hashrate": 1146.0989184848,
+      "difficulty": 137531870218,
+      "reward": 2.04,
+      "algo_id": 31
+    },
+    "2020-01-01": {
+      "hashrate": 1046.6957263186,
+      "difficulty": 125603487158,
+      "reward": 2.04,
+      "algo_id": 31
+    },
+    "2020-01-02": {
+      "hashrate": 1042.234877532,
+      "difficulty": 125068185304,
+      "reward": 2.03,
+      "algo_id": 31
+    },
+    "2020-01-03": {
+      "hashrate": 1095.7300863473,
+      "difficulty": 131487610362,
+      "reward": 2.03,
+      "algo_id": 31
+    },
+    "2020-01-04": {
+      "hashrate": 1082.4106173966,
+      "difficulty": 129889274088,
+      "reward": 2.03,
+      "algo_id": 31
+    },
+    "2020-01-05": {
+      "hashrate": 1099.5715033039,
+      "difficulty": 131948580396,
+      "reward": 2.03,
+      "algo_id": 31
+    },
+    "2020-01-06": {
+      "hashrate": 1050.7301067635,
+      "difficulty": 126087612812,
+      "reward": 2.02,
+      "algo_id": 31
+    },
+    "2020-01-07": {
+      "hashrate": 1164.4805228178,
+      "difficulty": 139737662738,
+      "reward": 2.02,
+      "algo_id": 31
+    },
+    "2020-01-08": {
+      "hashrate": 1122.3067171351,
+      "difficulty": 134676806056,
+      "reward": 2.02,
+      "algo_id": 31
+    },
+    "2020-01-09": {
+      "hashrate": 1126.5010251585,
+      "difficulty": 135180123019,
+      "reward": 2.02,
+      "algo_id": 31
+    },
+    "2020-01-10": {
+      "hashrate": 1062.1135559735,
+      "difficulty": 127453626717,
+      "reward": 2.01,
+      "algo_id": 31
+    },
+    "2020-01-11": {
+      "hashrate": 1077.1800419386,
+      "difficulty": 129261605033,
+      "reward": 2.01,
+      "algo_id": 31
+    },
+    "2020-01-12": {
+      "hashrate": 1126.2254318756,
+      "difficulty": 135147051825,
+      "reward": 2.01,
+      "algo_id": 31
+    },
+    "2020-01-13": {
+      "hashrate": 1132.0821728221,
+      "difficulty": 135849860739,
+      "reward": 2,
+      "algo_id": 31
+    },
+    "2020-01-14": {
+      "hashrate": 1114.9485384269,
+      "difficulty": 133793824611,
+      "reward": 2,
+      "algo_id": 31
+    },
+    "2020-01-15": {
+      "hashrate": 1088.3761534128,
+      "difficulty": 130605138410,
+      "reward": 2,
+      "algo_id": 31
+    },
+    "2020-01-16": {
+      "hashrate": 1058.4813178986,
+      "difficulty": 127017758148,
+      "reward": 2,
+      "algo_id": 31
+    },
+    "2020-01-17": {
+      "hashrate": 1068.5428460948,
+      "difficulty": 128225141531,
+      "reward": 1.99,
+      "algo_id": 31
+    },
+    "2020-01-18": {
+      "hashrate": 1164.195802803,
+      "difficulty": 139703496336,
+      "reward": 1.99,
+      "algo_id": 31
+    },
+    "2020-01-19": {
+      "hashrate": 1228.5902640179,
+      "difficulty": 147430831682,
+      "reward": 1.99,
+      "algo_id": 31
+    },
+    "2020-01-20": {
+      "hashrate": 1223.9509099633,
+      "difficulty": 146874109196,
+      "reward": 1.98,
+      "algo_id": 31
+    },
+    "2020-01-21": {
+      "hashrate": 1206.124079221,
+      "difficulty": 144734889507,
+      "reward": 1.98,
+      "algo_id": 31
+    },
+    "2020-01-22": {
+      "hashrate": 1162.3743927739,
+      "difficulty": 139484927133,
+      "reward": 1.98,
+      "algo_id": 31
+    },
+    "2020-01-23": {
+      "hashrate": 1285.8795408867,
+      "difficulty": 154305544906,
+      "reward": 1.98,
+      "algo_id": 31
+    },
+    "2020-01-24": {
+      "hashrate": 1246.6021383456,
+      "difficulty": 149592256601,
+      "reward": 1.98,
+      "algo_id": 31
+    },
+    "2020-01-25": {
+      "hashrate": 1260.4487052244,
+      "difficulty": 151253844627,
+      "reward": 1.97,
+      "algo_id": 31
+    },
+    "2020-01-26": {
+      "hashrate": 1213.0812390056,
+      "difficulty": 145569748681,
+      "reward": 1.97,
+      "algo_id": 31
+    },
+    "2020-01-27": {
+      "hashrate": 1178.0386862145,
+      "difficulty": 141364642346,
+      "reward": 1.97,
+      "algo_id": 31
+    },
+    "2020-01-28": {
+      "hashrate": 1212.8206454249,
+      "difficulty": 145538477451,
+      "reward": 1.97,
+      "algo_id": 31
+    },
+    "2020-01-29": {
+      "hashrate": 1209.3240969019,
+      "difficulty": 145118891628,
+      "reward": 1.96,
+      "algo_id": 31
+    },
+    "2020-01-30": {
+      "hashrate": 1186.7705254321,
+      "difficulty": 142412463052,
+      "reward": 1.96,
+      "algo_id": 31
+    },
+    "2020-01-31": {
+      "hashrate": 1175.3366769329,
+      "difficulty": 141040401232,
+      "reward": 1.96,
+      "algo_id": 31
+    },
+    "2020-02-01": {
+      "hashrate": 1249.5126749782,
+      "difficulty": 149941520997,
+      "reward": 1.95,
+      "algo_id": 31
+    },
+    "2020-02-02": {
+      "hashrate": 1203.6484433393,
+      "difficulty": 144437813201,
+      "reward": 1.95,
+      "algo_id": 31
+    },
+    "2020-02-03": {
+      "hashrate": 1272.2381932817,
+      "difficulty": 152668583194,
+      "reward": 1.95,
+      "algo_id": 31
+    },
+    "2020-02-04": {
+      "hashrate": 1340.4633821211,
+      "difficulty": 160855605855,
+      "reward": 1.94,
+      "algo_id": 31
+    },
+    "2020-02-05": {
+      "hashrate": 1352.6082058396,
+      "difficulty": 162312984701,
+      "reward": 1.94,
+      "algo_id": 31
+    },
+    "2020-02-06": {
+      "hashrate": 1315.8231801574,
+      "difficulty": 157898781619,
+      "reward": 1.94,
+      "algo_id": 31
+    },
+    "2020-02-07": {
+      "hashrate": 1344.670137151,
+      "difficulty": 161360416458,
+      "reward": 1.94,
+      "algo_id": 31
+    },
+    "2020-02-08": {
+      "hashrate": 1331.3231836677,
+      "difficulty": 159758782040,
+      "reward": 1.93,
+      "algo_id": 31
+    },
+    "2020-02-09": {
+      "hashrate": 1314.6253714127,
+      "difficulty": 157755044570,
+      "reward": 1.93,
+      "algo_id": 31
+    },
+    "2020-02-10": {
+      "hashrate": 1313.9792097474,
+      "difficulty": 157677505170,
+      "reward": 1.93,
+      "algo_id": 31
+    },
+    "2020-02-11": {
+      "hashrate": 1259.9850028521,
+      "difficulty": 151198200342,
+      "reward": 1.93,
+      "algo_id": 31
+    },
+    "2020-02-12": {
+      "hashrate": 1298.9019250061,
+      "difficulty": 155868231001,
+      "reward": 1.92,
+      "algo_id": 31
+    },
+    "2020-02-13": {
+      "hashrate": 1326.9607833576,
+      "difficulty": 159235294003,
+      "reward": 1.92,
+      "algo_id": 31
+    },
+    "2020-02-14": {
+      "hashrate": 1321.977650735,
+      "difficulty": 158637318088,
+      "reward": 1.92,
+      "algo_id": 31
+    },
+    "2020-02-15": {
+      "hashrate": 1369.7517006598,
+      "difficulty": 164370204079,
+      "reward": 1.91,
+      "algo_id": 31
+    },
+    "2020-02-16": {
+      "hashrate": 1356.8693688278,
+      "difficulty": 162824324259,
+      "reward": 1.91,
+      "algo_id": 31
+    },
+    "2020-02-17": {
+      "hashrate": 1354.5845711538,
+      "difficulty": 162550148538,
+      "reward": 1.91,
+      "algo_id": 31
+    },
+    "2020-02-18": {
+      "hashrate": 1385.0871565188,
+      "difficulty": 166210458782,
+      "reward": 1.91,
+      "algo_id": 31
+    },
+    "2020-02-19": {
+      "hashrate": 1322.0075856019,
+      "difficulty": 158640910272,
+      "reward": 1.9,
+      "algo_id": 31
+    },
+    "2020-02-20": {
+      "hashrate": 1389.4500182393,
+      "difficulty": 166734002189,
+      "reward": 1.9,
+      "algo_id": 31
+    },
+    "2020-02-21": {
+      "hashrate": 1354.6238092914,
+      "difficulty": 162554857115,
+      "reward": 1.9,
+      "algo_id": 31
+    },
+    "2020-02-22": {
+      "hashrate": 1414.6882924028,
+      "difficulty": 169762595088,
+      "reward": 1.89,
+      "algo_id": 31
+    },
+    "2020-02-23": {
+      "hashrate": 1389.5193213007,
+      "difficulty": 166742318556,
+      "reward": 1.89,
+      "algo_id": 31
+    },
+    "2020-02-24": {
+      "hashrate": 1384.5345310687,
+      "difficulty": 166144143728,
+      "reward": 1.89,
+      "algo_id": 31
+    },
+    "2020-02-25": {
+      "hashrate": 1313.1254255197,
+      "difficulty": 157575051062,
+      "reward": 1.89,
+      "algo_id": 31
+    },
+    "2020-02-26": {
+      "hashrate": 1260.9350852246,
+      "difficulty": 151312210227,
+      "reward": 1.89,
+      "algo_id": 31
+    },
+    "2020-02-27": {
+      "hashrate": 1262.8967473324,
+      "difficulty": 151547609680,
+      "reward": 1.88,
+      "algo_id": 31
+    },
+    "2020-02-28": {
+      "hashrate": 1285.0650440555,
+      "difficulty": 154207805287,
+      "reward": 1.88,
+      "algo_id": 31
+    },
+    "2020-02-29": {
+      "hashrate": 1329.9034473198,
+      "difficulty": 159588413678,
+      "reward": 1.88,
+      "algo_id": 31
+    },
+    "2020-03-01": {
+      "hashrate": 1302.8287050609,
+      "difficulty": 156339444607,
+      "reward": 1.87,
+      "algo_id": 31
+    },
+    "2020-03-02": {
+      "hashrate": 1313.6082853874,
+      "difficulty": 157632994246,
+      "reward": 1.87,
+      "algo_id": 31
+    },
+    "2020-03-03": {
+      "hashrate": 1274.9440929981,
+      "difficulty": 152993291160,
+      "reward": 1.87,
+      "algo_id": 31
+    },
+    "2020-03-04": {
+      "hashrate": 1325.2676903206,
+      "difficulty": 159032122838,
+      "reward": 1.87,
+      "algo_id": 31
+    },
+    "2020-03-05": {
+      "hashrate": 1339.8294240353,
+      "difficulty": 160779530884,
+      "reward": 1.87,
+      "algo_id": 31
+    },
+    "2020-03-06": {
+      "hashrate": 1286.8982743454,
+      "difficulty": 154427792921,
+      "reward": 1.86,
+      "algo_id": 31
+    },
+    "2020-03-07": {
+      "hashrate": 1205.4844337159,
+      "difficulty": 144658132046,
+      "reward": 1.86,
+      "algo_id": 31
+    },
+    "2020-03-08": {
+      "hashrate": 1190.6717753262,
+      "difficulty": 142880613039,
+      "reward": 1.86,
+      "algo_id": 31
+    },
+    "2020-03-09": {
+      "hashrate": 1197.5664602813,
+      "difficulty": 143707975234,
+      "reward": 1.85,
+      "algo_id": 31
+    },
+    "2020-03-10": {
+      "hashrate": 1146.1977611374,
+      "difficulty": 137543731336,
+      "reward": 1.85,
+      "algo_id": 31
+    },
+    "2020-03-11": {
+      "hashrate": 1131.5935117284,
+      "difficulty": 135791221407,
+      "reward": 1.85,
+      "algo_id": 31
+    },
+    "2020-03-12": {
+      "hashrate": 1188.3135809183,
+      "difficulty": 142597629710,
+      "reward": 1.85,
+      "algo_id": 31
+    },
+    "2020-03-13": {
+      "hashrate": 1157.5749858044,
+      "difficulty": 138908998297,
+      "reward": 1.85,
+      "algo_id": 31
+    },
+    "2020-03-14": {
+      "hashrate": 1214.0136158907,
+      "difficulty": 145681633907,
+      "reward": 1.84,
+      "algo_id": 31
+    },
+    "2020-03-15": {
+      "hashrate": 1154.4708505514,
+      "difficulty": 138536502066,
+      "reward": 1.84,
+      "algo_id": 31
+    },
+    "2020-03-16": {
+      "hashrate": 1160.4927163196,
+      "difficulty": 139259125958,
+      "reward": 1.84,
+      "algo_id": 31
+    },
+    "2020-03-17": {
+      "hashrate": 1157.7335393598,
+      "difficulty": 138928024723,
+      "reward": 1.84,
+      "algo_id": 31
+    },
+    "2020-03-18": {
+      "hashrate": 1145.2553826695,
+      "difficulty": 137430645920,
+      "reward": 1.83,
+      "algo_id": 31
+    },
+    "2020-03-19": {
+      "hashrate": 1170.6073874124,
+      "difficulty": 140472886489,
+      "reward": 1.83,
+      "algo_id": 31
+    },
+    "2020-03-20": {
+      "hashrate": 1163.3093859461,
+      "difficulty": 139597126314,
+      "reward": 1.83,
+      "algo_id": 31
+    },
+    "2020-03-21": {
+      "hashrate": 1177.6277709819,
+      "difficulty": 141315332518,
+      "reward": 1.83,
+      "algo_id": 31
+    },
+    "2020-03-22": {
+      "hashrate": 1158.1645704457,
+      "difficulty": 138979748453,
+      "reward": 1.82,
+      "algo_id": 31
+    },
+    "2020-03-23": {
+      "hashrate": 1250.9884004248,
+      "difficulty": 150118608051,
+      "reward": 1.82,
+      "algo_id": 31
+    },
+    "2020-03-24": {
+      "hashrate": 1275.3584768461,
+      "difficulty": 153043017222,
+      "reward": 1.82,
+      "algo_id": 31
+    },
+    "2020-03-25": {
+      "hashrate": 1214.1566055991,
+      "difficulty": 145698792672,
+      "reward": 1.82,
+      "algo_id": 31
+    },
+    "2020-03-26": {
+      "hashrate": 1147.6896005854,
+      "difficulty": 137722752070,
+      "reward": 1.81,
+      "algo_id": 31
+    },
+    "2020-03-27": {
+      "hashrate": 1223.9719149483,
+      "difficulty": 146876629794,
+      "reward": 1.81,
+      "algo_id": 31
+    },
+    "2020-03-28": {
+      "hashrate": 1154.1165205931,
+      "difficulty": 138493982471,
+      "reward": 1.81,
+      "algo_id": 31
+    },
+    "2020-03-29": {
+      "hashrate": 1279.1569558576,
+      "difficulty": 153498834703,
+      "reward": 1.8,
+      "algo_id": 31
+    },
+    "2020-03-30": {
+      "hashrate": 1254.5576849615,
+      "difficulty": 150546922195,
+      "reward": 1.8,
+      "algo_id": 31
+    },
+    "2020-03-31": {
+      "hashrate": 1238.8891650929,
+      "difficulty": 148666699811,
+      "reward": 1.8,
+      "algo_id": 31
+    },
+    "2020-04-01": {
+      "hashrate": 1220.0947399467,
+      "difficulty": 146411368794,
+      "reward": 1.8,
+      "algo_id": 31
+    },
+    "2020-04-02": {
+      "hashrate": 1255.4186685196,
+      "difficulty": 150650240222,
+      "reward": 1.8,
+      "algo_id": 31
+    },
+    "2020-04-03": {
+      "hashrate": 1251.1494730243,
+      "difficulty": 150137936763,
+      "reward": 1.8,
+      "algo_id": 31
+    },
+    "2020-04-04": {
+      "hashrate": 1168.7797869233,
+      "difficulty": 140253574431,
+      "reward": 1.79,
+      "algo_id": 31
+    },
+    "2020-04-05": {
+      "hashrate": 1130.0050869918,
+      "difficulty": 135600610439,
+      "reward": 1.79,
+      "algo_id": 31
+    },
+    "2020-04-06": {
+      "hashrate": 1191.5905479196,
+      "difficulty": 142990865750,
+      "reward": 1.79,
+      "algo_id": 31
+    },
+    "2020-04-07": {
+      "hashrate": 1191.7234740248,
+      "difficulty": 143006816883,
+      "reward": 1.79,
+      "algo_id": 31
+    },
+    "2020-04-08": {
+      "hashrate": 1201.3944643305,
+      "difficulty": 144167335720,
+      "reward": 1.78,
+      "algo_id": 31
+    },
+    "2020-04-09": {
+      "hashrate": 1221.5941070411,
+      "difficulty": 146591292845,
+      "reward": 1.78,
+      "algo_id": 31
+    },
+    "2020-04-10": {
+      "hashrate": 1295.1487546042,
+      "difficulty": 155417850553,
+      "reward": 1.78,
+      "algo_id": 31
+    },
+    "2020-04-11": {
+      "hashrate": 1224.4368080223,
+      "difficulty": 146932416963,
+      "reward": 1.77,
+      "algo_id": 31
+    },
+    "2020-04-12": {
+      "hashrate": 1226.4139084412,
+      "difficulty": 147169669013,
+      "reward": 1.77,
+      "algo_id": 31
+    },
+    "2020-04-13": {
+      "hashrate": 1289.4264396378,
+      "difficulty": 154731172757,
+      "reward": 1.77,
+      "algo_id": 31
+    },
+    "2020-04-14": {
+      "hashrate": 1264.9096308437,
+      "difficulty": 151789155701,
+      "reward": 1.77,
+      "algo_id": 31
+    },
+    "2020-04-15": {
+      "hashrate": 1264.3508002812,
+      "difficulty": 151722096034,
+      "reward": 1.76,
+      "algo_id": 31
+    },
+    "2020-04-16": {
+      "hashrate": 1203.9279637882,
+      "difficulty": 144471355655,
+      "reward": 1.77,
+      "algo_id": 31
+    },
+    "2020-04-17": {
+      "hashrate": 1287.3367433867,
+      "difficulty": 154480409206,
+      "reward": 1.76,
+      "algo_id": 31
+    },
+    "2020-04-18": {
+      "hashrate": 1164.1642488938,
+      "difficulty": 139699709867,
+      "reward": 1.76,
+      "algo_id": 31
+    },
+    "2020-04-19": {
+      "hashrate": 1161.1410032709,
+      "difficulty": 139336920393,
+      "reward": 1.76,
+      "algo_id": 31
+    },
+    "2020-04-20": {
+      "hashrate": 1245.6273572684,
+      "difficulty": 149475282872,
+      "reward": 1.75,
+      "algo_id": 31
+    },
+    "2020-04-21": {
+      "hashrate": 1250.2922710457,
+      "difficulty": 150035072525,
+      "reward": 1.75,
+      "algo_id": 31
+    },
+    "2020-04-22": {
+      "hashrate": 1199.2164780356,
+      "difficulty": 143905977364,
+      "reward": 1.75,
+      "algo_id": 31
+    },
+    "2020-04-23": {
+      "hashrate": 1171.371310644,
+      "difficulty": 140564557277,
+      "reward": 1.74,
+      "algo_id": 31
+    },
+    "2020-04-24": {
+      "hashrate": 1262.878017188,
+      "difficulty": 151545362063,
+      "reward": 1.75,
+      "algo_id": 31
+    },
+    "2020-04-25": {
+      "hashrate": 1332.6132227424,
+      "difficulty": 159913586729,
+      "reward": 1.74,
+      "algo_id": 31
+    },
+    "2020-04-26": {
+      "hashrate": 1233.9239276607,
+      "difficulty": 148070871319,
+      "reward": 1.74,
+      "algo_id": 31
+    },
+    "2020-04-27": {
+      "hashrate": 1213.5409190651,
+      "difficulty": 145624910288,
+      "reward": 1.74,
+      "algo_id": 31
+    },
+    "2020-04-28": {
+      "hashrate": 1242.6970998339,
+      "difficulty": 149123651980,
+      "reward": 1.74,
+      "algo_id": 31
+    },
+    "2020-04-29": {
+      "hashrate": 1219.6297290602,
+      "difficulty": 146355567487,
+      "reward": 1.74,
+      "algo_id": 31
+    },
+    "2020-04-30": {
+      "hashrate": 1189.266431598,
+      "difficulty": 142711971792,
+      "reward": 1.73,
+      "algo_id": 31
+    },
+    "2020-05-01": {
+      "hashrate": 1235.383269188,
+      "difficulty": 148245992303,
+      "reward": 1.73,
+      "algo_id": 31
+    },
+    "2020-05-02": {
+      "hashrate": 1236.7356937535,
+      "difficulty": 148408283250,
+      "reward": 1.72,
+      "algo_id": 31
+    },
+    "2020-05-03": {
+      "hashrate": 1301.2350515055,
+      "difficulty": 156148206181,
+      "reward": 1.72,
+      "algo_id": 31
+    },
+    "2020-05-04": {
+      "hashrate": 1288.3697532969,
+      "difficulty": 154604370396,
+      "reward": 1.72,
+      "algo_id": 31
+    },
+    "2020-05-05": {
+      "hashrate": 1301.6145252439,
+      "difficulty": 156193743029,
+      "reward": 1.72,
+      "algo_id": 31
+    },
+    "2020-05-06": {
+      "hashrate": 1299.1906360779,
+      "difficulty": 155902876329,
+      "reward": 1.72,
+      "algo_id": 31
+    },
+    "2020-05-07": {
+      "hashrate": 1213.6008090255,
+      "difficulty": 145632097083,
+      "reward": 1.72,
+      "algo_id": 31
+    },
+    "2020-05-08": {
+      "hashrate": 1260.1498257319,
+      "difficulty": 151217979088,
+      "reward": 1.71,
+      "algo_id": 31
+    },
+    "2020-05-09": {
+      "hashrate": 1238.2580453115,
+      "difficulty": 148590965437,
+      "reward": 1.71,
+      "algo_id": 31
+    },
+    "2020-05-10": {
+      "hashrate": 1226.08285843,
+      "difficulty": 147129943012,
+      "reward": 1.7,
+      "algo_id": 31
+    },
+    "2020-05-11": {
+      "hashrate": 1222.295883691,
+      "difficulty": 146675506043,
+      "reward": 1.7,
+      "algo_id": 31
+    },
+    "2020-05-12": {
+      "hashrate": 1269.8236701524,
+      "difficulty": 152378840418,
+      "reward": 1.7,
+      "algo_id": 31
+    },
+    "2020-05-13": {
+      "hashrate": 1327.1119813387,
+      "difficulty": 159253437761,
+      "reward": 1.7,
+      "algo_id": 31
+    },
+    "2020-05-14": {
+      "hashrate": 1427.2823021381,
+      "difficulty": 171273876257,
+      "reward": 1.7,
+      "algo_id": 31
+    },
+    "2020-05-15": {
+      "hashrate": 1239.5573862328,
+      "difficulty": 148746886348,
+      "reward": 1.69,
+      "algo_id": 31
+    },
+    "2020-05-16": {
+      "hashrate": 1229.1492492134,
+      "difficulty": 147497909906,
+      "reward": 1.69,
+      "algo_id": 31
+    },
+    "2020-05-17": {
+      "hashrate": 1265.6908872629,
+      "difficulty": 151882906472,
+      "reward": 1.69,
+      "algo_id": 31
+    },
+    "2020-05-18": {
+      "hashrate": 1346.4072197538,
+      "difficulty": 161568866370,
+      "reward": 1.69,
+      "algo_id": 31
+    },
+    "2020-05-19": {
+      "hashrate": 1291.3195890957,
+      "difficulty": 154958350691,
+      "reward": 1.68,
+      "algo_id": 31
+    },
+    "2020-05-20": {
+      "hashrate": 1283.4618540579,
+      "difficulty": 154015422487,
+      "reward": 1.68,
+      "algo_id": 31
+    },
+    "2020-05-21": {
+      "hashrate": 1325.8300640371,
+      "difficulty": 159099607684,
+      "reward": 1.68,
+      "algo_id": 31
+    },
+    "2020-05-22": {
+      "hashrate": 1322.1662946382,
+      "difficulty": 158659955357,
+      "reward": 1.68,
+      "algo_id": 31
+    },
+    "2020-05-23": {
+      "hashrate": 1309.003601649,
+      "difficulty": 157080432198,
+      "reward": 1.67,
+      "algo_id": 31
+    },
+    "2020-05-24": {
+      "hashrate": 1267.3311410843,
+      "difficulty": 152079736930,
+      "reward": 1.67,
+      "algo_id": 31
+    },
+    "2020-05-25": {
+      "hashrate": 1323.7650841481,
+      "difficulty": 158851810098,
+      "reward": 1.67,
+      "algo_id": 31
+    },
+    "2020-05-26": {
+      "hashrate": 1413.3076240996,
+      "difficulty": 169596914892,
+      "reward": 1.67,
+      "algo_id": 31
+    },
+    "2020-05-27": {
+      "hashrate": 1370.9596867021,
+      "difficulty": 164515162404,
+      "reward": 1.67,
+      "algo_id": 31
+    },
+    "2020-05-28": {
+      "hashrate": 1385.9821083039,
+      "difficulty": 166317852996,
+      "reward": 1.66,
+      "algo_id": 31
+    },
+    "2020-05-29": {
+      "hashrate": 1394.7715760172,
+      "difficulty": 167372589122,
+      "reward": 1.66,
+      "algo_id": 31
+    },
+    "2020-05-30": {
+      "hashrate": 1336.7687307241,
+      "difficulty": 160412247687,
+      "reward": 1.66,
+      "algo_id": 31
+    },
+    "2020-05-31": {
+      "hashrate": 1399.4452301065,
+      "difficulty": 167933427613,
+      "reward": 1.66,
+      "algo_id": 31
+    },
+    "2020-06-01": {
+      "hashrate": 1302.4077562618,
+      "difficulty": 156288930751,
+      "reward": 1.66,
+      "algo_id": 31
+    },
+    "2020-06-02": {
+      "hashrate": 1368.1451351403,
+      "difficulty": 164177416217,
+      "reward": 1.65,
+      "algo_id": 31
+    },
+    "2020-06-03": {
+      "hashrate": 1278.4310708718,
+      "difficulty": 153411728505,
+      "reward": 1.65,
+      "algo_id": 31
+    },
+    "2020-06-04": {
+      "hashrate": 1320.9446713183,
+      "difficulty": 158513360558,
+      "reward": 1.65,
+      "algo_id": 31
+    },
+    "2020-06-05": {
+      "hashrate": 1348.4861431935,
+      "difficulty": 161818337183,
+      "reward": 1.65,
+      "algo_id": 31
+    },
+    "2020-06-06": {
+      "hashrate": 1349.0438678927,
+      "difficulty": 161885264147,
+      "reward": 1.64,
+      "algo_id": 31
+    },
+    "2020-06-07": {
+      "hashrate": 1361.788115057,
+      "difficulty": 163414573807,
+      "reward": 1.64,
+      "algo_id": 31
+    },
+    "2020-06-08": {
+      "hashrate": 1358.8439001664,
+      "difficulty": 163061268020,
+      "reward": 1.64,
+      "algo_id": 31
+    },
+    "2020-06-09": {
+      "hashrate": 1319.3345828747,
+      "difficulty": 158320149945,
+      "reward": 1.64,
+      "algo_id": 31
+    },
+    "2020-06-10": {
+      "hashrate": 1371.2098212998,
+      "difficulty": 164545178556,
+      "reward": 1.64,
+      "algo_id": 31
+    },
+    "2020-06-11": {
+      "hashrate": 1303.8077475975,
+      "difficulty": 156456929712,
+      "reward": 1.63,
+      "algo_id": 31
+    },
+    "2020-06-12": {
+      "hashrate": 1283.8563091403,
+      "difficulty": 154062757097,
+      "reward": 1.64,
+      "algo_id": 31
+    },
+    "2020-06-13": {
+      "hashrate": 1344.5909655821,
+      "difficulty": 161350915870,
+      "reward": 1.64,
+      "algo_id": 31
+    },
+    "2020-06-14": {
+      "hashrate": 1257.2896230624,
+      "difficulty": 150874754767,
+      "reward": 1.63,
+      "algo_id": 31
+    },
+    "2020-06-15": {
+      "hashrate": 1345.0399205999,
+      "difficulty": 161404790472,
+      "reward": 1.63,
+      "algo_id": 31
+    },
+    "2020-06-16": {
+      "hashrate": 1394.1983824022,
+      "difficulty": 167303805888,
+      "reward": 1.62,
+      "algo_id": 31
+    },
+    "2020-06-17": {
+      "hashrate": 1365.637601343,
+      "difficulty": 163876512161,
+      "reward": 1.62,
+      "algo_id": 31
+    },
+    "2020-06-18": {
+      "hashrate": 1296.8486854488,
+      "difficulty": 155621842254,
+      "reward": 1.62,
+      "algo_id": 31
+    },
+    "2020-06-19": {
+      "hashrate": 1289.0555821784,
+      "difficulty": 154686669861,
+      "reward": 1.61,
+      "algo_id": 31
+    },
+    "2020-06-20": {
+      "hashrate": 1279.5238059001,
+      "difficulty": 153542856708,
+      "reward": 1.61,
+      "algo_id": 31
+    },
+    "2020-06-21": {
+      "hashrate": 1350.0476718849,
+      "difficulty": 162005720626,
+      "reward": 1.61,
+      "algo_id": 31
+    },
+    "2020-06-22": {
+      "hashrate": 1366.8200426613,
+      "difficulty": 164018405119,
+      "reward": 1.61,
+      "algo_id": 31
+    },
+    "2020-06-23": {
+      "hashrate": 1415.6319474722,
+      "difficulty": 169875833697,
+      "reward": 1.61,
+      "algo_id": 31
+    },
+    "2020-06-24": {
+      "hashrate": 1433.707141847,
+      "difficulty": 172044857022,
+      "reward": 1.6,
+      "algo_id": 31
+    },
+    "2020-06-25": {
+      "hashrate": 1429.2356640383,
+      "difficulty": 171508279685,
+      "reward": 1.6,
+      "algo_id": 31
+    },
+    "2020-06-26": {
+      "hashrate": 1542.6459498975,
+      "difficulty": 185117513988,
+      "reward": 1.6,
+      "algo_id": 31
+    },
+    "2020-06-27": {
+      "hashrate": 1586.151639302,
+      "difficulty": 190338196716,
+      "reward": 1.59,
+      "algo_id": 31
+    },
+    "2020-06-28": {
+      "hashrate": 1489.7350523653,
+      "difficulty": 178768206284,
+      "reward": 1.59,
+      "algo_id": 31
+    },
+    "2020-06-29": {
+      "hashrate": 1472.8937862386,
+      "difficulty": 176747254349,
+      "reward": 1.59,
+      "algo_id": 31
+    },
+    "2020-06-30": {
+      "hashrate": 1473.9802177383,
+      "difficulty": 176877626129,
+      "reward": 1.59,
+      "algo_id": 31
+    },
+    "2020-07-01": {
+      "hashrate": 1447.762612892,
+      "difficulty": 173731513547,
+      "reward": 1.59,
+      "algo_id": 31
+    },
+    "2020-07-02": {
+      "hashrate": 1603.282632647,
+      "difficulty": 192393915918,
+      "reward": 1.59,
+      "algo_id": 31
+    },
+    "2020-07-03": {
+      "hashrate": 1563.4086140099,
+      "difficulty": 187609033681,
+      "reward": 1.58,
+      "algo_id": 31
+    },
+    "2020-07-04": {
+      "hashrate": 1469.6399576634,
+      "difficulty": 176356794920,
+      "reward": 1.58,
+      "algo_id": 31
+    },
+    "2020-07-05": {
+      "hashrate": 1444.0366417945,
+      "difficulty": 173284397015,
+      "reward": 1.58,
+      "algo_id": 31
+    },
+    "2020-07-06": {
+      "hashrate": 1519.7676675012,
+      "difficulty": 182372120100,
+      "reward": 1.58,
+      "algo_id": 31
+    },
+    "2020-07-07": {
+      "hashrate": 1748.0728686867,
+      "difficulty": 209768744242,
+      "reward": 1.58,
+      "algo_id": 31
+    },
+    "2020-07-08": {
+      "hashrate": 1423.9252120569,
+      "difficulty": 170871025447,
+      "reward": 1.58,
+      "algo_id": 31
+    },
+    "2020-07-09": {
+      "hashrate": 1395.429160608,
+      "difficulty": 167451499273,
+      "reward": 1.57,
+      "algo_id": 31
+    },
+    "2020-07-10": {
+      "hashrate": 1399.5345277668,
+      "difficulty": 167944143332,
+      "reward": 1.57,
+      "algo_id": 31
+    },
+    "2020-07-11": {
+      "hashrate": 1465.3307523138,
+      "difficulty": 175839690278,
+      "reward": 1.57,
+      "algo_id": 31
+    },
+    "2020-07-12": {
+      "hashrate": 1315.5924772085,
+      "difficulty": 157871097265,
+      "reward": 1.57,
+      "algo_id": 31
+    },
+    "2020-07-13": {
+      "hashrate": 1453.6430014478,
+      "difficulty": 174437160174,
+      "reward": 1.56,
+      "algo_id": 31
+    },
+    "2020-07-14": {
+      "hashrate": 1583.0275030687,
+      "difficulty": 189963300368,
+      "reward": 1.56,
+      "algo_id": 31
+    },
+    "2020-07-15": {
+      "hashrate": 1623.00391744,
+      "difficulty": 194760470093,
+      "reward": 1.56,
+      "algo_id": 31
+    },
+    "2020-07-16": {
+      "hashrate": 1624.0254290251,
+      "difficulty": 194883051483,
+      "reward": 1.56,
+      "algo_id": 31
+    },
+    "2020-07-17": {
+      "hashrate": 1493.0863326759,
+      "difficulty": 179170359921,
+      "reward": 1.55,
+      "algo_id": 31
+    },
+    "2020-07-18": {
+      "hashrate": 1387.5432766951,
+      "difficulty": 166505193203,
+      "reward": 1.55,
+      "algo_id": 31
+    },
+    "2020-07-19": {
+      "hashrate": 1358.2186413234,
+      "difficulty": 162986236959,
+      "reward": 1.55,
+      "algo_id": 31
+    },
+    "2020-07-20": {
+      "hashrate": 1360.7266139097,
+      "difficulty": 163287193669,
+      "reward": 1.55,
+      "algo_id": 31
+    },
+    "2020-07-21": {
+      "hashrate": 1452.0551227686,
+      "difficulty": 174246614732,
+      "reward": 1.55,
+      "algo_id": 31
+    },
+    "2020-07-22": {
+      "hashrate": 1409.1541893414,
+      "difficulty": 169098502721,
+      "reward": 1.55,
+      "algo_id": 31
+    },
+    "2020-07-23": {
+      "hashrate": 1250.1412708595,
+      "difficulty": 150016952503,
+      "reward": 1.54,
+      "algo_id": 31
+    },
+    "2020-07-24": {
+      "hashrate": 1270.2856207333,
+      "difficulty": 152434274488,
+      "reward": 1.54,
+      "algo_id": 31
+    },
+    "2020-07-25": {
+      "hashrate": 1326.5605005194,
+      "difficulty": 159187260062,
+      "reward": 1.54,
+      "algo_id": 31
+    },
+    "2020-07-26": {
+      "hashrate": 1362.998607969,
+      "difficulty": 163559832956,
+      "reward": 1.54,
+      "algo_id": 31
+    },
+    "2020-07-27": {
+      "hashrate": 1492.0350636702,
+      "difficulty": 179044207640,
+      "reward": 1.53,
+      "algo_id": 31
+    },
+    "2020-07-28": {
+      "hashrate": 1499.6000332433,
+      "difficulty": 179952003989,
+      "reward": 1.53,
+      "algo_id": 31
+    },
+    "2020-07-29": {
+      "hashrate": 1532.5089802501,
+      "difficulty": 183901077630,
+      "reward": 1.53,
+      "algo_id": 31
+    },
+    "2020-07-30": {
+      "hashrate": 1492.5207300754,
+      "difficulty": 179102487609,
+      "reward": 1.53,
+      "algo_id": 31
+    },
+    "2020-07-31": {
+      "hashrate": 1535.1440388493,
+      "difficulty": 184217284662,
+      "reward": 1.53,
+      "algo_id": 31
+    },
+    "2020-08-01": {
+      "hashrate": 1497.9158717494,
+      "difficulty": 179749904610,
+      "reward": 1.52,
+      "algo_id": 31
+    },
+    "2020-08-02": {
+      "hashrate": 1605.8234347914,
+      "difficulty": 192698812175,
+      "reward": 1.52,
+      "algo_id": 31
+    },
+    "2020-08-03": {
+      "hashrate": 1743.1521200203,
+      "difficulty": 209178254402,
+      "reward": 1.52,
+      "algo_id": 31
+    },
+    "2020-08-04": {
+      "hashrate": 1722.6849621352,
+      "difficulty": 206722195456,
+      "reward": 1.52,
+      "algo_id": 31
+    },
+    "2020-08-05": {
+      "hashrate": 1688.2676294907,
+      "difficulty": 202592115539,
+      "reward": 1.51,
+      "algo_id": 31
+    },
+    "2020-08-06": {
+      "hashrate": 2156.6368181705,
+      "difficulty": 258796418180,
+      "reward": 1.51,
+      "algo_id": 31
+    },
+    "2020-08-07": {
+      "hashrate": 2542.1164946825,
+      "difficulty": 305053979362,
+      "reward": 1.51,
+      "algo_id": 31
+    },
+    "2020-08-08": {
+      "hashrate": 1947.0396413414,
+      "difficulty": 233644756961,
+      "reward": 1.51,
+      "algo_id": 31
+    },
+    "2020-08-09": {
+      "hashrate": 1494.8101730575,
+      "difficulty": 179377220767,
+      "reward": 1.51,
+      "algo_id": 31
+    },
+    "2020-08-10": {
+      "hashrate": 1501.5586381052,
+      "difficulty": 180187036573,
+      "reward": 1.5,
+      "algo_id": 31
+    },
+    "2020-08-11": {
+      "hashrate": 1591.9411312777,
+      "difficulty": 191032935753,
+      "reward": 1.5,
+      "algo_id": 31
+    },
+    "2020-08-12": {
+      "hashrate": 1446.5544362418,
+      "difficulty": 173586532349,
+      "reward": 1.5,
+      "algo_id": 31
+    },
+    "2020-08-13": {
+      "hashrate": 1408.8318428283,
+      "difficulty": 169059821139,
+      "reward": 1.5,
+      "algo_id": 31
+    },
+    "2020-08-14": {
+      "hashrate": 1438.8513725454,
+      "difficulty": 172662164705,
+      "reward": 1.5,
+      "algo_id": 31
+    },
+    "2020-08-15": {
+      "hashrate": 1409.2423543296,
+      "difficulty": 169109082520,
+      "reward": 1.49,
+      "algo_id": 31
+    },
+    "2020-08-16": {
+      "hashrate": 1352.6805469627,
+      "difficulty": 162321665636,
+      "reward": 1.49,
+      "algo_id": 31
+    },
+    "2020-08-17": {
+      "hashrate": 1339.702662447,
+      "difficulty": 160764319494,
+      "reward": 1.49,
+      "algo_id": 31
+    },
+    "2020-08-18": {
+      "hashrate": 1364.4147261856,
+      "difficulty": 163729767142,
+      "reward": 1.49,
+      "algo_id": 31
+    },
+    "2020-08-19": {
+      "hashrate": 1324.0199680201,
+      "difficulty": 158882396162,
+      "reward": 1.48,
+      "algo_id": 31
+    },
+    "2020-08-20": {
+      "hashrate": 1317.6898855671,
+      "difficulty": 158122786268,
+      "reward": 1.49,
+      "algo_id": 31
+    },
+    "2020-08-21": {
+      "hashrate": 1296.5727332223,
+      "difficulty": 155588727987,
+      "reward": 1.48,
+      "algo_id": 31
+    },
+    "2020-08-22": {
+      "hashrate": 1343.7347562143,
+      "difficulty": 161248170746,
+      "reward": 1.48,
+      "algo_id": 31
+    },
+    "2020-08-23": {
+      "hashrate": 1328.5356878094,
+      "difficulty": 159424282537,
+      "reward": 1.48,
+      "algo_id": 31
+    },
+    "2020-08-24": {
+      "hashrate": 1594.0432226905,
+      "difficulty": 191285186723,
+      "reward": 1.48,
+      "algo_id": 31
+    },
+    "2020-08-25": {
+      "hashrate": 1514.8243549925,
+      "difficulty": 181778922599,
+      "reward": 1.48,
+      "algo_id": 31
+    },
+    "2020-08-26": {
+      "hashrate": 1336.5644884988,
+      "difficulty": 160387738620,
+      "reward": 1.47,
+      "algo_id": 31
+    },
+    "2020-08-27": {
+      "hashrate": 1390.5650174529,
+      "difficulty": 166867802094,
+      "reward": 1.47,
+      "algo_id": 31
+    },
+    "2020-08-28": {
+      "hashrate": 1285.7217827011,
+      "difficulty": 154286613924,
+      "reward": 1.47,
+      "algo_id": 31
+    },
+    "2020-08-29": {
+      "hashrate": 1305.4111672388,
+      "difficulty": 156649340069,
+      "reward": 1.47,
+      "algo_id": 31
+    },
+    "2020-08-30": {
+      "hashrate": 1363.6521662716,
+      "difficulty": 163638259953,
+      "reward": 1.46,
+      "algo_id": 31
+    },
+    "2020-08-31": {
+      "hashrate": 1362.4666271104,
+      "difficulty": 163495995253,
+      "reward": 1.46,
+      "algo_id": 31
+    },
+    "2020-09-01": {
+      "hashrate": 1317.0153861178,
+      "difficulty": 158041846334,
+      "reward": 1.46,
+      "algo_id": 31
+    },
+    "2020-09-02": {
+      "hashrate": 1326.9191564677,
+      "difficulty": 159230298776,
+      "reward": 1.46,
+      "algo_id": 31
+    },
+    "2020-09-03": {
+      "hashrate": 1244.3819393173,
+      "difficulty": 149325832718,
+      "reward": 1.46,
+      "algo_id": 31
+    },
+    "2020-09-04": {
+      "hashrate": 1280.0660268986,
+      "difficulty": 153607923228,
+      "reward": 1.46,
+      "algo_id": 31
+    },
+    "2020-09-05": {
+      "hashrate": 1249.6339838237,
+      "difficulty": 149956078059,
+      "reward": 1.45,
+      "algo_id": 31
+    },
+    "2020-09-06": {
+      "hashrate": 1315.6276882441,
+      "difficulty": 157875322589,
+      "reward": 1.45,
+      "algo_id": 31
+    },
+    "2020-09-07": {
+      "hashrate": 1231.5423998073,
+      "difficulty": 147785087977,
+      "reward": 1.45,
+      "algo_id": 31
+    },
+    "2020-09-08": {
+      "hashrate": 1269.6685630589,
+      "difficulty": 152360227567,
+      "reward": 1.45,
+      "algo_id": 31
+    },
+    "2020-09-09": {
+      "hashrate": 1330.3664493062,
+      "difficulty": 159643973917,
+      "reward": 1.45,
+      "algo_id": 31
+    },
+    "2020-09-10": {
+      "hashrate": 1311.9844021068,
+      "difficulty": 157438128253,
+      "reward": 1.45,
+      "algo_id": 31
+    },
+    "2020-09-11": {
+      "hashrate": 1276.6625776414,
+      "difficulty": 153199509317,
+      "reward": 1.44,
+      "algo_id": 31
+    },
+    "2020-09-12": {
+      "hashrate": 1274.0181803058,
+      "difficulty": 152882181637,
+      "reward": 1.44,
+      "algo_id": 31
+    },
+    "2020-09-13": {
+      "hashrate": 1232.1603719549,
+      "difficulty": 147859244635,
+      "reward": 1.44,
+      "algo_id": 31
+    },
+    "2020-09-14": {
+      "hashrate": 1316.9194267451,
+      "difficulty": 158030331209,
+      "reward": 1.44,
+      "algo_id": 31
+    },
+    "2020-09-15": {
+      "hashrate": 1264.6324569476,
+      "difficulty": 151755894834,
+      "reward": 1.44,
+      "algo_id": 31
+    },
+    "2020-09-16": {
+      "hashrate": 1267.6721149866,
+      "difficulty": 152120653798,
+      "reward": 1.43,
+      "algo_id": 31
+    },
+    "2020-09-17": {
+      "hashrate": 1277.1936325867,
+      "difficulty": 153263235910,
+      "reward": 1.43,
+      "algo_id": 31
+    },
+    "2020-09-18": {
+      "hashrate": 1226.8651686004,
+      "difficulty": 147223820232,
+      "reward": 1.43,
+      "algo_id": 31
+    },
+    "2020-09-19": {
+      "hashrate": 1237.8152708605,
+      "difficulty": 148537832503,
+      "reward": 1.42,
+      "algo_id": 31
+    },
+    "2020-09-20": {
+      "hashrate": 1331.6742266275,
+      "difficulty": 159800907195,
+      "reward": 1.42,
+      "algo_id": 31
+    },
+    "2020-09-21": {
+      "hashrate": 1245.1754725162,
+      "difficulty": 149421056702,
+      "reward": 1.42,
+      "algo_id": 31
+    },
+    "2020-09-22": {
+      "hashrate": 1248.4077452486,
+      "difficulty": 149808929430,
+      "reward": 1.42,
+      "algo_id": 31
+    },
+    "2020-09-23": {
+      "hashrate": 1251.5829142811,
+      "difficulty": 150189949714,
+      "reward": 1.42,
+      "algo_id": 31
+    },
+    "2020-09-24": {
+      "hashrate": 1206.2574049371,
+      "difficulty": 144750888592,
+      "reward": 1.42,
+      "algo_id": 31
+    },
+    "2020-09-25": {
+      "hashrate": 1292.8426831285,
+      "difficulty": 155141121975,
+      "reward": 1.41,
+      "algo_id": 31
+    },
+    "2020-09-26": {
+      "hashrate": 1331.5470733593,
+      "difficulty": 159785648803,
+      "reward": 1.41,
+      "algo_id": 31
+    },
+    "2020-09-27": {
+      "hashrate": 1260.4539961692,
+      "difficulty": 151254479540,
+      "reward": 1.41,
+      "algo_id": 31
+    },
+    "2020-09-28": {
+      "hashrate": 1286.1296474479,
+      "difficulty": 154335557694,
+      "reward": 1.41,
+      "algo_id": 31
+    },
+    "2020-09-29": {
+      "hashrate": 1303.8274456731,
+      "difficulty": 156459293481,
+      "reward": 1.41,
+      "algo_id": 31
+    },
+    "2020-09-30": {
+      "hashrate": 1365.5214484744,
+      "difficulty": 163862573817,
+      "reward": 1.41,
+      "algo_id": 31
+    },
+    "2020-10-01": {
+      "hashrate": 1338.1247029442,
+      "difficulty": 160574964353,
+      "reward": 1.4,
+      "algo_id": 31
+    },
+    "2020-10-02": {
+      "hashrate": 1433.1241012903,
+      "difficulty": 171974892155,
+      "reward": 1.4,
+      "algo_id": 31
+    },
+    "2020-10-03": {
+      "hashrate": 1460.1231832701,
+      "difficulty": 175214781992,
+      "reward": 1.4,
+      "algo_id": 31
+    },
+    "2020-10-04": {
+      "hashrate": 1402.6669206406,
+      "difficulty": 168320030477,
+      "reward": 1.4,
+      "algo_id": 31
+    },
+    "2020-10-05": {
+      "hashrate": 1357.0228200016,
+      "difficulty": 162842738400,
+      "reward": 1.4,
+      "algo_id": 31
+    },
+    "2020-10-06": {
+      "hashrate": 1385.7915422649,
+      "difficulty": 166294985072,
+      "reward": 1.4,
+      "algo_id": 31
+    },
+    "2020-10-07": {
+      "hashrate": 1349.8043941474,
+      "difficulty": 161976527298,
+      "reward": 1.4,
+      "algo_id": 31
+    },
+    "2020-10-08": {
+      "hashrate": 1475.4869543049,
+      "difficulty": 177058434517,
+      "reward": 1.39,
+      "algo_id": 31
+    },
+    "2020-10-09": {
+      "hashrate": 1500.6016045015,
+      "difficulty": 180072192540,
+      "reward": 1.39,
+      "algo_id": 31
+    },
+    "2020-10-10": {
+      "hashrate": 1544.2833519479,
+      "difficulty": 185314002234,
+      "reward": 1.39,
+      "algo_id": 31
+    },
+    "2020-10-11": {
+      "hashrate": 1531.2249282531,
+      "difficulty": 183746991390,
+      "reward": 1.38,
+      "algo_id": 31
+    },
+    "2020-10-12": {
+      "hashrate": 1580.8496699511,
+      "difficulty": 189701960394,
+      "reward": 1.4,
+      "algo_id": 31
+    },
+    "2020-10-13": {
+      "hashrate": 1998.1744715348,
+      "difficulty": 239780936584,
+      "reward": 1.38,
+      "algo_id": 31
+    },
+    "2020-10-14": {
+      "hashrate": 2426.7161294935,
+      "difficulty": 291205935539,
+      "reward": 1.38,
+      "algo_id": 31
+    },
+    "2020-10-15": {
+      "hashrate": 1993.8524533058,
+      "difficulty": 239262294397,
+      "reward": 1.38,
+      "algo_id": 31
+    },
+    "2020-10-16": {
+      "hashrate": 1923.9139203788,
+      "difficulty": 230869670445,
+      "reward": 1.37,
+      "algo_id": 31
+    },
+    "2020-10-17": {
+      "hashrate": 1760.7632514637,
+      "difficulty": 211291590176,
+      "reward": 1.37,
+      "algo_id": 31
+    },
+    "2020-10-18": {
+      "hashrate": 1489.1539375112,
+      "difficulty": 178698472501,
+      "reward": 1.37,
+      "algo_id": 31
+    },
+    "2020-10-19": {
+      "hashrate": 1969.8719492313,
+      "difficulty": 236384633908,
+      "reward": 1.37,
+      "algo_id": 31
+    },
+    "2020-10-20": {
+      "hashrate": 1721.9364943563,
+      "difficulty": 206632379323,
+      "reward": 1.37,
+      "algo_id": 31
+    },
+    "2020-10-21": {
+      "hashrate": 2112.1352412423,
+      "difficulty": 253456228949,
+      "reward": 1.37,
+      "algo_id": 31
+    },
+    "2020-10-22": {
+      "hashrate": 1949.2602620742,
+      "difficulty": 233911231449,
+      "reward": 1.37,
+      "algo_id": 31
+    },
+    "2020-10-23": {
+      "hashrate": 1639.4572902598,
+      "difficulty": 196734874831,
+      "reward": 1.36,
+      "algo_id": 31
+    },
+    "2020-10-24": {
+      "hashrate": 1676.6089228983,
+      "difficulty": 201193070748,
+      "reward": 1.36,
+      "algo_id": 31
+    },
+    "2020-10-25": {
+      "hashrate": 1640.2533425689,
+      "difficulty": 196830401108,
+      "reward": 1.36,
+      "algo_id": 31
+    },
+    "2020-10-26": {
+      "hashrate": 1641.3836691481,
+      "difficulty": 196966040298,
+      "reward": 1.36,
+      "algo_id": 31
+    },
+    "2020-10-27": {
+      "hashrate": 1625.7572117758,
+      "difficulty": 195090865413,
+      "reward": 1.36,
+      "algo_id": 31
+    },
+    "2020-10-28": {
+      "hashrate": 1629.0089177553,
+      "difficulty": 195481070131,
+      "reward": 1.35,
+      "algo_id": 31
+    },
+    "2020-10-29": {
+      "hashrate": 1629.0588550576,
+      "difficulty": 195487062607,
+      "reward": 1.36,
+      "algo_id": 31
+    },
+    "2020-10-30": {
+      "hashrate": 1419.7690736181,
+      "difficulty": 170372288834,
+      "reward": 1.35,
+      "algo_id": 31
+    },
+    "2020-10-31": {
+      "hashrate": 1461.009044363,
+      "difficulty": 175321085324,
+      "reward": 1.35,
+      "algo_id": 31
+    },
+    "2020-11-01": {
+      "hashrate": 1539.826994292,
+      "difficulty": 184779239315,
+      "reward": 1.34,
+      "algo_id": 31
+    },
+    "2020-11-02": {
+      "hashrate": 1537.9247776015,
+      "difficulty": 184550973312,
+      "reward": 1.35,
+      "algo_id": 31
+    },
+    "2020-11-03": {
+      "hashrate": 1476.2216828976,
+      "difficulty": 177146601948,
+      "reward": 1.35,
+      "algo_id": 31
+    },
+    "2020-11-04": {
+      "hashrate": 1465.1865201723,
+      "difficulty": 175822382421,
+      "reward": 1.34,
+      "algo_id": 31
+    },
+    "2020-11-05": {
+      "hashrate": 1490.4519264955,
+      "difficulty": 178854231179,
+      "reward": 1.34,
+      "algo_id": 31
+    },
+    "2020-11-06": {
+      "hashrate": 1518.9616480927,
+      "difficulty": 182275397771,
+      "reward": 1.34,
+      "algo_id": 31
+    },
+    "2020-11-07": {
+      "hashrate": 1625.538973199,
+      "difficulty": 195064676784,
+      "reward": 1.34,
+      "algo_id": 31
+    },
+    "2020-11-08": {
+      "hashrate": 1596.866267053,
+      "difficulty": 191623952046,
+      "reward": 1.33,
+      "algo_id": 31
+    },
+    "2020-11-09": {
+      "hashrate": 1533.3019130189,
+      "difficulty": 183996229562,
+      "reward": 1.33,
+      "algo_id": 31
+    },
+    "2020-11-10": {
+      "hashrate": 1702.0253969139,
+      "difficulty": 204243047630,
+      "reward": 1.33,
+      "algo_id": 31
+    },
+    "2020-11-11": {
+      "hashrate": 1707.4900453822,
+      "difficulty": 204898805446,
+      "reward": 1.33,
+      "algo_id": 31
+    },
+    "2020-11-12": {
+      "hashrate": 1731.2528853125,
+      "difficulty": 207750346238,
+      "reward": 1.33,
+      "algo_id": 31
+    },
+    "2020-11-13": {
+      "hashrate": 1708.0365232892,
+      "difficulty": 204964382795,
+      "reward": 1.33,
+      "algo_id": 31
+    },
+    "2020-11-14": {
+      "hashrate": 1488.3073228386,
+      "difficulty": 178596878741,
+      "reward": 1.32,
+      "algo_id": 31
+    },
+    "2020-11-15": {
+      "hashrate": 1554.3305647091,
+      "difficulty": 186519667765,
+      "reward": 1.32,
+      "algo_id": 31
+    },
+    "2020-11-16": {
+      "hashrate": 1524.6542893789,
+      "difficulty": 182958514725,
+      "reward": 1.32,
+      "algo_id": 31
+    },
+    "2020-11-17": {
+      "hashrate": 1545.5577157826,
+      "difficulty": 185466925894,
+      "reward": 1.32,
+      "algo_id": 31
+    },
+    "2020-11-18": {
+      "hashrate": 1570.1311749869,
+      "difficulty": 188415740998,
+      "reward": 1.33,
+      "algo_id": 31
+    },
+    "2020-11-19": {
+      "hashrate": 1459.5265262546,
+      "difficulty": 175143183151,
+      "reward": 1.32,
+      "algo_id": 31
+    },
+    "2020-11-20": {
+      "hashrate": 1485.8642883889,
+      "difficulty": 178303714607,
+      "reward": 1.31,
+      "algo_id": 31
+    },
+    "2020-11-21": {
+      "hashrate": 1528.433442035,
+      "difficulty": 183412013044,
+      "reward": 1.31,
+      "algo_id": 31
+    },
+    "2020-11-22": {
+      "hashrate": 1513.3972094527,
+      "difficulty": 181607665134,
+      "reward": 1.31,
+      "algo_id": 31
+    },
+    "2020-11-23": {
+      "hashrate": 1608.9011639151,
+      "difficulty": 193068139670,
+      "reward": 1.31,
+      "algo_id": 31
+    },
+    "2020-11-24": {
+      "hashrate": 1643.1486340174,
+      "difficulty": 197177836082,
+      "reward": 1.31,
+      "algo_id": 31
+    },
+    "2020-11-25": {
+      "hashrate": 1476.692900849,
+      "difficulty": 177203148102,
+      "reward": 1.3,
+      "algo_id": 31
+    },
+    "2020-11-26": {
+      "hashrate": 1539.8999109855,
+      "difficulty": 184787989318,
+      "reward": 1.3,
+      "algo_id": 31
+    },
+    "2020-11-27": {
+      "hashrate": 1598.5659804563,
+      "difficulty": 191827917655,
+      "reward": 1.3,
+      "algo_id": 31
+    },
+    "2020-11-28": {
+      "hashrate": 1574.3506605152,
+      "difficulty": 188922079262,
+      "reward": 1.3,
+      "algo_id": 31
+    },
+    "2020-11-29": {
+      "hashrate": 1760.3948663462,
+      "difficulty": 211247383962,
+      "reward": 1.29,
+      "algo_id": 31
+    },
+    "2020-11-30": {
+      "hashrate": 1644.9675066623,
+      "difficulty": 197396100799,
+      "reward": 1.3,
+      "algo_id": 31
+    },
+    "2020-12-01": {
+      "hashrate": 1615.72670018,
+      "difficulty": 193887204022,
+      "reward": 1.29,
+      "algo_id": 31
+    },
+    "2020-12-02": {
+      "hashrate": 1650.2260605403,
+      "difficulty": 198027127265,
+      "reward": 1.29,
+      "algo_id": 31
+    },
+    "2020-12-03": {
+      "hashrate": 1612.5205760443,
+      "difficulty": 193502469125,
+      "reward": 1.29,
+      "algo_id": 31
+    },
+    "2020-12-04": {
+      "hashrate": 1571.5860589119,
+      "difficulty": 188590327069,
+      "reward": 1.29,
+      "algo_id": 31
+    },
+    "2020-12-05": {
+      "hashrate": 1548.8900147876,
+      "difficulty": 185866801775,
+      "reward": 1.28,
+      "algo_id": 31
+    },
+    "2020-12-06": {
+      "hashrate": 1633.4322557453,
+      "difficulty": 196011870689,
+      "reward": 1.28,
+      "algo_id": 31
+    },
+    "2020-12-07": {
+      "hashrate": 1604.5045453783,
+      "difficulty": 192540545445,
+      "reward": 1.28,
+      "algo_id": 31
+    },
+    "2020-12-08": {
+      "hashrate": 1685.6648390866,
+      "difficulty": 202279780690,
+      "reward": 1.28,
+      "algo_id": 31
+    },
+    "2020-12-09": {
+      "hashrate": 1638.2548554187,
+      "difficulty": 196590582650,
+      "reward": 1.28,
+      "algo_id": 31
+    },
+    "2020-12-10": {
+      "hashrate": 1639.7203252212,
+      "difficulty": 196766439027,
+      "reward": 1.28,
+      "algo_id": 31
+    },
+    "2020-12-11": {
+      "hashrate": 1583.3737272518,
+      "difficulty": 190004847270,
+      "reward": 1.28,
+      "algo_id": 31
+    },
+    "2020-12-12": {
+      "hashrate": 1523.6940535099,
+      "difficulty": 182843286421,
+      "reward": 1.27,
+      "algo_id": 31
+    },
+    "2020-12-13": {
+      "hashrate": 1617.9383860499,
+      "difficulty": 194152606326,
+      "reward": 1.27,
+      "algo_id": 31
+    },
+    "2020-12-14": {
+      "hashrate": 1680.4548370954,
+      "difficulty": 201654580451,
+      "reward": 1.27,
+      "algo_id": 31
+    },
+    "2020-12-15": {
+      "hashrate": 1682.7064649177,
+      "difficulty": 201924775790,
+      "reward": 1.27,
+      "algo_id": 31
+    },
+    "2020-12-16": {
+      "hashrate": 1725.3593298397,
+      "difficulty": 207043119581,
+      "reward": 1.27,
+      "algo_id": 31
+    },
+    "2020-12-17": {
+      "hashrate": 1682.0318496985,
+      "difficulty": 201843821964,
+      "reward": 1.26,
+      "algo_id": 31
+    },
+    "2020-12-18": {
+      "hashrate": 1704.3587855909,
+      "difficulty": 204523054271,
+      "reward": 1.27,
+      "algo_id": 31
+    },
+    "2020-12-19": {
+      "hashrate": 1680.2170207824,
+      "difficulty": 201626042494,
+      "reward": 1.26,
+      "algo_id": 31
+    },
+    "2020-12-20": {
+      "hashrate": 1771.6710939414,
+      "difficulty": 212600531273,
+      "reward": 1.26,
+      "algo_id": 31
+    },
+    "2020-12-21": {
+      "hashrate": 1759.4957278762,
+      "difficulty": 211139487345,
+      "reward": 1.26,
+      "algo_id": 31
+    },
+    "2020-12-22": {
+      "hashrate": 1685.1712320413,
+      "difficulty": 202220547845,
+      "reward": 1.25,
+      "algo_id": 31
+    },
+    "2020-12-23": {
+      "hashrate": 1750.9850942091,
+      "difficulty": 210118211305,
+      "reward": 1.25,
+      "algo_id": 31
+    },
+    "2020-12-24": {
+      "hashrate": 1716.3148983777,
+      "difficulty": 205957787805,
+      "reward": 1.25,
+      "algo_id": 31
+    },
+    "2020-12-25": {
+      "hashrate": 1706.0352914132,
+      "difficulty": 204724234970,
+      "reward": 1.25,
+      "algo_id": 31
+    },
+    "2020-12-26": {
+      "hashrate": 1662.7609086221,
+      "difficulty": 199531309035,
+      "reward": 1.25,
+      "algo_id": 31
+    },
+    "2020-12-27": {
+      "hashrate": 1659.2735471138,
+      "difficulty": 199112825654,
+      "reward": 1.25,
+      "algo_id": 31
+    },
+    "2020-12-28": {
+      "hashrate": 1650.6396878501,
+      "difficulty": 198076762542,
+      "reward": 1.25,
+      "algo_id": 31
+    },
+    "2020-12-29": {
+      "hashrate": 1677.539268887,
+      "difficulty": 201304712266,
+      "reward": 1.25,
+      "algo_id": 31
+    },
+    "2020-12-30": {
+      "hashrate": 1689.7803447785,
+      "difficulty": 202773641373,
+      "reward": 1.24,
+      "algo_id": 31
+    },
+    "2020-12-31": {
+      "hashrate": 1843.056376069,
+      "difficulty": 221166765128,
+      "reward": 1.24,
+      "algo_id": 31
+    },
+    "2021-01-01": {
+      "hashrate": 1714.5793204985,
+      "difficulty": 205749518460,
+      "reward": 1.24,
+      "algo_id": 31
+    },
+    "2021-01-02": {
+      "hashrate": 1624.9652291292,
+      "difficulty": 194995827496,
+      "reward": 1.23,
+      "algo_id": 31
+    },
+    "2021-01-03": {
+      "hashrate": 1687.7720717034,
+      "difficulty": 202532648604,
+      "reward": 1.23,
+      "algo_id": 31
+    },
+    "2021-01-04": {
+      "hashrate": 1746.2863686405,
+      "difficulty": 209554364237,
+      "reward": 1.24,
+      "algo_id": 31
+    },
+    "2021-01-05": {
+      "hashrate": 1785.9550499301,
+      "difficulty": 214314605992,
+      "reward": 1.23,
+      "algo_id": 31
+    },
+    "2021-01-06": {
+      "hashrate": 1737.4652511144,
+      "difficulty": 208495830134,
+      "reward": 1.23,
+      "algo_id": 31
+    },
+    "2021-01-07": {
+      "hashrate": 1797.4853333588,
+      "difficulty": 215698240003,
+      "reward": 1.23,
+      "algo_id": 31
+    },
+    "2021-01-08": {
+      "hashrate": 1759.5167488832,
+      "difficulty": 211142009866,
+      "reward": 1.23,
+      "algo_id": 31
+    },
+    "2021-01-09": {
+      "hashrate": 1823.3145649044,
+      "difficulty": 218797747789,
+      "reward": 1.22,
+      "algo_id": 31
+    },
+    "2021-01-10": {
+      "hashrate": 1833.6456184063,
+      "difficulty": 220037474209,
+      "reward": 1.22,
+      "algo_id": 31
+    },
+    "2021-01-11": {
+      "hashrate": 1851.47076143,
+      "difficulty": 222176491372,
+      "reward": 1.22,
+      "algo_id": 31
+    },
+    "2021-01-12": {
+      "hashrate": 1885.1298032057,
+      "difficulty": 226215576385,
+      "reward": 1.22,
+      "algo_id": 31
+    },
+    "2021-01-13": {
+      "hashrate": 1898.1252511867,
+      "difficulty": 227775030142,
+      "reward": 1.22,
+      "algo_id": 31
+    },
+    "2021-01-14": {
+      "hashrate": 1823.2703761535,
+      "difficulty": 218792445138,
+      "reward": 1.32,
+      "algo_id": 31
+    },
+    "2021-01-15": {
+      "hashrate": 1720.3122027285,
+      "difficulty": 206437464327,
+      "reward": 1.21,
+      "algo_id": 31
+    },
+    "2021-01-16": {
+      "hashrate": 1776.9743010542,
+      "difficulty": 213236916127,
+      "reward": 1.21,
+      "algo_id": 31
+    },
+    "2021-01-17": {
+      "hashrate": 1910.0012850101,
+      "difficulty": 229200154201,
+      "reward": 1.21,
+      "algo_id": 31
+    },
+    "2021-01-18": {
+      "hashrate": 1797.3542356498,
+      "difficulty": 215682508278,
+      "reward": 1.21,
+      "algo_id": 31
+    },
+    "2021-01-19": {
+      "hashrate": 1643.8617252236,
+      "difficulty": 197263407027,
+      "reward": 1.21,
+      "algo_id": 31
+    },
+    "2021-01-20": {
+      "hashrate": 1706.9233422791,
+      "difficulty": 204830801073,
+      "reward": 1.21,
+      "algo_id": 31
+    },
+    "2021-01-21": {
+      "hashrate": 1833.945747147,
+      "difficulty": 220073489658,
+      "reward": 1.2,
+      "algo_id": 31
+    },
+    "2021-01-22": {
+      "hashrate": 1833.5124785701,
+      "difficulty": 220021497428,
+      "reward": 1.2,
+      "algo_id": 31
+    },
+    "2021-01-23": {
+      "hashrate": 1809.3578454144,
+      "difficulty": 217122941450,
+      "reward": 1.2,
+      "algo_id": 31
+    },
+    "2021-01-24": {
+      "hashrate": 2190.6780609185,
+      "difficulty": 262881367310,
+      "reward": 1.2,
+      "algo_id": 31
+    },
+    "2021-01-25": {
+      "hashrate": 1807.6180632219,
+      "difficulty": 216914167587,
+      "reward": 1.2,
+      "algo_id": 31
+    },
+    "2021-01-26": {
+      "hashrate": 1824.9846416627,
+      "difficulty": 218998157000,
+      "reward": 1.2,
+      "algo_id": 31
+    },
+    "2021-01-27": {
+      "hashrate": 1835.7804701927,
+      "difficulty": 220293656423,
+      "reward": 1.19,
+      "algo_id": 31
+    },
+    "2021-01-28": {
+      "hashrate": 1821.1381008185,
+      "difficulty": 218536572098,
+      "reward": 1.19,
+      "algo_id": 31
+    },
+    "2021-01-29": {
+      "hashrate": 1771.4415899234,
+      "difficulty": 212572990791,
+      "reward": 1.19,
+      "algo_id": 31
+    },
+    "2021-01-30": {
+      "hashrate": 1895.8127733475,
+      "difficulty": 227497532802,
+      "reward": 1.19,
+      "algo_id": 31
+    },
+    "2021-01-31": {
+      "hashrate": 1906.5113163432,
+      "difficulty": 228781357961,
+      "reward": 1.19,
+      "algo_id": 31
+    },
+    "2021-02-01": {
+      "hashrate": 2003.9772880492,
+      "difficulty": 240477274566,
+      "reward": 1.19,
+      "algo_id": 31
+    },
+    "2021-02-02": {
+      "hashrate": 2046.1727735111,
+      "difficulty": 245540732821,
+      "reward": 1.19,
+      "algo_id": 31
+    },
+    "2021-02-03": {
+      "hashrate": 2025.3485096763,
+      "difficulty": 243041821161,
+      "reward": 1.19,
+      "algo_id": 31
+    },
+    "2021-02-04": {
+      "hashrate": 2017.0135362792,
+      "difficulty": 242041624354,
+      "reward": 1.18,
+      "algo_id": 31
+    },
+    "2021-02-05": {
+      "hashrate": 1885.7185738448,
+      "difficulty": 226286228861,
+      "reward": 1.18,
+      "algo_id": 31
+    },
+    "2021-02-06": {
+      "hashrate": 1974.7460890348,
+      "difficulty": 236969530684,
+      "reward": 1.18,
+      "algo_id": 31
+    },
+    "2021-02-07": {
+      "hashrate": 1988.5117685175,
+      "difficulty": 238621412222,
+      "reward": 1.18,
+      "algo_id": 31
+    },
+    "2021-02-08": {
+      "hashrate": 1964.7720825613,
+      "difficulty": 235772649907,
+      "reward": 1.18,
+      "algo_id": 31
+    },
+    "2021-02-09": {
+      "hashrate": 1949.3551888635,
+      "difficulty": 233922622664,
+      "reward": 1.17,
+      "algo_id": 31
+    },
+    "2021-02-10": {
+      "hashrate": 1954.9191663047,
+      "difficulty": 234590299957,
+      "reward": 1.17,
+      "algo_id": 31
+    },
+    "2021-02-11": {
+      "hashrate": 2011.5863751512,
+      "difficulty": 241390365018,
+      "reward": 1.18,
+      "algo_id": 31
+    },
+    "2021-02-12": {
+      "hashrate": 1976.4352396234,
+      "difficulty": 237172228755,
+      "reward": 1.17,
+      "algo_id": 31
+    },
+    "2021-02-13": {
+      "hashrate": 1973.9628576586,
+      "difficulty": 236875542919,
+      "reward": 1.17,
+      "algo_id": 31
+    },
+    "2021-02-14": {
+      "hashrate": 2020.0122777226,
+      "difficulty": 242401473327,
+      "reward": 1.17,
+      "algo_id": 31
+    },
+    "2021-02-15": {
+      "hashrate": 2094.9161299126,
+      "difficulty": 251389935590,
+      "reward": 1.17,
+      "algo_id": 31
+    },
+    "2021-02-16": {
+      "hashrate": 1994.8755924545,
+      "difficulty": 239385071095,
+      "reward": 1.16,
+      "algo_id": 31
+    },
+    "2021-02-17": {
+      "hashrate": 1927.7310904643,
+      "difficulty": 231327730856,
+      "reward": 1.16,
+      "algo_id": 31
+    },
+    "2021-02-18": {
+      "hashrate": 2003.2001351972,
+      "difficulty": 240384016224,
+      "reward": 1.16,
+      "algo_id": 31
+    },
+    "2021-02-19": {
+      "hashrate": 2119.5412941782,
+      "difficulty": 254344955301,
+      "reward": 1.16,
+      "algo_id": 31
+    },
+    "2021-02-20": {
+      "hashrate": 2094.0701175603,
+      "difficulty": 251288414107,
+      "reward": 1.16,
+      "algo_id": 31
+    },
+    "2021-02-21": {
+      "hashrate": 2052.3981870546,
+      "difficulty": 246287782447,
+      "reward": 1.15,
+      "algo_id": 31
+    },
+    "2021-02-22": {
+      "hashrate": 1994.7068015848,
+      "difficulty": 239364816190,
+      "reward": 1.15,
+      "algo_id": 31
+    },
+    "2021-02-23": {
+      "hashrate": 2077.6995524142,
+      "difficulty": 249323946290,
+      "reward": 1.15,
+      "algo_id": 31
+    },
+    "2021-02-24": {
+      "hashrate": 2021.8189106579,
+      "difficulty": 242618269279,
+      "reward": 1.15,
+      "algo_id": 31
+    },
+    "2021-02-25": {
+      "hashrate": 2115.8743680839,
+      "difficulty": 253904924170,
+      "reward": 1.15,
+      "algo_id": 31
+    },
+    "2021-02-26": {
+      "hashrate": 2306.2070173218,
+      "difficulty": 276744842079,
+      "reward": 1.14,
+      "algo_id": 31
+    },
+    "2021-02-27": {
+      "hashrate": 2350.4155119989,
+      "difficulty": 282049861440,
+      "reward": 1.14,
+      "algo_id": 31
+    },
+    "2021-02-28": {
+      "hashrate": 2250.0275055156,
+      "difficulty": 270003300662,
+      "reward": 1.14,
+      "algo_id": 31
+    },
+    "2021-03-01": {
+      "hashrate": 2243.5180610357,
+      "difficulty": 269222167324,
+      "reward": 1.14,
+      "algo_id": 31
+    },
+    "2021-03-02": {
+      "hashrate": 2315.1932542474,
+      "difficulty": 277823190510,
+      "reward": 1.14,
+      "algo_id": 31
+    },
+    "2021-03-03": {
+      "hashrate": 2303.0492536635,
+      "difficulty": 276365910440,
+      "reward": 1.14,
+      "algo_id": 31
+    },
+    "2021-03-04": {
+      "hashrate": 2248.0396514644,
+      "difficulty": 269764758176,
+      "reward": 1.14,
+      "algo_id": 31
+    },
+    "2021-03-05": {
+      "hashrate": 2270.3387672414,
+      "difficulty": 272440652069,
+      "reward": 1.14,
+      "algo_id": 31
+    },
+    "2021-03-06": {
+      "hashrate": 2284.8627206593,
+      "difficulty": 274183526479,
+      "reward": 1.13,
+      "algo_id": 31
+    },
+    "2021-03-07": {
+      "hashrate": 2071.652625574,
+      "difficulty": 248598315069,
+      "reward": 1.13,
+      "algo_id": 31
+    },
+    "2021-03-08": {
+      "hashrate": 2193.7474431574,
+      "difficulty": 263249693179,
+      "reward": 1.13,
+      "algo_id": 31
+    },
+    "2021-03-09": {
+      "hashrate": 2112.9569647659,
+      "difficulty": 253554835772,
+      "reward": 1.13,
+      "algo_id": 31
+    },
+    "2021-03-10": {
+      "hashrate": 2146.3246911682,
+      "difficulty": 257558962940,
+      "reward": 1.13,
+      "algo_id": 31
+    },
+    "2021-03-11": {
+      "hashrate": 2009.3179585505,
+      "difficulty": 241118155026,
+      "reward": 1.13,
+      "algo_id": 31
+    },
+    "2021-03-12": {
+      "hashrate": 2118.309714489,
+      "difficulty": 254197165739,
+      "reward": 1.13,
+      "algo_id": 31
+    },
+    "2021-03-13": {
+      "hashrate": 2167.0642903237,
+      "difficulty": 260047714839,
+      "reward": 1.12,
+      "algo_id": 31
+    },
+    "2021-03-14": {
+      "hashrate": 2294.5342906865,
+      "difficulty": 275344114882,
+      "reward": 1.13,
+      "algo_id": 31
+    },
+    "2021-03-15": {
+      "hashrate": 2320.2435904543,
+      "difficulty": 278429230855,
+      "reward": 1.12,
+      "algo_id": 31
+    },
+    "2021-03-16": {
+      "hashrate": 2225.9413639342,
+      "difficulty": 267112963672,
+      "reward": 1.12,
+      "algo_id": 31
+    },
+    "2021-03-17": {
+      "hashrate": 2209.0965134044,
+      "difficulty": 265091581609,
+      "reward": 1.12,
+      "algo_id": 31
+    },
+    "2021-03-18": {
+      "hashrate": 2137.8144251396,
+      "difficulty": 256537731017,
+      "reward": 1.12,
+      "algo_id": 31
+    },
+    "2021-03-19": {
+      "hashrate": 2131.1115129701,
+      "difficulty": 255733381556,
+      "reward": 1.11,
+      "algo_id": 31
+    },
+    "2021-03-20": {
+      "hashrate": 2260.497427965,
+      "difficulty": 271259691356,
+      "reward": 1.11,
+      "algo_id": 31
+    },
+    "2021-03-21": {
+      "hashrate": 2181.5644822623,
+      "difficulty": 261787737871,
+      "reward": 1.11,
+      "algo_id": 31
+    },
+    "2021-03-22": {
+      "hashrate": 2121.7392760694,
+      "difficulty": 254608713128,
+      "reward": 1.11,
+      "algo_id": 31
+    },
+    "2021-03-23": {
+      "hashrate": 2226.7240576928,
+      "difficulty": 267206886923,
+      "reward": 1.11,
+      "algo_id": 31
+    },
+    "2021-03-24": {
+      "hashrate": 2182.3344461106,
+      "difficulty": 261880133533,
+      "reward": 1.11,
+      "algo_id": 31
+    },
+    "2021-03-25": {
+      "hashrate": 2047.3416315672,
+      "difficulty": 245680995788,
+      "reward": 1.11,
+      "algo_id": 31
+    },
+    "2021-03-26": {
+      "hashrate": 2084.7870609885,
+      "difficulty": 250174447319,
+      "reward": 1.11,
+      "algo_id": 31
+    },
+    "2021-03-27": {
+      "hashrate": 2087.1613072312,
+      "difficulty": 250459356868,
+      "reward": 1.1,
+      "algo_id": 31
+    },
+    "2021-03-28": {
+      "hashrate": 2097.18682437,
+      "difficulty": 251662418924,
+      "reward": 1.1,
+      "algo_id": 31
+    },
+    "2021-03-29": {
+      "hashrate": 2121.5801723418,
+      "difficulty": 254589620681,
+      "reward": 1.1,
+      "algo_id": 31
+    },
+    "2021-03-30": {
+      "hashrate": 2126.0675453569,
+      "difficulty": 255128105443,
+      "reward": 1.1,
+      "algo_id": 31
+    },
+    "2021-03-31": {
+      "hashrate": 2146.7083754317,
+      "difficulty": 257605005052,
+      "reward": 1.1,
+      "algo_id": 31
+    },
+    "2021-04-01": {
+      "hashrate": 2252.1450768829,
+      "difficulty": 270257409226,
+      "reward": 1.1,
+      "algo_id": 31
+    },
+    "2021-04-02": {
+      "hashrate": 2287.0164637488,
+      "difficulty": 274441975650,
+      "reward": 1.09,
+      "algo_id": 31
+    },
+    "2021-04-03": {
+      "hashrate": 2225.7291897906,
+      "difficulty": 267087502775,
+      "reward": 1.09,
+      "algo_id": 31
+    },
+    "2021-04-04": {
+      "hashrate": 2235.8060360277,
+      "difficulty": 268296724323,
+      "reward": 1.09,
+      "algo_id": 31
+    },
+    "2021-04-05": {
+      "hashrate": 2310.3094266876,
+      "difficulty": 277237131203,
+      "reward": 1.09,
+      "algo_id": 31
+    },
+    "2021-04-06": {
+      "hashrate": 2234.6073417841,
+      "difficulty": 268152881014,
+      "reward": 1.09,
+      "algo_id": 31
+    },
+    "2021-04-07": {
+      "hashrate": 2227.6884050055,
+      "difficulty": 267322608601,
+      "reward": 1.08,
+      "algo_id": 31
+    },
+    "2021-04-08": {
+      "hashrate": 2249.7325891428,
+      "difficulty": 269967910697,
+      "reward": 1.09,
+      "algo_id": 31
+    },
+    "2021-04-09": {
+      "hashrate": 2100.6619302268,
+      "difficulty": 252079431627,
+      "reward": 1.08,
+      "algo_id": 31
+    },
+    "2021-04-10": {
+      "hashrate": 2357.7074707634,
+      "difficulty": 282924896492,
+      "reward": 1.08,
+      "algo_id": 31
+    },
+    "2021-04-11": {
+      "hashrate": 2450.3867148725,
+      "difficulty": 294046405785,
+      "reward": 1.08,
+      "algo_id": 31
+    },
+    "2021-04-12": {
+      "hashrate": 2361.5445998345,
+      "difficulty": 283385351980,
+      "reward": 1.08,
+      "algo_id": 31
+    },
+    "2021-04-13": {
+      "hashrate": 2319.6925411035,
+      "difficulty": 278363104932,
+      "reward": 1.08,
+      "algo_id": 31
+    },
+    "2021-04-14": {
+      "hashrate": 2342.2581061619,
+      "difficulty": 281070972739,
+      "reward": 1.08,
+      "algo_id": 31
+    },
+    "2021-04-15": {
+      "hashrate": 2230.8691204406,
+      "difficulty": 267704294453,
+      "reward": 1.07,
+      "algo_id": 31
+    },
+    "2021-04-16": {
+      "hashrate": 2248.4683898377,
+      "difficulty": 269816206781,
+      "reward": 1.07,
+      "algo_id": 31
+    },
+    "2021-04-17": {
+      "hashrate": 2352.5990341266,
+      "difficulty": 282311884095,
+      "reward": 1.07,
+      "algo_id": 31
+    },
+    "2021-04-18": {
+      "hashrate": 2375.4313982537,
+      "difficulty": 285051767790,
+      "reward": 1.07,
+      "algo_id": 31
+    },
+    "2021-04-19": {
+      "hashrate": 2313.4787240393,
+      "difficulty": 277617446885,
+      "reward": 1.07,
+      "algo_id": 31
+    },
+    "2021-04-20": {
+      "hashrate": 2562.7177009307,
+      "difficulty": 307526124112,
+      "reward": 1.07,
+      "algo_id": 31
+    },
+    "2021-04-21": {
+      "hashrate": 2423.901717546,
+      "difficulty": 290868206106,
+      "reward": 1.06,
+      "algo_id": 31
+    },
+    "2021-04-22": {
+      "hashrate": 2420.9993597002,
+      "difficulty": 290519923164,
+      "reward": 1.07,
+      "algo_id": 31
+    },
+    "2021-04-23": {
+      "hashrate": 2397.0543095646,
+      "difficulty": 287646517148,
+      "reward": 1.06,
+      "algo_id": 31
+    },
+    "2021-04-24": {
+      "hashrate": 2214.8355238435,
+      "difficulty": 265780262861,
+      "reward": 1.06,
+      "algo_id": 31
+    },
+    "2021-04-25": {
+      "hashrate": 2314.2461537642,
+      "difficulty": 277709538452,
+      "reward": 1.06,
+      "algo_id": 31
+    },
+    "2021-04-26": {
+      "hashrate": 2469.5376163298,
+      "difficulty": 296344513960,
+      "reward": 1.06,
+      "algo_id": 31
+    },
+    "2021-04-27": {
+      "hashrate": 2183.3260704332,
+      "difficulty": 261999128452,
+      "reward": 1.06,
+      "algo_id": 31
+    },
+    "2021-04-28": {
+      "hashrate": 2221.2934407571,
+      "difficulty": 266555212891,
+      "reward": 1.05,
+      "algo_id": 31
+    },
+    "2021-04-29": {
+      "hashrate": 2335.7297802736,
+      "difficulty": 280287573633,
+      "reward": 1.05,
+      "algo_id": 31
+    },
+    "2021-04-30": {
+      "hashrate": 2413.6231621609,
+      "difficulty": 289634779459,
+      "reward": 1.05,
+      "algo_id": 31
+    },
+    "2021-05-01": {
+      "hashrate": 2364.3801478149,
+      "difficulty": 283725617738,
+      "reward": 1.06,
+      "algo_id": 31
+    },
+    "2021-05-02": {
+      "hashrate": 2332.7382753772,
+      "difficulty": 279928593045,
+      "reward": 1.05,
+      "algo_id": 31
+    },
+    "2021-05-03": {
+      "hashrate": 2351.7267348312,
+      "difficulty": 282207208180,
+      "reward": 1.05,
+      "algo_id": 31
+    },
+    "2021-05-04": {
+      "hashrate": 2435.18607158,
+      "difficulty": 292222328590,
+      "reward": 1.05,
+      "algo_id": 31
+    },
+    "2021-05-05": {
+      "hashrate": 2368.005110538,
+      "difficulty": 284160613265,
+      "reward": 1.04,
+      "algo_id": 31
+    },
+    "2021-05-06": {
+      "hashrate": 2530.0895021513,
+      "difficulty": 303610740258,
+      "reward": 1.04,
+      "algo_id": 31
+    },
+    "2021-05-07": {
+      "hashrate": 2557.6139724452,
+      "difficulty": 306913676693,
+      "reward": 1.04,
+      "algo_id": 31
+    },
+    "2021-05-08": {
+      "hashrate": 2489.6927160168,
+      "difficulty": 298763125922,
+      "reward": 1.04,
+      "algo_id": 31
+    }
+  };
 }

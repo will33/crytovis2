@@ -37,7 +37,7 @@ class Constants {
 
   static const PROCESSOR_TYPES = ['ASIC', 'GPU', 'CPU'];
 
-  /// List of processors of format [processor]: [Cost, Power, SHA256, Ethash, Scrypt, RandomX]
+  /// List of processors of format [processor]: [Cost, Power, SHA256, Ethash, RandomX]
   static const PROCESSORS = {
     // Price data from Amazon, Cryptocompare.com and various other online 
     // sources (converted to AUD on 09/05/2021), other data from nicehash.com
