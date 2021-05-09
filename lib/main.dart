@@ -62,7 +62,7 @@ class MyHomePage extends StatefulWidget {
 
 class ProcessorSet {
   String processorType = 'GPU';
-  String processor = 'GTX 1080 Ti';
+  String processor = 'NVIDIA GTX 1080 Ti';
   bool enabled = true;
   int quantity = 1;
   bool alreadyPurchased = false;
@@ -290,6 +290,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 _processorSet1.processorType = newValue;
                                 _processorSet1.processor = Constants
                                     .PROCESSORS[_processorSet1.processorType]
+                                    .keys
+                                    .toList()
                                     .first;
                               });
                             },
@@ -315,10 +317,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           DropdownButton(
                             value: Constants
                                     .PROCESSORS[_processorSet1.processorType]
+                                    .keys
+                                    .toList()
                                     .contains(_processorSet1.processor)
                                 ? _processorSet1.processor
                                 : Constants
                                     .PROCESSORS[_processorSet1.processorType]
+                                    .keys
+                                    .toList()
                                     .first,
                             onChanged: (String newValue) {
                               setState(() {
@@ -326,7 +332,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               });
                             },
                             items: Constants
-                                .PROCESSORS[_processorSet1.processorType]
+                                .PROCESSORS[_processorSet1.processorType].keys
+                                .toList()
                                 .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -407,6 +414,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 _processorSet2.processorType = newValue;
                                 _processorSet2.processor = Constants
                                     .PROCESSORS[_processorSet2.processorType]
+                                    .keys
+                                    .toList()
                                     .first;
                               });
                             },
@@ -432,10 +441,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           DropdownButton(
                             value: Constants
                                     .PROCESSORS[_processorSet2.processorType]
+                                    .keys
+                                    .toList()
                                     .contains(_processorSet2.processor)
                                 ? _processorSet2.processor
                                 : Constants
                                     .PROCESSORS[_processorSet2.processorType]
+                                    .keys
+                                    .toList()
                                     .first,
                             onChanged: (String newValue) {
                               setState(() {
@@ -443,7 +456,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               });
                             },
                             items: Constants
-                                .PROCESSORS[_processorSet2.processorType]
+                                .PROCESSORS[_processorSet2.processorType].keys
+                                .toList()
                                 .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -696,8 +710,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     processors.forEach((processor) {
       if (processor.enabled && !processor.alreadyPurchased) {
-        totalInitialCapitalExpense +=
-            Constants.INITIAL_CAPITALS[processor.processor];
+        totalInitialCapitalExpense += Constants
+            .PROCESSORS[processor.processorType][processor.processor][0];
       }
     });
 
@@ -720,7 +734,8 @@ class _MyHomePageState extends State<MyHomePage> {
       if (processor.enabled) {
         totalFixedCosts += (_electricityPrice / Constants.WATTS_IN_KILOWATT) *
             Constants.HOURS_IN_DAY *
-            Constants.POWER_USAGES[processor.processor] *
+            Constants.PROCESSORS[processor.processorType][processor.processor]
+                [1] *
             processor.quantity;
       }
     });
@@ -735,23 +750,44 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // Calculate the fixed daily income generated from running all of the enabled processors
     processors.forEach((processor) {
-      double blockReward, blockTime, networkHashRate,
-          hashRate; //TODO: Implement different hashrates for same processor.
+      double blockReward,
+          blockTime,
+          networkHashRate,
+          hashRate;
       switch (_activeCoin) {
         case 'bitcoin':
-          blockReward = Constants.BITCOIN_BLOCK_REWARD;
-          blockTime = Constants.BITCOIN_AVG_BLOCKTIME;
-          hashRate = Constants.HASH_RATES[processor.processor];
-          networkHashRate = Constants.BITCOIN_NETWORK_HASHRATE;
+          blockReward = Constants.BLOCK_REWARD[0];
+          blockTime = Constants.BLOCKTIME[0];
+          hashRate = Constants.PROCESSORS[processor.processorType]
+              [processor.processor][2];
+          networkHashRate = Constants.NETWORK_HASHRATE[0];
           break;
-        
+
         case 'ethereum':
-          blockReward = Constants.ETHEREUM_BLOCK_REWARD;
-          blockTime = Constants.ETHEREUM_AVG_BLOCKTIME;
-          hashRate = Constants.HASH_RATES[processor.processor];
-          networkHashRate = Constants.ETHEREUM_NETWORK_HASHRATE;
+          blockReward = Constants.BLOCK_REWARD[1];
+          blockTime = Constants.BLOCKTIME[1];
+          hashRate = Constants.PROCESSORS[processor.processorType]
+              [processor.processor][3];
+          networkHashRate = Constants.NETWORK_HASHRATE[1];
+          break;
+
+        case 'dogecoin':
+          blockReward = Constants.BLOCK_REWARD[2];
+          blockTime = Constants.BLOCKTIME[2];
+          hashRate = Constants.PROCESSORS[processor.processorType]
+              [processor.processor][4];
+          networkHashRate = Constants.NETWORK_HASHRATE[2];
+          break;
+
+        case 'monero':
+          blockReward = Constants.BLOCK_REWARD[3];
+          blockTime = Constants.BLOCKTIME[3];
+          hashRate = Constants.PROCESSORS[processor.processorType]
+              [processor.processor][5];
+          networkHashRate = Constants.NETWORK_HASHRATE[3];
           break;
       }
+
       if (processor.enabled) {
         totalIncome += blockReward *
             (Constants.MINUTES_IN_DAY / blockTime) *

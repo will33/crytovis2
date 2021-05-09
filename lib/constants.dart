@@ -39,7 +39,8 @@ class Constants {
 
   /// List of processors of format [processor]: [Cost, Power, SHA256, Ethash, Scrypt, RandomX]
   static const PROCESSORS = {
-    // Price data from Amazon, Cryptocompare.com and various other online sources (converted to AUD on 09/05/2021), other data from nicehash.com
+    // Price data from Amazon, Cryptocompare.com and various other online 
+    // sources (converted to AUD on 09/05/2021), other data from nicehash.com
     'ASIC': {
       'BITMAIN AntMiner L3++': [4062, 1050, 0, 0, 596, 0],
       'BITMAIN AntMiner S19 Pro': [22933, 3250, 110000000, 0, 0, 0],
@@ -118,13 +119,12 @@ class Constants {
     },
   };
 
-  static const BITCOIN_NETWORK_HASHRATE =
-      149045000.0; // TODO: Make this variable per day
-  static const BITCOIN_BLOCK_REWARD = 6.25;
-  static const BITCOIN_AVG_BLOCKTIME = 10.0;
-  static const ETHEREUM_NETWORK_HASHRATE = 580230000.0;
-  static const ETHEREUM_BLOCK_REWARD = 2.0;
-  static const ETHEREUM_AVG_BLOCKTIME = 0.25; // 15 Seconds
+  static const int WATTS_IN_KILOWATT = 1000;
   static const MINUTES_IN_DAY = 1440;
+  static const int HOURS_IN_DAY = 24;
   static const DAYS_IN_TWO_YEARS = 1825;
+
+  static const NETWORK_HASHRATE = [149045000.0, 580230000.0, 321080000, 2566]; // TODO: Make this variable per day
+  static const BLOCK_REWARD = [6.25, 2.0, 10000, 1.03];
+  static const BLOCKTIME = [10.0, 0.25, 1, 2];
 }
