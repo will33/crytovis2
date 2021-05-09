@@ -42,7 +42,6 @@ class Constants {
     // Price data from Amazon, Cryptocompare.com and various other online 
     // sources (converted to AUD on 09/05/2021), other data from nicehash.com
     'ASIC': {
-      'BITMAIN AntMiner L3++': [4062, 1050, 0, 0, 596, 0],
       'BITMAIN AntMiner S19 Pro': [22933, 3250, 110000000, 0, 0, 0],
       'BITMAIN AntMiner S19': [20830, 3250, 95000000, 0, 0, 0],
       'BITMAIN AntMiner S17 Pro': [15971, 1975, 84000000, 0, 0, 0],
@@ -52,7 +51,6 @@ class Constants {
       'BITMAIN AntMiner T17+': [2410, 3200, 73000000, 0, 0, 0],
       'BITMAIN AntMiner T17': [876, 2200, 60000000, 0, 0, 0],
       'BITMAIN AntMiner T17e': [887, 2915, 53000000, 0, 0, 0],
-      'Innosilicon A6': [3076, 1500, 0, 0, 1230, 0],
       'Innosilicon T3+ 57T': [2124, 3300, 57000000, 0, 0],
       'MicroBT Whatsminer M31S': [2486, 3220, 70000000, 0, 0, 0],
       'MicroBT Whatsminer M30S': [3436, 3268, 86000000, 0, 0, 0],

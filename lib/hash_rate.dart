@@ -1467,7 +1467,5 @@ class HashRates {
     "1620432000": 592468.3454,
   };
 
-  static const DOGECOIN = {};
-
   static const MONERO = {};
 }
