@@ -17,4 +17,4 @@ A simple economics of cryptocurrency mining visualisation tool, informed by acad
 - Zachary Thomas - [ZachThomasAU](https://github.com/ZachThomasAU/)
 
 ## Deployment
-URL: [https://cryptovis-a73f8.web.app/#/](https://cryptovis-a73f8.web.app/#/)
+URL: [https://cryptovis.xyz](https://cryptovis.xyz)
