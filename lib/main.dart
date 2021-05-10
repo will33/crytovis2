@@ -156,6 +156,59 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Future<void> _showDialog(int index) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // User needs to tap the button to exit dialog
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('It is not profitable to mine that coin!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                SizedBox(
+                  width: 600,
+                  child: Text(
+                      'You have selected a coin that your hardware is not suitable to mine.'),
+                ),
+                Container(height: 10),
+                Visibility(
+                  visible: index == 0,
+                  child: SizedBox(
+                    width: 600,
+                    child: Text(
+                      'The Bitcoin network uses the SHA-256 hashing algorithm, which specialised hardware (ASICs) can be built to compute far more efficiently than any ordinary hardware you might find in a commercial PC or laptop. Those ASICs can compute more than a million times more hashes per second than conventional hardware, which makes mining Bitcoin (and other SHA-256 coins) unprofitable with any hardware not specifically designed for the purpose.'),
+                )),
+                Visibility(
+                  visible: index == 1,
+                  child: SizedBox(
+                    width: 600,
+                    child: Text(
+                      'The Ethereum network uses the Ethash hashing algorithm, which is a hashing algorithm specifically designed to be resistant to purpose-built hardware (called ASICs). This means only a general purpose, math-intensive processor like a GPU is efficient at mining Ethereum. The prevalence of powerful GPUs on the Ethereum Network makes mining Ethereum with a less-efficient CPU unprofitable in all but the most extreme edge cases.'),
+                )),
+                Visibility(
+                  visible: index == 2,
+                  child: SizedBox(
+                    width: 600,
+                    child: Text(
+                      'The Monero network uses the RandomX hashing algorithm, which uses a random "workzone", advanced virtualisation and demands high memory consumption. This means hashing with RandomX requires complicated operations only really suited to a CPU. Specialised hardware (ASICs), and even GPUs - which, although similar to CPUs, are really only good at specific types of math, are ill-suited to computing RandomX hashes. Although some GPUs can mine Monero profitably, its almost always more profitable to mine a more GPU-friendly coin, like Ethereum, instead.'),
+                ))
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('I understand'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   /// Fetches the cached data for the [coin] provided.
   Future<http.Response> _fetchData() {
     if (_coinSelected[0]) {
@@ -272,20 +325,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           Icon(ToggleIcons.monero),
                         ],
                         onPressed: (int index) {
-                          /* FUNCTIONAL BUTTON CODE
-                              setState(() {
-                                for (int i = 0; i < _coinSelected.length; i++) {
-                                  if (i == index) {
-                                    if (_coinSelected[index] != true) {
-                                      _coinSelected[index] = true;
-                                    }
-                                  } else {
-                                    if (_coinSelected[i] == true) {
-                                      _coinSelected[i] = false;
-                                    }
-                                  } 
-                                }
-                              }); */
+                          if (_coinSelected[index] != true) {
+                            _showDialog(index);
+                          }
                         },
                         isSelected: _coinSelected,
                       ),
