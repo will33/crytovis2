@@ -10,6 +10,7 @@ import 'package:group_button/group_button.dart';
 import 'package:http/http.dart' as http;
 
 import 'constants.dart';
+import 'hash_rate.dart';
 
 import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 
@@ -173,26 +174,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Container(height: 10),
                 Visibility(
-                  visible: index == 0,
-                  child: SizedBox(
-                    width: 600,
-                    child: Text(
-                      'The Bitcoin network uses the SHA-256 hashing algorithm, which specialised hardware (ASICs) can be built to compute far more efficiently than any ordinary hardware you might find in a commercial PC or laptop. Those ASICs can compute more than a million times more hashes per second than conventional hardware, which makes mining Bitcoin (and other SHA-256 coins) unprofitable with any hardware not specifically designed for the purpose.'),
-                )),
+                    visible: index == 0,
+                    child: SizedBox(
+                      width: 600,
+                      child: Text(
+                          'The Bitcoin network uses the SHA-256 hashing algorithm, which specialised hardware (ASICs) can be built to compute far more efficiently than any ordinary hardware you might find in a commercial PC or laptop. Those ASICs can compute more than a million times more hashes per second than conventional hardware, which makes mining Bitcoin (and other SHA-256 coins) unprofitable with any hardware not specifically designed for the purpose.'),
+                    )),
                 Visibility(
-                  visible: index == 1,
-                  child: SizedBox(
-                    width: 600,
-                    child: Text(
-                      'The Ethereum network uses the Ethash hashing algorithm, which is a hashing algorithm specifically designed to be resistant to purpose-built hardware (called ASICs). This means only a general purpose, math-intensive processor like a GPU is efficient at mining Ethereum. The prevalence of powerful GPUs on the Ethereum Network makes mining Ethereum with a less-efficient CPU unprofitable in all but the most extreme edge cases.'),
-                )),
+                    visible: index == 1,
+                    child: SizedBox(
+                      width: 600,
+                      child: Text(
+                          'The Ethereum network uses the Ethash hashing algorithm, which is a hashing algorithm specifically designed to be resistant to purpose-built hardware (called ASICs). This means only a general purpose, math-intensive processor like a GPU is efficient at mining Ethereum. The prevalence of powerful GPUs on the Ethereum Network makes mining Ethereum with a less-efficient CPU unprofitable in all but the most extreme edge cases.'),
+                    )),
                 Visibility(
-                  visible: index == 2,
-                  child: SizedBox(
-                    width: 600,
-                    child: Text(
-                      'The Monero network uses the RandomX hashing algorithm, which uses a random "workzone", advanced virtualisation and demands high memory consumption. This means hashing with RandomX requires complicated operations only really suited to a CPU. Specialised hardware (ASICs), and even GPUs - which, although similar to CPUs, are really only good at specific types of math - are ill-suited to computing RandomX hashes. Although some GPUs can mine Monero profitably, its almost always more profitable to mine a more GPU-friendly coin, like Ethereum, instead.'),
-                ))
+                    visible: index == 2,
+                    child: SizedBox(
+                      width: 600,
+                      child: Text(
+                          'The Monero network uses the RandomX hashing algorithm, which uses a random "workzone", advanced virtualisation and demands high memory consumption. This means hashing with RandomX requires complicated operations only really suited to a CPU. Specialised hardware (ASICs), and even GPUs - which, although similar to CPUs, are really only good at specific types of math - are ill-suited to computing RandomX hashes. Although some GPUs can mine Monero profitably, its almost always more profitable to mine a more GPU-friendly coin, like Ethereum, instead.'),
+                    ))
               ],
             ),
           ),
@@ -638,7 +639,8 @@ class _MyHomePageState extends State<MyHomePage> {
               double coinPrice = scopedList.elementAt(i)[1];
               double profitForDay = 0.0;
 
-              profitForDay = calculateProfitForDay(coinPrice, processors);
+              profitForDay = calculateProfitForDay(
+                  coinPrice, processors, numberOfDays - i);
 
               cumulativeProfit += profitForDay;
 
@@ -680,8 +682,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// Returns the amount of profit made for a specific day.
   double calculateProfitForDay(
-      double coinPrice, List<ProcessorSet> processors) {
-    return calculateIncomeForDay(coinPrice, processors) -
+      double coinPrice, List<ProcessorSet> processors, int day) {
+    return calculateIncomeForDay(coinPrice, processors, day) -
         calculateCostForDay(processors);
   }
 
@@ -705,25 +707,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// Returns the income generated from 24 hours of hashing.
   double calculateIncomeForDay(
-      double coinPrice, List<ProcessorSet> processors) {
+      double coinPrice, List<ProcessorSet> processors, int day) {
     double totalIncome = 0;
 
     // Calculate the fixed daily income generated from running all of the enabled processors
     processors.forEach((processor) {
       double blockReward, blockTime, networkHashRate, hashRate;
       int index;
+      List list;
       if (_coinSelected[0]) {
         index = 0;
+        list = HashRates.BITCOIN.values.toList();
+        networkHashRate = list[list.length - day]*1000000;
       } else if (_coinSelected[1]) {
         index = 1;
+        list = HashRates.ETHEREUM.values.toList();
+        networkHashRate = list[list.length - day]*1000;
       } else {
         index = 2;
+        list = HashRates.MONERO.values.toList();
+        networkHashRate = list[list.length - day]['hashrate'];
       }
       blockReward = Constants.BLOCK_REWARD[index];
       blockTime = Constants.BLOCKTIME[index];
       hashRate = Constants.PROCESSORS[processor.processorType]
           [processor.processor][index + 2];
-      networkHashRate = Constants.NETWORK_HASHRATE[index];
 
       if (processor.enabled) {
         totalIncome += blockReward *
