@@ -169,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(
                   width: 600,
                   child: Text(
-                      'You have selected a coin that your hardware is not suitable to mine.'),
+                      'You have selected a coin that your hardware is not suited to mine.'),
                 ),
                 Container(height: 10),
                 Visibility(
@@ -191,7 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: SizedBox(
                     width: 600,
                     child: Text(
-                      'The Monero network uses the RandomX hashing algorithm, which uses a random "workzone", advanced virtualisation and demands high memory consumption. This means hashing with RandomX requires complicated operations only really suited to a CPU. Specialised hardware (ASICs), and even GPUs - which, although similar to CPUs, are really only good at specific types of math, are ill-suited to computing RandomX hashes. Although some GPUs can mine Monero profitably, its almost always more profitable to mine a more GPU-friendly coin, like Ethereum, instead.'),
+                      'The Monero network uses the RandomX hashing algorithm, which uses a random "workzone", advanced virtualisation and demands high memory consumption. This means hashing with RandomX requires complicated operations only really suited to a CPU. Specialised hardware (ASICs), and even GPUs - which, although similar to CPUs, are really only good at specific types of math - are ill-suited to computing RandomX hashes. Although some GPUs can mine Monero profitably, its almost always more profitable to mine a more GPU-friendly coin, like Ethereum, instead.'),
                 ))
               ],
             ),
