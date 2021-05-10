@@ -71,7 +71,7 @@ class ProcessorSet {
 /// Stores the state of the [MyHomePage].
 class _MyHomePageState extends State<MyHomePage> {
   ProcessorSet _processorSet1 = ProcessorSet();
-  ProcessorSet _processorSet2 = ProcessorSet();
+  //ProcessorSet _processorSet2 = ProcessorSet();
 
   final AsyncMemoizer<http.Response> _btcMemoizer = AsyncMemoizer();
   final AsyncMemoizer<http.Response> _ethMemoizer = AsyncMemoizer();
@@ -167,6 +167,16 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  void setCoinSelected(int index) {
+    for (int i = 0; i < _coinSelected.length; i++) {
+      if (i == index) {
+        _coinSelected[i] = true;
+      } else {
+        _coinSelected[i] = false;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called.
@@ -253,15 +263,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     Container(
                         //width: 150,
                         child: Column(children: [
-                          Text("Cryptocurrency Select"),
-                          Container(height: 5),
-                          ToggleButtons(
-                            children: <Widget>[
-                              Icon(ToggleIcons.bitcoin),
-                              Icon(ToggleIcons.ethereum),
-                              Icon(ToggleIcons.monero),
-                            ],
-                            onPressed: (int index) {
+                      Text("Cryptocurrency Mined"),
+                      Container(height: 5),
+                      ToggleButtons(
+                        children: <Widget>[
+                          Icon(ToggleIcons.bitcoin),
+                          Icon(ToggleIcons.ethereum),
+                          Icon(ToggleIcons.monero),
+                        ],
+                        onPressed: (int index) {
+                          /* FUNCTIONAL BUTTON CODE
                               setState(() {
                                 for (int i = 0; i < _coinSelected.length; i++) {
                                   if (i == index) {
@@ -272,13 +283,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                     if (_coinSelected[i] == true) {
                                       _coinSelected[i] = false;
                                     }
-                                  }
+                                  } 
                                 }
-                              });
-                            },
-                            isSelected: _coinSelected,
-                          ),
-                        ]))
+                              }); */
+                        },
+                        isSelected: _coinSelected,
+                      ),
+                    ]))
                   ]),
 
                   // Processor Section
@@ -304,6 +315,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                     .keys
                                     .toList()
                                     .first;
+
+                                if (newValue == 'ASIC') {
+                                  setCoinSelected(0);
+                                } else if (newValue == 'GPU') {
+                                  setCoinSelected(1);
+                                } else {
+                                  setCoinSelected(2);
+                                }
                               });
                             },
                             items: Constants.PROCESSOR_TYPES
@@ -402,130 +421,6 @@ class _MyHomePageState extends State<MyHomePage> {
                               onChanged: (bool newValue) {
                                 setState(() {
                                   _processorSet1.alreadyPurchased = newValue;
-                                });
-                              })
-                        ],
-                      ),
-                      Container(
-                        width: 10,
-                      ),
-                    ],
-                  ),
-                  Container(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
-                        children: [
-                          Text('Processor type'),
-                          DropdownButton(
-                            value: _processorSet2.processorType,
-                            onChanged: (String newValue) {
-                              setState(() {
-                                _processorSet2.processorType = newValue;
-                                _processorSet2.processor = Constants
-                                    .PROCESSORS[_processorSet2.processorType]
-                                    .keys
-                                    .toList()
-                                    .first;
-                              });
-                            },
-                            items: Constants.PROCESSOR_TYPES
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          )
-                        ],
-                      ),
-                      Container(
-                        width: 50,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            'Processor',
-                            style: TextStyle(color: Colors.blue),
-                          ),
-                          DropdownButton(
-                            value: Constants
-                                    .PROCESSORS[_processorSet2.processorType]
-                                    .keys
-                                    .toList()
-                                    .contains(_processorSet2.processor)
-                                ? _processorSet2.processor
-                                : Constants
-                                    .PROCESSORS[_processorSet2.processorType]
-                                    .keys
-                                    .toList()
-                                    .first,
-                            onChanged: (String newValue) {
-                              setState(() {
-                                _processorSet2.processor = newValue;
-                              });
-                            },
-                            items: Constants
-                                .PROCESSORS[_processorSet2.processorType].keys
-                                .toList()
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          )
-                        ],
-                      ),
-                      Container(
-                        width: 20,
-                      ),
-                      Column(
-                        children: [
-                          Text('Quantity'),
-                          Container(
-                            width: 50,
-                            child: TextFormField(
-                              initialValue: _processorSet2.quantity.toString(),
-                              keyboardType: TextInputType.number,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  if (newValue != "")
-                                    _processorSet2.quantity =
-                                        int.parse(newValue);
-                                });
-                              },
-                            ),
-                          )
-                        ],
-                      ),
-                      Container(
-                        width: 20,
-                      ),
-                      Column(
-                        children: [
-                          Text('Enabled'),
-                          Checkbox(
-                              value: _processorSet2.enabled,
-                              onChanged: (bool newValue) {
-                                setState(() {
-                                  _processorSet2.enabled = newValue;
-                                });
-                              })
-                        ],
-                      ),
-                      Container(
-                        width: 20,
-                      ),
-                      Column(
-                        children: [
-                          Text('Already Purchased'),
-                          Checkbox(
-                              value: _processorSet2.alreadyPurchased,
-                              onChanged: (bool newValue) {
-                                setState(() {
-                                  _processorSet2.alreadyPurchased = newValue;
                                 });
                               })
                         ],
@@ -685,7 +580,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
           if (snapshot.hasData) {
             DateTime startDate = chartStartDate(_startDate, numberOfDays);
-            List<ProcessorSet> processors = [_processorSet1, _processorSet2];
+            List<ProcessorSet> processors = [_processorSet1];
             List<ProfitPerDay> processorSeries = [];
             double cumulativeProfit =
                 calculateInitialCapitalExpense(processors) * -1;
