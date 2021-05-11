@@ -170,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(
                   width: 600,
                   child: Text(
-                      'You have selected a coin that your hardware is not suited to mine.'),
+                      'You have tried to select a coin that your hardware is not suited to mine.'),
                 ),
                 Container(height: 10),
                 Visibility(
@@ -178,21 +178,34 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: SizedBox(
                       width: 600,
                       child: Text(
-                          'The Bitcoin network uses the SHA-256 hashing algorithm, which specialised hardware (ASICs) can be built to compute far more efficiently than any ordinary hardware you might find in a commercial PC or laptop. Those ASICs can compute more than a million times more hashes per second than conventional hardware, which makes mining Bitcoin (and other SHA-256 coins) unprofitable with any hardware not specifically designed for the purpose.'),
+                          'The Bitcoin network uses the SHA-256 hashing algorithm, which can be mined extremely efficiently using '
+                          'ASIC processing hardware. ASICs dominate the Bitcoin mining network and can each compute more than a milliion '
+                          'times more hashes every second than the hardware you have selected. This makes mining Bitcoin with your '
+                          'selected processor type unprofitable in almost all conditions. Choose the ASIC processor type if you would '
+                          'like to learn about the profitability of Bitcoin Mining'),
                     )),
                 Visibility(
                     visible: index == 1,
                     child: SizedBox(
                       width: 600,
                       child: Text(
-                          'The Ethereum network uses the Ethash hashing algorithm, which is a hashing algorithm specifically designed to be resistant to purpose-built hardware (called ASICs). This means only a general purpose, math-intensive processor like a GPU is efficient at mining Ethereum. The prevalence of powerful GPUs on the Ethereum Network makes mining Ethereum with a less-efficient CPU unprofitable in all but the most extreme edge cases.'),
+                          'The Ethereum network uses the Ethash hashing algorithm, which is a hashing algorithm specifically designed '
+                              'to be resistant to purpose-built hardware (called ASICs). Currently, this means that only GPU processors '
+                              'can efficiently mine Ethereum. The prevalence of powerful GPUs on the Ethereum Network makes mining '
+                              'Ethereum with a less-efficient CPU or ASIC unprofitable in all but the most extreme edge cases. '
+                              'Choose the GPU processor type if you would like to learn about the '
+                              'profitability of Ethereum Mining'),
                     )),
                 Visibility(
                     visible: index == 2,
                     child: SizedBox(
                       width: 600,
                       child: Text(
-                          'The Monero network uses the RandomX hashing algorithm, which uses a random "workzone", advanced virtualisation and demands high memory consumption. This means hashing with RandomX requires complicated operations only really suited to a CPU. Specialised hardware (ASICs), and even GPUs - which, although similar to CPUs, are really only good at specific types of math - are ill-suited to computing RandomX hashes. Although some GPUs can mine Monero profitably, its almost always more profitable to mine a more GPU-friendly coin, like Ethereum, instead.'),
+                          'The Monero network uses the RandomX hashing algorithm, which uses a random "workzone", advanced virtualisation '
+                              'and demands high memory consumption. This means hashing with RandomX requires complicated operations designed '
+                              'to suit conventional CPUs. Specialised hardware (ASICs), and even GPUs are ill-suited to computing RandomX '
+                              'hashes, and are rarely profitable. Choose the CPU processor type if you would like to learn about the '
+                              'profitability of Monero Mining'),
                     ))
               ],
             ),
