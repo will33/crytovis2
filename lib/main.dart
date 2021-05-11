@@ -438,21 +438,21 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                         ],
                       ),
-                      Container(
-                        width: 20,
-                      ),
-                      Column(
-                        children: [
-                          Text('Enabled'),
-                          Checkbox(
-                              value: _processorSet1.enabled,
-                              onChanged: (bool newValue) {
-                                setState(() {
-                                  _processorSet1.enabled = newValue;
-                                });
-                              })
-                        ],
-                      ),
+                      // Container(
+                      //   width: 20,
+                      // ),
+                      // Column(
+                      //   children: [
+                      //     Text('Enabled'),
+                      //     Checkbox(
+                      //         value: _processorSet1.enabled,
+                      //         onChanged: (bool newValue) {
+                      //           setState(() {
+                      //             _processorSet1.enabled = newValue;
+                      //           });
+                      //         })
+                      //   ],
+                      // ),
                       Container(
                         width: 20,
                       ),
@@ -673,7 +673,7 @@ class _MyHomePageState extends State<MyHomePage> {
     processors.forEach((processor) {
       if (processor.enabled && !processor.alreadyPurchased) {
         totalInitialCapitalExpense += Constants
-            .PROCESSORS[processor.processorType][processor.processor][0];
+            .PROCESSORS[processor.processorType][processor.processor][0] * processor.quantity;
       }
     });
 
