@@ -12,7 +12,6 @@ import 'package:http/http.dart' as http;
 import 'constants.dart';
 import 'hash_rate.dart';
 
-import 'package:flutter_date_pickers/flutter_date_pickers.dart' as dp;
 
 void main() {
   runApp(MyApp());
