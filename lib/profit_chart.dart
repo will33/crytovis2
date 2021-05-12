@@ -107,7 +107,13 @@ class _ProfitChartState extends State<ProfitChart> {
     final children = <Widget>[chartWidget];
 
     if (_time != null)
-      //children.add(Text(_time.toString()));
+      children.add(
+          Text(
+              _time.year.toString() + "-" +
+                  _time.month.toString() + "-" +
+                  _time.day.toString()
+          )
+      );
       _measures?.forEach((series, value) {
         children.add(new Text('$series: \$${value.toStringAsFixed(2)}'));
         children.add(Container(
