@@ -244,13 +244,20 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    priceController.text = _electricityPrice.toStringAsFixed(2);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called.
     //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    priceController.text = _electricityPrice.toStringAsFixed(2);
+
 
     return Scaffold(
       appBar: AppBar(
@@ -317,7 +324,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           onChanged: (String newValue) {
                             setState(() {
                               if (newValue != "")
-                                _electricityPrice = double.parse(newValue);
+                                if (double.tryParse(newValue) != null) {
+                                  _electricityPrice = double.parse(newValue);
+                                }
                             });
                           },
                         )
@@ -502,10 +511,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           initialValue: _otherFixedCosts.toString(),
                           keyboardType: TextInputType.number,
                           onChanged: (String newValue) {
-                            setState(() {
-                              _otherFixedCosts = double.parse(newValue);
-                            });
-                          },
+                            if (double.tryParse(newValue) != null) {
+                              setState(() {
+                                _otherFixedCosts = double.parse(newValue);
+                              });
+                            }
+                          }
                         )
                       ]),
                     ),
@@ -520,10 +531,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           initialValue: _otherCapitalExpenses.toString(),
                           keyboardType: TextInputType.number,
                           onChanged: (String newValue) {
-                            setState(() {
-                              _otherCapitalExpenses = double.parse(newValue);
-                            });
-                          },
+                            if (double.tryParse(newValue) != null) {
+                              setState(() {
+                                _otherCapitalExpenses = double.parse(newValue);
+                              });
+                            }
+                          }
                         )
                       ]),
                     )
